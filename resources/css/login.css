@@ -1,0 +1,55 @@
+.main-login {
+  /* background-image: url(../img/main-image-edith.jpg); */
+  background-image: url(../img/maestro.jpg);
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  flex-direction: column;
+
+  background-position: center center;
+  background-size: cover;
+  padding-top: 30px;
+  height: 75vh;
+  min-height: 25rem;
+}
+.contenido-main-radius {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.logo-tec {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 30px;
+  background-position: center center;
+  background-size: cover;
+  height: 40vh;
+  min-height: 10rem;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-weight: bold;
+}
+p {
+  padding-top: 10px;
+}
+input {
+  border-radius: 5px;
+
+  border: 0;
+  height: 30px;
+  width: 300px;
+  padding: 20px;
+  margin-right: 30px;
+}
+
+.btn-login {
+  height: 50px;
+  width: 150px;
+  padding: 30px;
+}

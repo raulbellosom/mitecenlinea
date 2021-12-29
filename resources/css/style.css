@@ -1,0 +1,178 @@
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+body {
+  font-family: "Lato", sans-serif;
+  font-size: 1.6rem;
+  line-height: 2;
+}
+img {
+  max-width: 100%;
+}
+.contenedor {
+  width: 95%;
+  max-width: 120rem;
+  margin: 0 auto;
+}
+h1 {
+  font-size: 3.8rem;
+}
+h2 {
+  font-size: 3.4rem;
+}
+h3 {
+  font-size: 3rem;
+}
+h4 {
+  font-size: 2.6rem;
+}
+/**utilidades**/
+.centrar-texto {
+  text-align: center;
+}
+.logo {
+  font-size: 3.4rem;
+  text-decoration: none;
+  color: #fff;
+  height: 100px;
+}
+.img-logo {
+  height: 100px;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+.site-header {
+  background-color: #333333;
+  padding: 1rem 0 3rem 0;
+}
+.site-header.inicio {
+  background-image: url(/img/maquinaria1.jpg);
+  background-position: center center;
+  background-size: cover;
+  height: 100vh;
+  min-height: 60rem;
+}
+.contenido-header {
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.contenido-header h1 {
+  color: #ffffff;
+  padding-bottom: 2rem;
+  max-width: 60rem;
+  line-height: 2;
+}
+.barra {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+}
+.navegacion a {
+  color: white;
+  display: inline-block;
+  text-decoration: none;
+  font-size: 1.8rem;
+  margin-right: 2rem;
+  margin-bottom: 3rem;
+}
+
+.navegacion a:hover {
+  color: #fd9a21;
+}
+
+.navegacion a:last-of-type {
+  margin: 0;
+}
+
+.site-footer {
+  background-image: url(../img/banner-tecmm-nuevo.jpg);
+  display: flex;
+  /* flex-direction: row; */
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 8vh;
+  min-height: 8rem;
+}
+
+.main {
+  /* background-image: url(../img/main-image-edith.jpg); */
+  background-image: url(../img/ejecutivo.jpg);
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  flex-direction: column;
+  padding-top: 30px;
+  background-position: center center;
+  background-size: cover;
+  height: 75vh;
+  min-height: 25rem;
+}
+.contenido-main {
+  align-items: center;
+  min-height: 20rem;
+  max-width: 100rem;
+  background-color: rgba(255, 255, 255, 0.5);
+  margin: 10px;
+  /* padding: 20px; */
+}
+.principal {
+  padding: 20px;
+}
+.titulo {
+  font-size: 25px;
+  text-align: center;
+}
+.titulo-main {
+  font-size: 25px;
+  font-weight: bolder;
+  text-align: center;
+}
+.titulo-color {
+  color: #efb810;
+}
+.second-title {
+  background-color: #333333;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+}
+.separador {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+}
+.texto {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+.button-ingresar {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 20px;
+  color: #ffffff;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 40px;
+  margin-right: 40px;
+  background-color: #007aa2;
+  border-radius: 5px;
+}
