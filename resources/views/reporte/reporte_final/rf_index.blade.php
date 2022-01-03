@@ -22,10 +22,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
               <div class=" nav navbar-nav">
                     <a href="{{url('reporte_diagnostico/')}}" class="nav-link text-secondary" >Reporte Diagnostico</a>
-                    <a href="{{route('raa-index')}}" class="nav-link text-primary font-weight-bold">Reporte de Avance Académico</a>
-                    <a href="{{route('rap-index')}}" class="nav-link text-secondary" href="#">Reporte de Avance Programatico</a>
-                    <a href="{{route('rdep-index')}}" class="nav-link text-secondary ">Reporte Departamental</a>
-                    <a href="{{route('rfinal-index')}}" class="nav-link text-secondary" href="#">Reporte Final</a>
+                    <a href="{{route('raa-index')}}" class="nav-link text-secondary">Reporte de Avance Académico</a>
+                    <a href="{{route('rap-index')}}" class="nav-link text-secondary">Reporte de Avance Programático</a>
+                    <a href="{{route('rdep-index')}}" class="nav-link text-secondary">Reporte Departamental</a>
+                    <a href="{{route('rfinal-index')}}" class="nav-link text-primary font-weight-bold">Reporte Final</a>
                 </div>
             </div>
         </nav>
@@ -36,14 +36,14 @@
             <div class="m-4">
                 <div class="d-md-flex justify-content-md-between pt-4 ">
                     <div class="font-weight-bold text-primary h5 pb-2">
-                        Mis Reportes de Avance Académico de Alumnos
+                        Mis Reportes Final de Actividades
                     </div>
-                    <a href="{{url('reporte_avance_academico/create')}}" class="btn btn-outline-primary col-12 col-sm-12 col-md-6 col-lg-6"> 
+                    <a href="{{url('reporte_final/create')}}" class="btn btn-outline-success col-12 col-sm-12 col-md-6 col-lg-6"> 
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                             <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                         </svg>
-                        Crear Reporte Avance Académico
+                        Crear Reporte Final
                     </a>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                         <tr>
                             <th>Fecha de elaboración</th>
                             <th>Asignatura</th>
-                            <th>Carrera</th>
+                            <th>Carrera</th>                            
                             <th>Grado Grupo</th>
                             <th>Turno</th>
                             <th>Status</th>
@@ -65,7 +65,7 @@
                         <tr>
                             <td>{{Str::substr($reporte->created_at, 0, 10)}}</td>
                             <td>{{$reporte->asignatura}}</td>
-                            <td>{{$reporte->carrera}}</td>                            
+                            <td>{{$reporte->carrera}}</td>
                             <td class="text-center">{{$reporte->grado}} {{$reporte->grupo}}</td>
                             <td>{{$reporte->turno}}</td>
                             <td class="font-weight-bold">
@@ -81,15 +81,15 @@
                                 @endswitch
                             </td> 
                             <td class="d-flex justify-content-between">
-                                <a href="{{url('/reporte_avance_academico/'.$reporte->id.'/edit') }}" class="btn btn-warning">
+                                <a href="{{url('/reporte_final/'.$reporte->id.'/edit') }}" class="btn btn-warning">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                         <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                         <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                                     </svg>
                                     Editar
-                                </a>
+                                </a> 
                                 @if ($reporte->status == 2)
-                                    <form action="{{url('/download_reporte_avance_academico/'.$reporte->id)}}" method="GET">
+                                    <form action="{{url('/downloadPDF/'.$reporte->id)}}" method="GET">
                                         <button  class="btn btn-success" type="submit">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
                                                 <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
@@ -99,7 +99,7 @@
                                         </button>
                                     </form>
                                 @endif
-                                <form action="{{ url('/reporte_avance_academico/'.$reporte->id) }}" method="POST">
+                                <form action="{{ url('/reporte_final/'.$reporte->id) }}" method="POST">
                                     @csrf
                                     {{method_field('DELETE')}}
                                 <button type="submit" onclick="return confirm('¿Deseas borrar este reporte?')" 

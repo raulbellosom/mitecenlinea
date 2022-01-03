@@ -138,7 +138,7 @@
             <tbody>
                 <tr>
                     <th class="text-center">________________________________</th>
-                    <th class="text-center">Mtra. Martha Irene Sánchez Beltrán</th>
+                    <th class="text-center">________________________________</th>
                 </tr>
                 <tr>
                     <th class="text-center">Nombre y Firma del Docente</th>

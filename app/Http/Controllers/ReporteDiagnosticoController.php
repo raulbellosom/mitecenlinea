@@ -135,31 +135,20 @@ class ReporteDiagnosticoController extends Controller
     public function update(Request $request, $id)
     {
         $campos=[
-            'user_id'=>'required|int',
-            'autor'=>'required|string',
-            'nombre_reporte'=>'required|string',
-            'asignatura'=>'required|string',
-            'tipo_evaluacion'=>'required|string',
-            'cantidad_alumnos'=>'required|int',
-            'carrera'=>'required|string',
-            'grado'=>'required|string',
-            'grupo'=>'required|string',
-            'turno'=>'required|string',
-            'created_at'=>'required|date'
+            'status'=>'required|integer',
+            
         ];
         $mensaje=[
             'required'=>'El :attribute es requerido',
+            
         ];
         $this->validate($request, $campos, $mensaje);
 
-        $datosReporte = request()->except('_token','_method');
+        $status = request()->except(['_token','_method']);
         
-        ReporteDiagnostico::insert($datosReporte);
+        ReporteDiagnostico::where('id','=',$id)->update($status);
 
-        ReporteDiagnostico::where('id','=',$id)->update($datosReporte);
-        // $reporte_diagnostico=ReporteDiagnostico::findOrFail($id);
-
-        return redirect('reporte_diagnostico')->with('mensaje','Reporte ha sido modificado con éxito');
+        return redirect('reporte_diagnostico')->with('mensaje','El reporte se ha finalizado con éxito');
     }
 
     /**

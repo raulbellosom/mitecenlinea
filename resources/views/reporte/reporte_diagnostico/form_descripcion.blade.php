@@ -11,18 +11,34 @@
                 Regresar
             </a>
         </div>
-        <div>
-            <form action="{{url('/downloadPDF/'.$reporte_diagnostico->id)}}" method="GET">
-                
-                <button  class="btn btn-outline-success" type="submit">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-                        <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                        <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-                    </svg>
-                    Descargar reporte
-                </button>
-            </form>
-            {{-- <input type="submit" value="Descargar" class="btn btn-outline-success" id="btn_descargar"> --}}
+        <div class="d-flex">
+            @if ($reporte_diagnostico->status == 1)
+                <form action="{{url('/reporte_diagnostico/'.$reporte_diagnostico->id)}}" method="POST">
+                    @csrf
+                    {{method_field('PATCH')}}
+                    <input type="hidden" value="2" id="status" name="status">
+                    <input type="hidden" value="{{$reporte_diagnostico->id}}" id="id" name="id">
+                    <button  class="btn btn-outline-primary" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-square" viewBox="0 0 16 16">
+                            <path d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z"/>
+                            <path d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z"/>
+                        </svg>
+                        Finalizar Reporte
+                    </button>
+                </form>
+            @endif
+            @if ($reporte_diagnostico->status == 2)
+                <form action="{{url('/downloadPDF/'.$reporte_diagnostico->id)}}" method="GET">
+                    
+                    <button  class="btn btn-outline-success" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                        </svg>
+                        Descargar reporte
+                    </button>
+                </form>
+            @endif
         </div>
     </div>
             @if(Session::has('mensaje'))
@@ -94,8 +110,8 @@
                         <tbody>
                         @foreach ($competencia as $comp)
                             <tr>
-                                <th class="col-8">{{$comp->competencia}}</th>
-                                <th class="col-2 text-center">
+                                <td class="col-8">{{$comp->competencia}}</td>
+                                <td class="col-2 text-center">
                                     @if ($comp->ponderacion==0)
                                         Nulo
                                     @endif
@@ -108,11 +124,11 @@
                                     @if ($comp->ponderacion==3)
                                         Bueno
                                     @endif
-                                </th>
-                                <th class="col-2">
+                                </td>
+                                <td class="col-2">
                                     <input type="hidden" value="{{$comp->id}}" id="id_reporte">
                                     <input class=" btn btn-danger" type="submit" value="Borrar" id="borrar">
-                                </th>
+                                </td>
                             </tr>
                         @endforeach     
                         </tbody>
@@ -163,16 +179,16 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <th class="col-4">{{$pag_def}}</th>
-                                <th class="col-4 text-center">{{$pag_ac}}</th>
-                                <th class="col-2 text-center">{{$pag_time}}</th>
-                                <th class="col-2">
+                                <td class="col-4">{{$pag_def}}</td>
+                                <td class="col-4 text-center">{{$pag_ac}}</td>
+                                <td class="col-2 text-center">{{$pag_time}}</td>
+                                <td class="col-2">
                                     <input type="hidden" value="{{$pag_id}}" id="pag_id">
                                     @if ($pag_id != 0)
                                     <input class=" btn btn-danger" type="submit" value="Borrar" id="borrar_pag">
                                     @endif
                                     
-                                </th>
+                                </td>
                             </tr>  
                         </tbody>
                     </table>
@@ -266,18 +282,34 @@
                         Regresar
                     </a>
                 </div>
-                <div>
-                    <form action="{{url('/downloadPDF/'.$reporte_diagnostico->id)}}" method="GET">
-                        
-                        <button  class="btn btn-outline-success" type="submit">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-                            </svg>
-                            Descargar reporte
-                        </button>
-                    </form>
-                    {{-- <input type="submit" value="Descargar" class="btn btn-outline-success" id="btn_descargar"> --}}
+                <div class="d-flex">
+                    @if ($reporte_diagnostico->status == 1)
+                        <form action="{{url('/reporte_diagnostico/'.$reporte_diagnostico->id)}}" method="POST">
+                            @csrf
+                            {{method_field('PATCH')}}
+                            <input type="hidden" value="2" id="status" name="status">
+                            <input type="hidden" value="{{$reporte_diagnostico->id}}" id="id" name="id">
+                            <button  class="btn btn-outline-primary" type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-square" viewBox="0 0 16 16">
+                                    <path d="M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z"/>
+                                    <path d="m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z"/>
+                                </svg>
+                                Finalizar Reporte
+                            </button>
+                        </form>
+                    @endif
+                    @if ($reporte_diagnostico->status == 2)
+                        <form action="{{url('/downloadPDF/'.$reporte_diagnostico->id)}}" method="GET">
+                            
+                            <button  class="btn btn-outline-success" type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                    <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                    <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                                </svg>
+                                Descargar reporte
+                            </button>
+                        </form>
+                    @endif
                 </div>
             </div>
         {{-- Botones --}}

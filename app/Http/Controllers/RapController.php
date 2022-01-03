@@ -9,6 +9,7 @@ use App\Models\RapPracticaPlaneada;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class RapController extends Controller
 {
@@ -157,10 +158,9 @@ class RapController extends Controller
      */
     public function destroy($id)
     {
-        // DB::delete('delete from raa_unidads where raa_id  = ?', [$id]);
-        // DB::delete('delete from raa_analisis_resultados where raa_id  = ?', [$id]);
-        // DB::delete('delete from raa_pags where raa_id  = ?', [$id]);
-        // DB::delete('delete from raa_paps where raa_id  = ?', [$id]);
+        DB::delete('delete from rap_unidads where rap_id  = ?', [$id]);
+        DB::delete('delete from rap_practica_planeadas where rap_id  = ?', [$id]);
+        DB::delete('delete from rap_desglose_horas where rap_id  = ?', [$id]);
         Rap::destroy($id);
         return redirect('reporte_avance_programatico')->with('mensaje','Reporte borrado con éxito');
     }

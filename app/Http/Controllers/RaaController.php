@@ -129,9 +129,22 @@ class RaaController extends Controller
      * @param  \App\Models\raa  $raa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, raa $raa)
+    public function update(Request $request,  $id)
     {
-        //
+        $campos=[
+            'status'=>'required|integer',
+            
+        ];
+        $mensaje=[
+            'required'=>'El :attribute es requerido',
+            
+        ];
+        $this->validate($request, $campos, $mensaje);
+
+        $status = request()->except(['_token','_method']);
+        
+        Raa::where('id','=',$id)->update($status);
+        return redirect('reporte_avance_academico')->with('mensaje','Reporte Finalizado');
     }
 
     /**

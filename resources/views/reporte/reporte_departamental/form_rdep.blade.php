@@ -79,7 +79,7 @@
                 <div class="mw-100 d-flex justify-content-around">
                     <div class="d-flex align-items-center">
                         <input class="form-control " type="hidden" name="nombre_reporte"
-                        value="Reporte Avance Académico" id="nombre_reporte"
+                        value="Reporte Departamental" id="nombre_reporte"
                         >
                     </div>
                     <div class="d-flex align-items-center">

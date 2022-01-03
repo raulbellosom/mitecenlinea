@@ -1,6 +1,7 @@
 <?php
 
 use App\Exports\ReporteDiagnosticoExport;
+use App\Exports\ReportePrimerCorteExport;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DocenteController;
@@ -21,7 +22,9 @@ use App\Http\Controllers\RdCompetenciaController;
 use App\Http\Controllers\RDepartamentalController;
 use App\Http\Controllers\RdPagController;
 use App\Http\Controllers\RdPapController;
-use App\Models\RapDesgloseHoras;
+use App\Http\Controllers\RfCursoController;
+use App\Http\Controllers\RFinalController;
+use App\Http\Controllers\RfPracticasEspacioController;
 
 //probablemente borrar este auth;
 /*
@@ -72,7 +75,7 @@ Route::group(['middleware'=>'auth'], function(){
     Route::get('reporte_diagnostico/index', [ReporteDiagnosticoController::class, 'index']);
     Route::get('reporte_diagnostico/create', [ReporteDiagnosticoController::class, 'create']);
     Route::get('reporte_diagnostico/show', [ReporteDiagnosticoController::class, 'show']);
-
+    Route::post('reporte_diagnostico/finalizar', [ReporteDiagnosticoController::class, 'update']);
     Route::post('reporte_diagnostico/competencia', [RdCompetenciaController::class, 'addComp']);
     Route::post('reporte_diagnostico/borrar_competencia', [RdCompetenciaController::class, 'deleteComp']);
     Route::post('reporte_diagnostico/pag', [RdPagController::class, 'addPag']);
@@ -94,6 +97,7 @@ Route::group(['middleware'=>'auth'], function(){
     Route::post('reporte_avance_academico/borrar_pag', [RaaPagController::class, 'deleteRaaPag']);
     Route::post('reporte_avance_academico/agregar_pap', [RaaPapController::class, 'addRaaPap']);
     Route::post('reporte_avance_academico/borrar_pap', [RaaPapController::class, 'deleteRaaPap']);
+    Route::post('reporte_avance_academico/finalizar', [RaaController::class, 'update']);
     Route::resource('reporte_avance_academico', RaaController::class);
 });
 
@@ -120,10 +124,30 @@ Route::group(['middleware'=>'auth'], function(){
     Route::resource('reporte_departamental', RDepartamentalController::class);
 });
 
-Route::get('/download', function () {
+//-------------------------Reporte Final
+Route::group(['middleware'=>'auth'], function(){
+    Route::get('reporte_final/index', [RFinalController::class, 'index'])->name('rfinal-index');
+    Route::get('reporte_final/create', [RFinalController::class, 'create']);
+    Route::post('reporte_final/agregar_curso', [RfCursoController::class, 'addCurso']);
+    Route::post('reporte_final/eliminar_curso', [RfCursoController::class, 'deleteCurso']);
+    Route::post('reporte_final/addPracticasEspacio', [RfPracticasEspacioController::class, 'addPracticasEspacio']);
+    Route::post('reporte_final/deletePracticasEspacio', [RfPracticasEspacioController::class, 'deletePracticasEspacio']);
+    // Route::post('reporte_avance_programatico/agregar_practicas_planeadas', [RapPracticaPlaneadaController::class, 'addPracticasPlaneadas']);
+    // Route::post('reporte_avance_programatico/borrar_practicas_planeadas', [RapPracticaPlaneadaController::class, 'deletePracticasPlaneadas']);
+    // Route::post('reporte_avance_academico/agregar_pap', [RaaPapController::class, 'addRaaPap']);
+    // Route::post('reporte_avance_academico/borrar_pap', [RaaPapController::class, 'deleteRaaPap']);
+    Route::resource('reporte_final', RFinalController::class);
+});
+
+Route::get('download', function () {
     return (new ReporteDiagnosticoExport)->download('diagnosticos.xlsx');
 })->middleware('auth');
 
+Route::group(['middleware'=>'auth'], function(){
+    Route::get('download_reporte_avance_programatico', function () {
+        return (new ReportePrimerCorteExport)->download('reporte_primer_corte.xlsx');
+    });
+});
 
 Route::group(['middleware'=>'auth'], function(){
     // Route::get('reporte_diagnostico/', [ReporteDiagnosticoController::class, 'index']);
@@ -138,3 +162,4 @@ Route::resource('infoUser', InfoUserController::class);
 // Route::get('/get-all-reportes', [PdfController::class, 'getAllPdfController'])->middleware('auth');
 // Route::get('/get-reporte', [PdfController::class, 'getReporte'])->middleware('auth');
 Route::get('/downloadPDF/{id}', [PdfController::class, 'downloadPDF'])->middleware('auth');
+Route::get('/download_reporte_avance_academico/{id}', [PdfController::class, 'downloadPDFRAA'])->middleware('auth');

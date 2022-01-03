@@ -12,13 +12,38 @@ use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class ReporteDiagnosticoExport implements FromView
+class ReporteDiagnosticoExport implements FromView, WithStyles
 {
     use Exportable;
     /**
     // * @return \Illuminate\Support\Collection
     */
+    public function styles(Worksheet $sheet)
+    {
+        return [
+            // Style the first row as bold text.
+            1    => ['font' => ['bold' => true, 'size'=> 16 ]],
+            2    => ['font' => ['bold' => true, 'size'=> 8 ]],
+            3    => ['font' => ['bold' => true , 'size'=> 8 ]],
+            't'    => ['font' => ['size'=> 7 ]],
+            'u'    => ['font' => ['size'=> 7 ]],
+            'v'    => ['font' => ['size'=> 7 ]],
+            'w'    => ['font' => ['size'=> 7 ]],
+            'x'    => ['font' => ['size'=> 7 ]],
+            'y'    => ['font' => ['size'=> 7 ]],
+
+
+            // Styling a specific cell by coordinate.
+            // 'B2' => ['font' => ['italic' => true]],
+
+            // Styling an entire column.
+            // 'C'  => ['font' => ['size' => 16]],
+        ];
+    }
 
     public function view():View
     {
@@ -31,7 +56,9 @@ class ReporteDiagnosticoExport implements FromView
                 INNER JOIN `rd_pags` as pags ON pags.r_diagnostico_id = rd.id
                 INNER JOIN `rd_competencias` as compe ON compe.r_diagnostico_id = rd.id
                 INNER JOIN `rd_paps` as paps ON paps.r_diagnostico_id = rd.id
-        GROUP BY rd_id');
+        WHERE status = 2
+        GROUP BY compe.r_diagnostico_id
+        ORDER BY rd.autor');
 
         // $detalles['reporte']= DB::select('SELECT rd.*,pags.*, pags.id as pag_id, AVG(compe.ponderacion) as ponderacion FROM `reporte_diagnosticos` as rd 
         // INNER JOIN `rd_pags` as pags ON pags.r_diagnostico_id = rd.id

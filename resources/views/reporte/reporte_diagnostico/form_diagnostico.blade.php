@@ -89,6 +89,11 @@
                         >
                     </div>
                     <div class="d-flex align-items-center">
+                        <input class="form-control " type="hidden" name="status"
+                        value="1" id="status"
+                        >
+                    </div>
+                    <div class="d-flex align-items-center">
                         <input class="form-control " type="hidden" name="autor"
                         value="{{ $users->name}}" id="autor"
                         >

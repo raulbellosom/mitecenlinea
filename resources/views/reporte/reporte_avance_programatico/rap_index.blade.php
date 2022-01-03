@@ -25,7 +25,7 @@
                     <a href="{{route('raa-index')}}" class="nav-link text-secondary">Reporte de Avance Académico</a>
                     <a href="{{route('rap-index')}}" class="nav-link text-primary font-weight-bold" href="#">Reporte de Avance Programático</a>
                     <a href="{{route('rdep-index')}}" class="nav-link text-secondary ">Reporte Departamental</a>
-                    <a class="nav-link text-secondary" href="#">Reporte Final</a>
+                    <a href="{{route('rfinal-index')}}" class="nav-link text-secondary" href="#">Reporte Final</a>
                 </div>
             </div>
         </nav>
@@ -48,15 +48,15 @@
                 </div>
             </div>
             <div class="col-sm-12 row-sm-12">
-                <table class="table table-responsive-lg table-white table-striped">
+                <table class="table table-responsive-lg table-white table-striped text-center">
                     <thead class="bg-primary text-white">
                         <tr>
                             <th>Fecha de elaboración</th>
-                            <th>Tipo de reporte</th>
-                            <th>Carrera</th>
                             <th>Asignatura</th>
+                            <th>Carrera</th>
                             <th>Grado Grupo</th>
-                            {{-- <th>Turno</th> --}}
+                            <th>Turno</th>
+                            <th>Status</th>
                             <th class="text-center">Acciones</th>
                         </tr>
                     </thead>
@@ -64,11 +64,22 @@
                         @foreach ($reportes as $reporte)
                         <tr>
                             <td>{{Str::substr($reporte->created_at, 0, 10)}}</td>
-                            <td>{{$reporte->nombre_reporte}}</td>
-                            <td>{{$reporte->carrera}}</td>
                             <td>{{$reporte->asignatura}}</td>
+                            <td>{{$reporte->carrera}}</td>
                             <td class="text-center">{{$reporte->grado}} {{$reporte->grupo}}</td>
-                            {{-- <td>{{$reporte->turno}}</td> --}}
+                            <td>{{$reporte->turno}}</td>
+                            <td class="font-weight-bold">
+                                @switch($reporte->status)
+                                    @case(1)
+                                        <label class="text-danger">Incompleto</label> 
+                                        @break
+                                    @case(2)
+                                        <label class="text-primary">Finalizado</label>
+                                        @break
+                                    @default
+                                    Incompleto
+                                @endswitch
+                            </td> 
                             <td class="d-flex justify-content-between">
                                 <a href="{{url('/reporte_avance_programatico/'.$reporte->id.'/edit') }}" class="btn btn-warning">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
@@ -77,15 +88,17 @@
                                     </svg>
                                     Editar
                                 </a> 
-                                <form action="{{url('/downloadPDF/'.$reporte->id)}}" method="GET">
-                                    <button  class="btn btn-success" type="submit">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-                                            <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
-                                            <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
-                                        </svg>
-                                        Descargar
-                                    </button>
-                                </form>
+                                @if ($reporte->status == 2)
+                                    <form action="{{url('/download_reporte_avance_academico/'.$reporte->id)}}" method="GET">
+                                        <button  class="btn btn-success" type="submit">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                                <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                                                <path d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+                                            </svg>
+                                            Descargar
+                                        </button>
+                                    </form>
+                                @endif
                                 <form action="{{ url('/reporte_avance_programatico/'.$reporte->id) }}" method="POST">
                                     @csrf
                                     {{method_field('DELETE')}}

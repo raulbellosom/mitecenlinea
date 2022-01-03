@@ -135,7 +135,7 @@ class RDepartamentalController extends Controller
         ];
         $this->validate($request, $campos, $mensaje);
 
-        $datosReporte = request()->except("_token");
+        $datosReporte = request()->except("_token",'_method');
         
         RDepartamental::where('id','=',$id)->update($datosReporte);
 
