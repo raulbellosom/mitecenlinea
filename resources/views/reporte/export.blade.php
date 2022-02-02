@@ -131,15 +131,13 @@
         <table class="table table-borderless col-12">
             <thead>
                 <tr>
-                    <th class="text-center"> <p class="text-decoration-underline">{{$reportes->autor}}</p> </th>
-                    <th class="text-center text-decoration-underline"><p class="text-decoration-underline">{{$reportes->autor}}</p></th>
+                    <tr>
+                        <th class="text-center">{{$reportes->autor}}</th>
+                        <th class="text-center">Mtra. Martha Irene Sánchez Beltrán</th>
+                    </tr>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th class="text-center">________________________________</th>
-                    <th class="text-center">Mtra. Martha Irene Sánchez Beltrán</th>
-                </tr>
                 <tr>
                     <th class="text-center">Nombre y Firma del Docente</th>
                     <th class="text-center">Vo. Bo. Nombre y firma <br> Coordinador Académico</th>

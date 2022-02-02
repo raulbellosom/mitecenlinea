@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="col-sm-12 row-sm-12">
-                <table class="table table-responsive-sm table-responsive-md table-white table-striped text-center">
+                <table class="table table-responsive-sm table-responsive-md table-responsive-lg table-white table-striped text-center">
                     <thead class="bg-primary text-white">
                         <tr>
                             <th>Fecha de elaboración</th>
@@ -77,7 +77,7 @@
                                     </svg>
                                     Editar
                                 </a> 
-                                    <form action="{{url('/downloadPDF/'.$reporte->id)}}" method="GET">
+                                    <form action="{{url('/download_reporte_departamental/'.$reporte->id)}}" method="GET">
                                         <button  class="btn btn-success" type="submit">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
                                                 <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>

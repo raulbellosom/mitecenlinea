@@ -29,7 +29,7 @@
         <nav class="navbar navbar-expand-md navbar-light shadow-sm bg-light" >
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                  <img src="{{asset('../resources/img/logo/ADYDO_Alter.png')}}" alt="adydo-logo" height="50px" >
+                  <img src="{{asset('../resources/img/logo/mi_tec_blue.png')}}" alt="mi-tec-logo" height="50px" >
                 </a>
                 
                 <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

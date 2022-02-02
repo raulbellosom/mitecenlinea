@@ -48,7 +48,7 @@
                 </div>
             </div>
             <div class="col-sm-12 row-sm-12">
-                <table class="table table-responsive-lg table-white table-striped text-center">
+                <table class="table table-responsive-sm table-responsive-md table-responsive-lg table-white table-striped text-center">
                     <thead class="bg-primary text-white">
                         <tr>
                             <th>Fecha de elaboración</th>

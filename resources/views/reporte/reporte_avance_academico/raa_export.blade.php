@@ -136,23 +136,18 @@
             @endforeach 
         </table>
     </div>
-   
     <div class="row">
         <table class="table table-borderless col-12">
             <thead>
                 <tr>
-                    <th class="text-center"> <p class="text-decoration-underline">{{$reportes->autor}}</p> </th>
-                    <th class="text-center text-decoration-underline"><p class="text-decoration-underline">{{$reportes->autor}}</p></th>
+                    <th class="text-center"><p class="text-decoration-underline">__{{$reportes->autor}}__</p> </th>
+                    <th class="text-center text-decoration-underline"><p class="text-decoration-underline">__Mtra. Martha Irene Sánchez Beltrán__</p></th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <th class="text-center">________________________________</th>
-                    <th class="text-center">Mtra. Martha Irene Sánchez Beltrán</th>
-                </tr>
-                <tr>
-                    <th class="text-center">Nombre y Firma del Docente</th>
-                    <th class="text-center">Vo. Bo. Nombre y firma <br> Coordinador Académico</th>
+                    <td class="text-center">Nombre y Firma del Docente</td>
+                    <td class="text-center">Vo. Bo. Nombre y firma <br> Coordinador Académico</td>
                 </tr>
             </tbody>
         </table>

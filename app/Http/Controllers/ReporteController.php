@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ReporteController extends Controller
 {
@@ -19,7 +20,30 @@ class ReporteController extends Controller
     public function index()
     {
         $id = Auth::id();
-        $datos["reportes"]=ReporteDiagnostico::where('user_id','=',$id)->paginate(10);
+        // $datos["reportes"]=ReporteDiagnostico::where('user_id','=',$id)->paginate(10);
+        $diagnostico = DB::table('reporte_diagnosticos')
+        ->select('created_at', 'nombre_reporte', 'grado', 'grupo', 'id', 'carrera','asignatura', 'user_id' )
+        ->where('user_id','=',$id)
+        ;
+
+        $raps= DB::table('raps')
+        ->select('created_at', 'nombre_reporte', 'grado', 'grupo', 'id', 'carrera','asignatura', 'user_id')
+        ->where('user_id','=',$id)
+        ;
+
+        $raas= DB::table('raas')
+        ->select('created_at', 'nombre_reporte', 'grado', 'grupo', 'id', 'carrera','asignatura', 'user_id')
+        ->where('user_id','=',$id)
+        ;
+        
+        $datos["reportes"] = DB::table('r_departamentals')
+        ->union($raas)
+        ->union($raps)
+        ->union($diagnostico)
+        ->select('created_at', 'nombre_reporte', 'grado', 'grupo', 'id', 'carrera','asignatura', 'user_id')
+        ->where('user_id','=',$id)
+        ->orderByDesc('created_at')
+        ->paginate(7);
         $user['users'] = Auth::user();
 
         return view("reporte.indexReporte", $user, $datos);

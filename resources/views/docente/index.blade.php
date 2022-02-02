@@ -20,7 +20,7 @@
                     <thead class="bg-primary text-white m-4">
                         <tr>
                             <th class="text-center" >Información del usuario</th>
-                            <th class="text-center">Acciones rapidas</th>
+                            {{-- <th class="text-center">Acciones rapidas</th> --}}
                         </tr>
                     </thead>
                     <tbody>
@@ -29,9 +29,9 @@
                                 <div class="pl-5">
                                     <p>
                                         @if ($imagen!=null)
-                                            <img class="img-thumbnail img-fluid" src="{{asset('storage').'/'.$imagen}}" width="100px" alt="imagenUsuario">
+                                            <img class="img-thumbnail img-fluid" src="{{asset('storage').'/'.$imagen}}" width="150px" alt="imagenUsuario">
                                         @else
-                                            <img class="img-thumbnail img-fluid" src="{{asset('storage/uploads/7PiW8C4MYaGWIpFxZgZVMKFdd0uU2mFe4Quj26vJ.png')}}" width="100px" alt="imagenUsuario">
+                                            <img class="img-thumbnail img-fluid" src="{{asset('../storage/uploads/tec-vallarta.jpg')}}" width="150px" alt="imagenUsuario">
                                         @endif
                                     </p> 
                                 </div>
@@ -108,11 +108,11 @@
                         <thead class="bg-primary text-white">
                             <tr>
                                 <th>Fecha de elaboración</th>
+                                <th>user id</th>
                                 <th>Tipo de reporte</th>
                                 <th>Carrera</th>
                                 <th>Asignatura</th>
                                 <th>Grado Grupo</th>
-                                {{-- <th>Turno</th> --}}
                                 <th class="text-center">Acciones</th>
                             </tr>
                         </thead>
@@ -120,11 +120,11 @@
                             @foreach ($reportes as $reporte)
                             <tr>
                                 <td>{{Str::substr($reporte->created_at, 0, 10)}}</td>
+                                <td>{{$reporte->user_id}}</td>
                                 <td>{{$reporte->nombre_reporte}}</td>
                                 <td>{{$reporte->carrera}}</td>
                                 <td>{{$reporte->asignatura}}</td>
                                 <td class="text-center">{{$reporte->grado}} {{$reporte->grupo}}</td>
-                                {{-- <td>{{$reporte->turno}}</td> --}}
                                 <td class="d-flex justify-content-between">
                                     <a href="{{url('/reporte_diagnostico/'.$reporte->id.'/edit') }}" class="btn btn-warning">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">

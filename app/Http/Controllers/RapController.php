@@ -145,9 +145,22 @@ class RapController extends Controller
      * @param  \App\Models\Rap  $rap
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Rap $rap)
+    public function update(Request $request,  $id)
     {
-        //
+        $campos=[
+            'status'=>'required|integer',
+            
+        ];
+        $mensaje=[
+            'required'=>'El :attribute es requerido',
+            
+        ];
+        $this->validate($request, $campos, $mensaje);
+
+        $status = request()->except(['_token','_method']);
+        
+        Rap::where('id','=',$id)->update($status);
+        return redirect('reporte_avance_programatico')->with('mensaje','Reporte Finalizado');
     }
 
     /**

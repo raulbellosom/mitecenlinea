@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Docente;
 use App\Models\InfoUser;
+use App\Models\Raa;
+use App\Models\Rap;
+use App\Models\RDepartamental;
 use App\Models\ReporteDiagnostico;
 use App\Models\User;
 
@@ -26,7 +29,54 @@ class DocenteController extends Controller
         // $datos["users"]=User::where('userid','=',$user);
         // $datos = DB::table('users')->where('id',$id);
         $id = Auth::id();
-        $datos["reportes"]=ReporteDiagnostico::where('user_id','=',$id)->paginate(3);
+        // $datos["reportes"]=ReporteDiagnostico::where('user_id','=',$id)->paginate(3);
+        // $d2["reportes"]=Raa::where('user_id','=',$id)->paginate(3);
+        // $d3["reportes"]=Rap::where('user_id','=',$id)->paginate(3);
+        // $d4["reportes"]=RDepartamental::where('user_id','=',$id)->paginate(3);
+
+        $diagnostico = DB::table('reporte_diagnosticos')
+        ->select('created_at', 'nombre_reporte', 'grado', 'grupo', 'id', 'carrera','asignatura', 'user_id' )
+        ->where('user_id','=',$id)
+        ;
+
+        $raps= DB::table('raps')
+        ->select('created_at', 'nombre_reporte', 'grado', 'grupo', 'id', 'carrera','asignatura', 'user_id')
+        ->where('user_id','=',$id)
+        ;
+
+        $raas= DB::table('raas')
+        ->select('created_at', 'nombre_reporte', 'grado', 'grupo', 'id', 'carrera','asignatura', 'user_id')
+        ->where('user_id','=',$id)
+        ;
+        
+        $datos["reportes"] = DB::table('r_departamentals')
+        ->union($raas)
+        ->union($raps)
+        ->union($diagnostico)
+        ->select('created_at', 'nombre_reporte', 'grado', 'grupo', 'id', 'carrera','asignatura', 'user_id')
+        ->where('user_id','=',$id)
+        ->orderByDesc('created_at')
+        ->paginate(3);
+
+        // var_dump($prueba);
+
+        // $datos["reportes"] = DB::select("SELECT* FROM (
+        //     SELECT  dia.created_at, dia.nombre_reporte, dia.grado, dia.grupo, dia.user_id, dia.carrera, dia.asignatura, dia.id
+        //     FROM reporte_diagnosticos as dia
+        //     UNION
+        //     SELECT  dia.created_at, dia.nombre_reporte, dia.grado, dia.grupo, dia.user_id, dia.carrera, dia.asignatura, dia.id
+        //     FROM r_departamentals as dia
+        //     UNION
+        //     SELECT  dia.created_at, dia.nombre_reporte, dia.grado, dia.grupo, dia.user_id, dia.carrera, dia.asignatura, dia.id
+        //     FROM raas as dia
+        //     UNION
+        //     SELECT  dia.created_at, dia.nombre_reporte, dia.grado, dia.grupo, dia.user_id, dia.carrera, dia.asignatura, dia.id
+        //     FROM raps as dia
+        //     ) AS QUERY WHERE user_id = {$id} ORDER BY created_at DESC LIMIT 5 OFFSET 5");
+
+
+
+
         $user['users'] = Auth::user();
         // $info['infos']= DB::select('select user_id, imagen from info_users where user_id = ?', [$id]);
         $info= InfoUser::where('user_id','=',$id)->value('user_id');
@@ -38,6 +88,7 @@ class DocenteController extends Controller
         $user = Arr::add($user, 'info_user',$bandera);
         $user = Arr::add($user, 'imagen',$imagen);
         
+
         // print_r($info);
         return view("docente.index",$datos,$user);
     }

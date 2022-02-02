@@ -1,7 +1,7 @@
 
 @extends('layouts.light')  
     @section('content')
-        <div class="bg-image" style="background-image: url({{ asset('../resources/img/junta.jpg') }});
+        <div class="bg-image" style="background-image: url({{ asset('../resources/img/trabajando.jpg') }});
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;

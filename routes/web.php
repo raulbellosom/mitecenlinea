@@ -2,6 +2,7 @@
 
 use App\Exports\ReporteDiagnosticoExport;
 use App\Exports\ReportePrimerCorteExport;
+use App\Exports\ReporteDepartamentalExport;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DocenteController;
@@ -111,7 +112,7 @@ Route::group(['middleware'=>'auth'], function(){
     Route::post('reporte_avance_programatico/borrar_desglose_horas', [RapDesgloseHorasController::class, 'deleteDesgloseHoras']);
     Route::post('reporte_avance_programatico/agregar_practicas_planeadas', [RapPracticaPlaneadaController::class, 'addPracticasPlaneadas']);
     Route::post('reporte_avance_programatico/borrar_practicas_planeadas', [RapPracticaPlaneadaController::class, 'deletePracticasPlaneadas']);
-    // Route::post('reporte_avance_academico/agregar_pap', [RaaPapController::class, 'addRaaPap']);
+    Route::post('reporte_avance_programatico/finalizar', [RapController::class, 'update']);
     // Route::post('reporte_avance_academico/borrar_pap', [RaaPapController::class, 'deleteRaaPap']);
     Route::resource('reporte_avance_programatico', RapController::class);
 });
@@ -147,6 +148,9 @@ Route::group(['middleware'=>'auth'], function(){
     Route::get('download_reporte_avance_programatico', function () {
         return (new ReportePrimerCorteExport)->download('reporte_primer_corte.xlsx');
     });
+    Route::get('download_reporte_departamental', function () {
+        return (new ReporteDepartamentalExport)->download('reporte_departamental.xlsx');
+    });
 });
 
 Route::group(['middleware'=>'auth'], function(){
@@ -163,3 +167,5 @@ Route::resource('infoUser', InfoUserController::class);
 // Route::get('/get-reporte', [PdfController::class, 'getReporte'])->middleware('auth');
 Route::get('/downloadPDF/{id}', [PdfController::class, 'downloadPDF'])->middleware('auth');
 Route::get('/download_reporte_avance_academico/{id}', [PdfController::class, 'downloadPDFRAA'])->middleware('auth');
+Route::get('/download_reporte_avance_programatico/{id}', [PdfController::class, 'downloadPDFRAP'])->middleware('auth');
+Route::get('/download_reporte_departamental/{id}', [PdfController::class, 'downloadPDFRDEP'])->middleware('auth');
