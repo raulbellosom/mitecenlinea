@@ -35,17 +35,17 @@ class DocenteController extends Controller
         // $d4["reportes"]=RDepartamental::where('user_id','=',$id)->paginate(3);
 
         $diagnostico = DB::table('reporte_diagnosticos')
-        ->select('created_at', 'nombre_reporte', 'grado', 'grupo', 'id', 'carrera','asignatura', 'user_id' )
+        ->select('created_at', 'nombre_reporte', 'grado', 'grupo', 'id', 'carrera','asignatura', 'user_id', 'status' )
         ->where('user_id','=',$id)
         ;
 
         $raps= DB::table('raps')
-        ->select('created_at', 'nombre_reporte', 'grado', 'grupo', 'id', 'carrera','asignatura', 'user_id')
+        ->select('created_at', 'nombre_reporte', 'grado', 'grupo', 'id', 'carrera','asignatura', 'user_id', 'status' )
         ->where('user_id','=',$id)
         ;
 
         $raas= DB::table('raas')
-        ->select('created_at', 'nombre_reporte', 'grado', 'grupo', 'id', 'carrera','asignatura', 'user_id')
+        ->select('created_at', 'nombre_reporte', 'grado', 'grupo', 'id', 'carrera','asignatura', 'user_id', 'status' )
         ->where('user_id','=',$id)
         ;
         
@@ -53,10 +53,11 @@ class DocenteController extends Controller
         ->union($raas)
         ->union($raps)
         ->union($diagnostico)
-        ->select('created_at', 'nombre_reporte', 'grado', 'grupo', 'id', 'carrera','asignatura', 'user_id')
+        ->select('created_at', 'nombre_reporte', 'grado', 'grupo', 'id', 'carrera','asignatura', 'user_id', 'status' )
         ->where('user_id','=',$id)
         ->orderByDesc('created_at')
-        ->paginate(3);
+        ->limit(10)
+        ->paginate(5);
 
         // var_dump($prueba);
 

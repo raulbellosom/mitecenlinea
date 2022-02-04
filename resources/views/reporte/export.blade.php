@@ -1,8 +1,7 @@
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 @extends('layouts.main')
 
 @section('content')
-<div id="emp" class="container-fluid bg-white" >
+<div class="container-fluid bg-white" >
     <div class="row mt-4">
         <table class="table table-bordered table-white col-12">
             <tr>
@@ -92,59 +91,64 @@
         </table>
     </div>
 
-    <div class="font-weight-bold">
+    <div class="row font-weight-bold">
         <p class="text-decoration-underline">Plan de acción</p>
     </div>
     
     <div class="row">
-        <table class="table table-bordered border-dark col-12">  
-        <tr class="bg-secondary text-white">
-            <th rowspan="2">General</th>
-            <th>Deficiencias</th>
-            <th>Acciones sugeridas y recursos necesarios</th>
-            <th>Tiempo de ejecución e impacto en cronograma</th>
-        </tr>
-        <tr>
-            <td>{{$pag_def}}</td>
-            <td>{{$pag_ac}}</td>
-            <td>{{$pag_time}}</td>
-        </tr>
-        <tr class="bg-secondary text-white ">
-            <th class="text-center" rowspan="5">Particular</th>
-            <th>Nombre del alumno</th>
-            <th>Deficiencias (temas, áreas, otros)</th>
-            <th>Acción sugerida (académica, psicologica, etc)</th>
-        </tr>
-            @foreach ($pap as $paps)
-                @foreach ($paps as $datos)
-                <tr>
-                    <td>{{$datos->alumno_particular}}</td>
-                    <td>{{$datos->deficiencia_particular}}</td>
-                    <td>{{$datos->accion_particular}}</td>
+        <div class="row">
+            <table class="table table-bordered border-dark col-12">  
+                <tr class="bg-secondary text-white">
+                    <th rowspan="2">General</th>
+                    <th>Deficiencias</th>
+                    <th>Acciones sugeridas y recursos necesarios</th>
+                    <th>Tiempo de ejecución e impacto en cronograma</th>
                 </tr>
-                @endforeach
-            @endforeach 
-        </table>
-    </div>
-   
-    <div class="row">
-        <table class="table table-borderless col-12">
-            <thead>
                 <tr>
+                    <td>{{$pag_def}}</td>
+                    <td>{{$pag_ac}}</td>
+                    <td>{{$pag_time}}</td>
+                </tr>
+                <tr class="bg-secondary text-white ">
+                    <th class="text-center" rowspan="5">Particular</th>
+                    <th>Nombre del alumno</th>
+                    <th>Deficiencias (temas, áreas, otros)</th>
+                    <th>Acción sugerida (académica, psicologica, etc)</th>
+                </tr>
+                @foreach ($pap as $paps)
+                    @foreach ($paps as $datos)
                     <tr>
-                        <th class="text-center">{{$reportes->autor}}</th>
-                        <th class="text-center">Mtra. Martha Irene Sánchez Beltrán</th>
+                        <td>{{$datos->alumno_particular}}</td>
+                        <td>{{$datos->deficiencia_particular}}</td>
+                        <td>{{$datos->accion_particular}}</td>
                     </tr>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th class="text-center">Nombre y Firma del Docente</th>
-                    <th class="text-center">Vo. Bo. Nombre y firma <br> Coordinador Académico</th>
-                </tr>
-            </tbody>
-        </table>
+                    @endforeach
+                @endforeach 
+            </table>
+        </div>
     </div>
+
+   
+    
+
+</div>
+<div class="row">
+    <table class="table table-borderless col-12">
+        <thead>
+            <tr>
+                <tr>
+                    <th class="text-center">{{$reportes->autor}}</th>
+                    <th class="text-center">Mtra. Martha Irene Sánchez Beltrán</th>
+                </tr>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th class="text-center">Nombre y Firma del Docente</th>
+                <th class="text-center">Vo. Bo. Nombre y firma <br> Coordinador Académico</th>
+            </tr>
+        </tbody>
+    </table>
 </div>
 @endsection
 

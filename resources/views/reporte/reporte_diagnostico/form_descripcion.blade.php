@@ -126,8 +126,21 @@
                                     @endif
                                 </td>
                                 <td class="col-2">
-                                    <input type="hidden" value="{{$comp->id}}" id="id_reporte">
-                                    <input class=" btn btn-danger" type="submit" value="Borrar" id="borrar">
+                                    {{-- @if ($comp->id) --}}
+                                        <form action="{{ url('/rd_competencia/'.$comp->id) }}" method="POST">
+                                            @csrf
+                                            {{method_field('DELETE')}}
+                                            <button type="submit" onclick="return confirm('¿Deseas borrar esta competencia?')" 
+                                            value="Borrar" class="btn btn-danger">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
+                                                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                                </svg>
+                                                Borrar
+                                            </button>
+                                        </form>
+                                    {{-- @endif --}}
+                                    
                                 </td>
                             </tr>
                         @endforeach     
@@ -183,11 +196,24 @@
                                 <td class="col-4 text-center">{{$pag_ac}}</td>
                                 <td class="col-2 text-center">{{$pag_time}}</td>
                                 <td class="col-2">
-                                    <input type="hidden" value="{{$pag_id}}" id="pag_id">
+                                    {{-- <input type="hidden" value="{{$pag_id}}" id="pag_id">
                                     @if ($pag_id != 0)
                                     <input class=" btn btn-danger" type="submit" value="Borrar" id="borrar_pag">
+                                    @endif --}}
+                                    @if ($pag_id != 0)
+                                        <form action="{{ url('/rd_pag/'.$pag_id) }}" method="POST">
+                                            @csrf
+                                            {{method_field('DELETE')}}
+                                            <button type="submit" onclick="return confirm('¿Deseas borrar este Plan de Acción General?')" 
+                                            value="Borrar" class="btn btn-danger">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
+                                                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                                </svg>
+                                                Borrar
+                                            </button>
+                                        </form>
                                     @endif
-                                    
                                 </td>
                             </tr>  
                         </tbody>
@@ -211,9 +237,19 @@
                     @endif
                 </div>
                 <div class="row">
+                    @if(!($pag_id))
                     <div class="col-md-12 text-center mb-4">
                         <input type="submit" value="Crear Plan de Accion General" class="btn btn-success" id="btn_pag">
                     </div>
+                    @else
+                    <div class="col-md-12 text-center mb-4">
+                        <div>
+                            <input type="submit" value="Crear Plan de Accion General" class="btn btn-warning" id="btn_pag" name="btn_pag" disabled>
+                        </div>
+                        
+                        <label class="text-danger" for="btn_pag">Para capturar un nuevo Plan de Accion General debe eliminar el actual.</label>
+                    </div>
+                    @endif
                 </div>
             </div>
         {{-- Plan accion general --}}
@@ -239,10 +275,20 @@
                             <tr>
                                 <th class="col-3">{{Str::substr($datos->alumno_particular,3) }}</th>
                                 <td class="col-3">{{Str::substr($datos->deficiencia_particular,3)}}</td>
-                                <td class="col-4">{{Str::substr($datos->accion_particular,3)}},</td>
+                                <td class="col-4">{{Str::substr($datos->accion_particular,3)}}</td>
                                 <td class="col-2">
-                                    <input type="hidden" value="{{$datos->id}}" id="pap_id">
-                                    <input class=" btn btn-danger" type="submit" value="Borrar" id="borrar_pap">
+                                    <form action="{{ url('/rd_pap/'.$datos->id) }}" method="POST">
+                                        @csrf
+                                        {{method_field('DELETE')}}
+                                    <button type="submit" onclick="return confirm('¿Deseas borrar este Plan de Acción Particular?')" 
+                                    value="Borrar" class="btn btn-danger">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
+                                            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                        </svg>
+                                        Borrar
+                                    </button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach
@@ -349,28 +395,27 @@
             });
 
             
-            btn_borrar.addEventListener("click", function(e){
-                let borrar_dato = {id:id_reporte.value}
-                e.preventDefault();
+            // btn_borrar.addEventListener("click", function(e){
+            //     let borrar_dato = {id:id_reporte.value}
+            //     e.preventDefault();
 
-                fetch('/reportec/public/reporte_diagnostico/borrar_competencia',{
-                    method: 'post',
-                    headers: {
-                        'X-CSRF-TOKEN': _token.value,
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(borrar_dato)
-                }).then(response => response.json())
-                .then(data => {
-                    // console.log(data);
-                    location.reload()
-                }).catch(error => {
-                    console.log(error.message);
-                })
-            });
+            //     fetch('/reportec/public/reporte_diagnostico/borrar_competencia',{
+            //         method: 'post',
+            //         headers: {
+            //             'X-CSRF-TOKEN': _token.value,
+            //             'Content-Type': 'application/json',
+            //         },
+            //         body: JSON.stringify(borrar_dato)
+            //     }).then(response => response.json())
+            //     .then(data => {
+            //         // console.log(data);
+            //         location.reload()
+            //     }).catch(error => {
+            //         console.log(error.message);
+            //     })
+            // });
 
             let boton_pag = document.getElementById('btn_pag');
-            let btn_borrar_pag = document.getElementById("borrar_pag");
             let deficiencia_general = document.getElementById('deficiencia_general');
             let accion_general = document.getElementById('accion_general');
             let tiempo_general = document.getElementById('tiempo_general');
@@ -397,28 +442,6 @@
                     console.log(error.message);
                 })
             });
-
-            if (btn_borrar_pag) {
-                btn_borrar_pag.addEventListener("click", function(e){
-                let borrar_dato = {id:pag_id.value}
-                e.preventDefault();
-                
-                fetch('/reportec/public/reporte_diagnostico/borrar_pag',{
-                    method: 'post',
-                    headers: {
-                        'X-CSRF-TOKEN': _token.value,
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(borrar_dato)
-                }).then(response => response.json())
-                .then(data => {
-                    // console.log(data);
-                    location.reload()
-                }).catch(error => {
-                    console.log(error.message);
-                })
-            });
-            }
             
 
             let boton_pap = document.getElementById('btn_pap');
@@ -428,7 +451,7 @@
             let accion_particular = document.getElementById('accion_particular');
             let pap_id = document.getElementById('pap_id');
             var contador = (document.getElementById("particular").rows.length);
-            console.log(contador);
+            // console.log(contador);
             // let alumn = contador + alumno_particular.value;
 
             boton_pap.addEventListener("click", function(e){
@@ -451,29 +474,8 @@
                 }).catch(error => {
                     console.log(error.message);
                 })
-            });
-
-            if (btn_borrar_pap) {
-                btn_borrar_pap.addEventListener("click", function(e){
-                let borrar_dato = {id:pap_id.value}
-                e.preventDefault();
-
-                fetch('/reportec/public/reporte_diagnostico/borrar_pap',{
-                    method: 'post',
-                    headers: {
-                        'X-CSRF-TOKEN': _token.value,
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(borrar_dato)
-                }).then(response => response.json())
-                .then(data => {
-                    // console.log(data);
-                    location.reload()
-                }).catch(error => {
-                    console.log(error.message);
-                })
-                });
-            }
+            })
+        
             
 
 

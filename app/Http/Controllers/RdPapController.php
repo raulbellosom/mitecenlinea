@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Rd_pap;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class RdPapController extends Controller
 {
@@ -95,8 +96,9 @@ class RdPapController extends Controller
      * @param  \App\Models\Rd_pap  $rd_pap
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Rd_pap $rd_pap)
+    public function destroy($id)
     {
-        //
+        Rd_pap::destroy($id);
+        return Redirect::back()->with('mensaje','Plan de Acción Particular eliminado con exito!');
     }
 }

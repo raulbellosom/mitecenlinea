@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Rd_competencia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class RdCompetenciaController extends Controller
 {
@@ -151,8 +152,9 @@ class RdCompetenciaController extends Controller
      * @param  \App\Models\Rd_competencia  $rd_competencia
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Rd_competencia $rd_competencia)
+    public function destroy($id)
     {
-        //
+        Rd_competencia::destroy($id);
+        return Redirect::back()->with('mensaje','Competencia eliminada con exito!');
     }
 }

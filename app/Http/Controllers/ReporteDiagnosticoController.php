@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class ReporteDiagnosticoController extends Controller
 {
@@ -148,7 +149,7 @@ class ReporteDiagnosticoController extends Controller
         
         ReporteDiagnostico::where('id','=',$id)->update($status);
 
-        return redirect('reporte_diagnostico')->with('mensaje','El reporte se ha finalizado con éxito');
+        return Redirect::back()->with('mensaje','El reporte se ha finalizado con éxito');
     }
 
     /**

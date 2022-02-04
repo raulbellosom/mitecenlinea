@@ -85,7 +85,11 @@ Route::group(['middleware'=>'auth'], function(){
     Route::post('reporte_diagnostico/borrar_pap', [RdPapController::class, 'deletePap']);
     Route::resource('reporte_diagnostico', ReporteDiagnosticoController::class);
 });
-
+Route::group(['middleware'=>'auth'], function(){
+    Route::resource('rd_competencia', RdCompetenciaController::class);
+    Route::resource('rd_pag', RdPagController::class);
+    Route::resource('rd_pap', RdPapController::class);
+});
 //-------------------------Reporte Avance Academico
 Route::group(['middleware'=>'auth'], function(){
     Route::get('reporte_avance_academico/index', [RaaController::class, 'index'])->name('raa-index');
