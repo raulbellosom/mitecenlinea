@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Raa_unidad;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class RaaUnidadController extends Controller
 {
@@ -95,8 +96,9 @@ class RaaUnidadController extends Controller
      * @param  \App\Models\Raa_unidad  $raa_unidad
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Raa_unidad $raa_unidad)
+    public function destroy($id)
     {
-        //
+        Raa_unidad::destroy($id);
+        return Redirect::back()->with('mensaje','Evaluación eliminada con exito!');
     }
 }

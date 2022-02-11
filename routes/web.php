@@ -3,6 +3,7 @@
 use App\Exports\ReporteDiagnosticoExport;
 use App\Exports\ReportePrimerCorteExport;
 use App\Exports\ReporteDepartamentalExport;
+use App\Exports\ReporteProgramatico;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DocenteController;
@@ -78,11 +79,8 @@ Route::group(['middleware'=>'auth'], function(){
     Route::get('reporte_diagnostico/show', [ReporteDiagnosticoController::class, 'show']);
     Route::post('reporte_diagnostico/finalizar', [ReporteDiagnosticoController::class, 'update']);
     Route::post('reporte_diagnostico/competencia', [RdCompetenciaController::class, 'addComp']);
-    Route::post('reporte_diagnostico/borrar_competencia', [RdCompetenciaController::class, 'deleteComp']);
     Route::post('reporte_diagnostico/pag', [RdPagController::class, 'addPag']);
-    Route::post('reporte_diagnostico/borrar_pag', [RdPagController::class, 'deletePag']);
     Route::post('reporte_diagnostico/pap', [RdPapController::class, 'addPap']);
-    Route::post('reporte_diagnostico/borrar_pap', [RdPapController::class, 'deletePap']);
     Route::resource('reporte_diagnostico', ReporteDiagnosticoController::class);
 });
 Route::group(['middleware'=>'auth'], function(){
@@ -90,20 +88,23 @@ Route::group(['middleware'=>'auth'], function(){
     Route::resource('rd_pag', RdPagController::class);
     Route::resource('rd_pap', RdPapController::class);
 });
+
 //-------------------------Reporte Avance Academico
 Route::group(['middleware'=>'auth'], function(){
     Route::get('reporte_avance_academico/index', [RaaController::class, 'index'])->name('raa-index');
     Route::get('reporte_avance_academico/create', [RaaController::class, 'create']);
     Route::post('reporte_avance_academico/evaluacion_por_unidad', [RaaUnidadController::class, 'addUnidad']);
-    Route::post('reporte_avance_academico/borrar_unidad', [RaaUnidadController::class, 'deleteUnidad']);
     Route::post('reporte_avance_academico/crear_analisis', [RaaAnalisisResultadoController::class, 'addAnalisis']);
-    Route::post('reporte_avance_academico/borrar_analisis', [RaaAnalisisResultadoController::class, 'deleteAnalisis']);
     Route::post('reporte_avance_academico/agregar_pag', [RaaPagController::class, 'addRaaPag']);
-    Route::post('reporte_avance_academico/borrar_pag', [RaaPagController::class, 'deleteRaaPag']);
     Route::post('reporte_avance_academico/agregar_pap', [RaaPapController::class, 'addRaaPap']);
-    Route::post('reporte_avance_academico/borrar_pap', [RaaPapController::class, 'deleteRaaPap']);
     Route::post('reporte_avance_academico/finalizar', [RaaController::class, 'update']);
     Route::resource('reporte_avance_academico', RaaController::class);
+});
+Route::group(['middleware'=>'auth'], function(){
+    Route::resource('raa_evaluacion_unidad', RaaUnidadController::class);
+    Route::resource('raa_analisis_resultados', RaaAnalisisResultadoController::class);
+    Route::resource('raa_pag', RaaPagController::class);
+    Route::resource('raa_pap', RaaPapController::class);
 });
 
 //-------------------------Reporte Avance Programatico
@@ -119,6 +120,11 @@ Route::group(['middleware'=>'auth'], function(){
     Route::post('reporte_avance_programatico/finalizar', [RapController::class, 'update']);
     // Route::post('reporte_avance_academico/borrar_pap', [RaaPapController::class, 'deleteRaaPap']);
     Route::resource('reporte_avance_programatico', RapController::class);
+});
+Route::group(['middleware'=>'auth'], function(){
+    Route::resource('rap_descripcion_unidad', RapUnidadController::class);
+    Route::resource('rap_desglose_horas', RapDesgloseHorasController::class);
+    Route::resource('rap_practicas_planeadas', RapPracticaPlaneadaController::class);
 });
 
 
@@ -154,6 +160,9 @@ Route::group(['middleware'=>'auth'], function(){
     });
     Route::get('download_reporte_departamental', function () {
         return (new ReporteDepartamentalExport)->download('reporte_departamental.xlsx');
+    });
+    Route::get('download_programatico/{id}', function () {
+        return (new ReporteProgramatico)->download('reporte_.pdf');
     });
 });
 

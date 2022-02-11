@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Raa_analisis_resultado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class RaaAnalisisResultadoController extends Controller
 {
@@ -95,8 +96,9 @@ class RaaAnalisisResultadoController extends Controller
      * @param  \App\Models\Raa_analisis_resultado  $raa_analisis_resultado
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Raa_analisis_resultado $raa_analisis_resultado)
+    public function destroy($id)
     {
-        //
+        Raa_analisis_resultado::destroy($id);
+        return Redirect::back()->with('mensaje','Analisis de Resultados eliminado con exito!');
     }
 }

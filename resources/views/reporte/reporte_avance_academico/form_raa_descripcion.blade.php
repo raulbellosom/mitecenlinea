@@ -119,7 +119,7 @@
                                 <th class="col-2">% de Reprobacion</th>
                                 <th class="col-4">Promedio de calificaciones del grupo por unidad (considerar el total de alumnos en lista)</th>
                                 <th class="col-1">% de Asistencia</th>
-                                <th class="col-2">Acciones</th>
+                                <th class="col-2 text-center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -131,8 +131,18 @@
                                     <td>{{$uni->promedio_grupal}}</td>
                                     <td>{{$uni->porcentaje_asistencia}}</td>
                                     <td class="col-2">
-                                        <input type="hidden" value="{{$uni->id}}" id="id_reporte">
-                                        <input class=" btn btn-danger" type="submit" value="Borrar" id="borrar">
+                                        <form action="{{ url('/raa_evaluacion_unidad/'.$uni->id) }}" method="POST">
+                                            @csrf
+                                            {{method_field('DELETE')}}
+                                            <button type="submit" onclick="return confirm('¿Deseas borrar esta Evaluación?')" 
+                                            value="Borrar" class="btn btn-danger">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
+                                                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                                </svg>
+                                                Borrar
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
@@ -194,7 +204,18 @@
                                 <td class="col-2">
                                     <input type="hidden" value="{{$anal_id}}" id="descr_id">
                                     @if ($anal_id != 0)
-                                        <input class=" btn btn-danger" type="submit" value="Borrar" id="borrar_analisis">
+                                    <form action="{{ url('/raa_analisis_resultados/'.$anal_id) }}" method="POST">
+                                        @csrf
+                                        {{method_field('DELETE')}}
+                                        <button type="submit" onclick="return confirm('¿Deseas borrar el Analisis de Resultados?')" 
+                                        value="Borrar" class="btn btn-danger">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
+                                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                            </svg>
+                                            Borrar
+                                        </button>
+                                    </form>
                                     @endif
                                 </td>
                             </tr>  
@@ -220,10 +241,11 @@
                         </div>
                     </div> 
                 @else
-                <div class="row">
-                    <div class="col-md-12 text-center mb-4">
-                        <input disabled type="submit" value="Agregar Analisis de Resultados" class="btn btn-success" id="btn_analisis">
+                <div class="col-md-12 text-center mb-4">
+                    <div>
+                        <input disabled type="submit" value="Agregar Analisis de Resultados" class="btn btn-warning" id="btn_analisis" name="btn_analisis">
                     </div>
+                    <label class="text-danger" for="btn_analisis">Para capturar un nuevo Analisis de Resultados debe borrar el actual.</label>
                 </div> 
                 @endif
             </div>
@@ -250,9 +272,19 @@
                             <td class="col-4 text-center">{{$pag_ac}}</td>
                             <td class="col-2 text-center">{{$pag_time}}</td>
                             <td class="col-2">
-                                <input type="hidden" value="{{$pag_id}}" id="pag_id">
                                 @if ($pag_id != 0)
-                                <input class=" btn btn-danger" type="submit" value="Borrar" id="borrar_pag">
+                                    <form action="{{ url('/raa_pag/'.$pag_id) }}" method="POST">
+                                        @csrf
+                                        {{method_field('DELETE')}}
+                                        <button type="submit" onclick="return confirm('¿Deseas borrar este Plan de Acción General?')" 
+                                        value="Borrar" class="btn btn-danger">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
+                                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                            </svg>
+                                            Borrar
+                                        </button>
+                                    </form>
                                 @endif
                             </td>
                         </tr>  
@@ -276,19 +308,21 @@
                     </div>
                 @endif
             </div>
-            @if(!($pag_id))
-                    <div class="row">
-                        <div class="col-md-12 text-center mb-4">
-                            <input type="submit" value="Crear Plan de Accion General" class="btn btn-success" id="btn_pag">
-                        </div>
-                    </div> 
+            <div class="row">
+                @if(!($pag_id))
+                <div class="col-md-12 text-center mb-4">
+                    <input type="submit" value="Crear Plan de Accion General" class="btn btn-success" id="btn_pag">
+                </div>
                 @else
-                <div class="row">
-                    <div class="col-md-12 text-center mb-4">
-                        <input disabled type="submit" value="Crear Plan de Accion General" class="btn btn-success" id="btn_pag">
+                <div class="col-md-12 text-center mb-4">
+                    <div>
+                        <input type="submit" value="Crear Plan de Accion General" class="btn btn-warning" id="btn_pag" name="btn_pag" disabled>
                     </div>
-                </div> 
+                    
+                    <label class="text-danger" for="btn_pag">Para capturar un nuevo Plan de Accion General debe borrar el actual.</label>
+                </div>
                 @endif
+            </div>
         </div>
     {{-- Plan accion general --}}
 
@@ -315,8 +349,18 @@
                                 <td class="col-3">{{Str::substr($datos->deficiencia_particular,3)}}</td>
                                 <td class="col-4">{{Str::substr($datos->accion_particular,3)}},</td>
                                 <td class="col-2">
-                                    <input type="hidden" value="{{$datos->id}}" id="pap_id">
-                                    <input class=" btn btn-danger" type="submit" value="Borrar" id="borrar_pap">
+                                    <form action="{{ url('/raa_pap/'.$datos->id) }}" method="POST">
+                                        @csrf
+                                        {{method_field('DELETE')}}
+                                        <button type="submit" onclick="return confirm('¿Deseas borrar este Plan de Acción Particular?')" 
+                                        value="Borrar" class="btn btn-danger">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
+                                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                            </svg>
+                                            Borrar
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach
@@ -394,7 +438,6 @@
     <script>
         //-------------------- JavaScript para Evaluacion por unidad---------------------//
             let boton = document.getElementById("enviar");
-            let btn_borrar = document.getElementById("borrar");
             let no_unidad =  document.getElementById('no_unidad');
             let no_alu_reprobados = document.getElementById('no_alu_reprobados');
             let porcentaje_reprobacion = document.getElementById('porcentaje_reprobacion');
@@ -427,32 +470,9 @@
                 })
             });
 
-    //-------------------- JavaScript para Borrar Unidad---------------------//        
-        if (btn_borrar) {
-            btn_borrar.addEventListener("click", function(e){
-                let borrar_dato = {id:id_reporte.value}
-                e.preventDefault();
-
-                fetch('/reportec/public/reporte_avance_academico/borrar_unidad',{
-                    method: 'post',
-                    headers: {
-                        'X-CSRF-TOKEN': _token.value,
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(borrar_dato)
-                }).then(response => response.json())
-                .then(data => {
-                    // console.log(data);
-                    location.reload()
-                }).catch(error => {
-                    console.log(error.message);
-                })
-            });
-        }
 
         //-------------------- JavaScript para Analisis ---------------------//
             let btn_analisis = document.getElementById('btn_analisis');
-            let btn_borrar_analisis = document.getElementById("borrar_analisis");
             let analisis_descripcion = document.getElementById('analisis_descripcion');
             let analisis_acciones = document.getElementById('analisis_acciones');
             let descr_id = document.getElementById('descr_id');
@@ -479,32 +499,8 @@
                 })
             });
 
-        //-------------------- JavaScript para Borrar Analisis---------------------//
-            if (btn_borrar_analisis) {
-                btn_borrar_analisis.addEventListener("click", function(e){
-                let borrar_dato = {id:descr_id.value}
-                e.preventDefault();
-                
-                fetch('/reportec/public/reporte_avance_academico/borrar_analisis',{
-                    method: 'post',
-                    headers: {
-                        'X-CSRF-TOKEN': _token.value,
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(borrar_dato)
-                }).then(response => response.json())
-                .then(data => {
-                    // console.log(data);
-                    location.reload()
-                }).catch(error => {
-                    console.log(error.message);
-                })
-            });
-            }
-
         //-------------------- JavaScript para Plan General---------------------//
             let boton_pag = document.getElementById('btn_pag');
-            let btn_borrar_pag = document.getElementById("borrar_pag");
             let deficiencia_general = document.getElementById('deficiencia_general');
             let accion_general = document.getElementById('accion_general');
             let tiempo_general = document.getElementById('tiempo_general');
@@ -531,33 +527,9 @@
                     console.log(error.message);
                 })
             });
-
-        //-------------------- JavaScript para Borrar Plan General---------------------//
-            if (btn_borrar_pag) {
-                btn_borrar_pag.addEventListener("click", function(e){
-                let borrar_dato = {id:pag_id.value}
-                e.preventDefault();
-                
-                fetch('/reportec/public/reporte_avance_academico/borrar_pag',{
-                    method: 'post',
-                    headers: {
-                        'X-CSRF-TOKEN': _token.value,
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(borrar_dato)
-                }).then(response => response.json())
-                .then(data => {
-                    // console.log(data);
-                    location.reload()
-                }).catch(error => {
-                    console.log(error.message);
-                })
-            });
-            }
             
     //-------------------- JavaScript para Plan Particular---------------------//
             let boton_pap = document.getElementById('btn_pap');
-            let btn_borrar_pap = document.getElementById("borrar_pap");
             let alumno_particular = document.getElementById('alumno_particular');
             let deficiencia_particular = document.getElementById('deficiencia_particular');
             let accion_particular = document.getElementById('accion_particular');
@@ -586,28 +558,6 @@
                     console.log(error.message);
                 })
             });
-            //-------------------- JavaScript para Borrar Plan Particular---------------------//
-            if (btn_borrar_pap) {
-                btn_borrar_pap.addEventListener("click", function(e){
-                let borrar_dato = {id:pap_id.value}
-                e.preventDefault();
-
-                fetch('/reportec/public/reporte_avance_academico/borrar_pap',{
-                    method: 'post',
-                    headers: {
-                        'X-CSRF-TOKEN': _token.value,
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(borrar_dato)
-                }).then(response => response.json())
-                .then(data => {
-                    // console.log(data);
-                    location.reload()
-                }).catch(error => {
-                    console.log(error.message);
-                })
-                });
-            }
 
     </script>
     {{-- Script campos automaticos --}}

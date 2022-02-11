@@ -16,7 +16,7 @@ class RDepartamentalController extends Controller
     public function index()
     {
         $id = Auth::id();
-        $datos["reportes"]=RDepartamental::where('user_id','=',$id)->paginate(10);
+        $datos["reportes"]=RDepartamental::where('user_id','=',$id)->orderByDesc('created_at')->paginate(5);
         $user['users'] = Auth::user();
         return view('reporte/reporte_departamental/rdep_index', $user, $datos);
     }

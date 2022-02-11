@@ -1,15 +1,8 @@
 <?php
 
 namespace App\Exports;
-
-use App\Models\Rd_competencia;
-use App\Models\Rd_pag;
-use App\Models\Rd_pap;
-use App\Models\ReporteDiagnostico;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;

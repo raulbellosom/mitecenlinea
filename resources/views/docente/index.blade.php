@@ -107,7 +107,7 @@
                     <table class="table table-responsive-sm table-responsive-md table-responsive-lg table-white table-striped">
                         <thead class="bg-primary text-white">
                             <tr>
-                                <th>Fecha de elaboración</th>
+                                <th>Fecha de creación</th>
                                 <th>Tipo de reporte</th>
                                 <th>Carrera</th>
                                 <th>Asignatura</th>

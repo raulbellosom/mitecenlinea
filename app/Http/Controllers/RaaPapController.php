@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Raa_pap;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class RaaPapController extends Controller
 {
@@ -95,8 +96,9 @@ class RaaPapController extends Controller
      * @param  \App\Models\Raa_pap  $raa_pap
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Raa_pap $raa_pap)
+    public function destroy($id)
     {
-        //
+        Raa_pap::destroy($id);
+        return Redirect::back()->with('mensaje','Plan de Acción Particular borrado con exito!');
     }
 }

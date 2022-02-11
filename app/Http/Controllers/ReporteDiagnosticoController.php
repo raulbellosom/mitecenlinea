@@ -22,7 +22,7 @@ class ReporteDiagnosticoController extends Controller
     public function index()
     {
         $id = Auth::id();
-        $datos["reportes"]=ReporteDiagnostico::where('user_id','=',$id)->paginate(3);
+        $datos["reportes"]=ReporteDiagnostico::where('user_id','=',$id)->orderByDesc('created_at')->paginate(5);
         $user['users'] = Auth::user();
         return view('reporte/reporte_diagnostico/indexDiagnostico', $user, $datos);
     }

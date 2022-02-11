@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Raa_pag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class RaaPagController extends Controller
 {
@@ -94,8 +95,9 @@ class RaaPagController extends Controller
      * @param  \App\Models\Raa_pag  $raa_pag
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Raa_pag $raa_pag)
+    public function destroy($id)
     {
-        //
+        Raa_pag::destroy($id);
+        return Redirect::back()->with('mensaje','Plan de Acción General eliminado con exito!');
     }
 }

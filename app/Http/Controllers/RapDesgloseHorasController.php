@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\RapDesgloseHoras;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class RapDesgloseHorasController extends Controller
 {
@@ -96,8 +97,9 @@ class RapDesgloseHorasController extends Controller
      * @param  \App\Models\RapDesgloseHoras  $RapDesgloseHoras
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RapDesgloseHoras $RapDesgloseHoras)
+    public function destroy($id)
     {
-        //
+        RapDesgloseHoras::destroy($id);
+        return Redirect::back()->with('mensaje','Desglose de Horas eliminado con exito!');
     }
 }

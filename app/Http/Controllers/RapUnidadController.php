@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Rap_unidad;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class RapUnidadController extends Controller
 {
@@ -95,8 +96,9 @@ class RapUnidadController extends Controller
      * @param  \App\Models\Rap_unidad  $rap_unidad
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Rap_unidad $rap_unidad)
+    public function destroy($id)
     {
-        //
+        Rap_unidad::destroy($id);
+        return Redirect::back()->with('mensaje','Evaluación eliminada con exito!');
     }
 }

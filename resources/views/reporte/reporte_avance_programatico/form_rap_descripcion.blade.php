@@ -76,6 +76,7 @@
                             <th>Asignatura</th>
                             <th>Grado Grupo</th>
                             <th>Turno</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -86,6 +87,18 @@
                             <td>{{$rap->asignatura}}</td>
                             <td>{{$rap->grado}} {{$rap->grupo}}</td>
                             <td>{{$rap->turno}}</td>
+                            <td class="font-weight-bold">
+                                @switch($rap->status)
+                                    @case(1)
+                                        <label class="text-danger">Incompleto</label> 
+                                        @break
+                                    @case(2)
+                                        <label class="text-primary">Finalizado</label>
+                                        @break
+                                    @default
+                                        Incompleto
+                                @endswitch
+                            </td> 
                         </tr>  
                     </tbody>
                 </table>
@@ -120,8 +133,18 @@
                                     <td class="col-2">{{$uni->porcentaje_alumnos_aprobados}}</td>
                                     <td class="col-2">{{$uni->promedio_calificaciones}}</td>
                                     <td class="col-2">
-                                        <input type="hidden" value="{{$uni->id}}" id="id_reporte">
-                                        <input class=" btn btn-danger" type="submit" value="Borrar" id="borrar">
+                                        <form action="{{ url('/rap_descripcion_unidad/'.$uni->id) }}" method="POST">
+                                            @csrf
+                                            {{method_field('DELETE')}}
+                                            <button type="submit" onclick="return confirm('¿Deseas borrar esta Unidad?')" 
+                                            value="Borrar" class="btn btn-danger">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
+                                                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                                </svg>
+                                                Borrar
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
@@ -187,19 +210,29 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <th class="col-1">{{$horas_teoricas}}</th>
-                                <th class="col-1">{{$horas_practicas}}</th>
-                                <th class="col-1">{{$total_horas}}</th>
-                                <th class="col-2">{{$cantidad_horas_aula}}</th>
-                                <th class="col-2">{{$cantidad_horas_externas}}</th>
-                                <th class="col-2">{{$cantidad_horas_taller}}</th>
-                                <th class="col-2">{{$porcentaje_horas_tecnologia}} </th>
-                                <th class="col-1">
-                                    <input type="hidden" value="{{$desglose_id}}" id="desglose_id">
+                                <td class="col-1">{{$horas_teoricas}}</td>
+                                <td class="col-1">{{$horas_practicas}}</td>
+                                <td class="col-1">{{$total_horas}}</td>
+                                <td class="col-2">{{$cantidad_horas_aula}}</td>
+                                <td class="col-2">{{$cantidad_horas_externas}}</td>
+                                <td class="col-2">{{$cantidad_horas_taller}}</td>
+                                <td class="col-2">{{$porcentaje_horas_tecnologia}} </td>
+                                <td class="col-1">
                                     @if ($desglose_id != 0)
-                                        <input class=" btn btn-danger" type="submit" value="Borrar" id="borrar_analisis">
+                                        <form action="{{ url('/rap_desglose_horas/'.$desglose_id) }}" method="POST">
+                                            @csrf
+                                            {{method_field('DELETE')}}
+                                            <button type="submit" onclick="return confirm('¿Deseas borrar el Desglose de Horas actual?')" 
+                                            value="Borrar" class="btn btn-danger">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
+                                                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                                </svg>
+                                                Borrar
+                                            </button>
+                                        </form>
                                     @endif
-                                </th>
+                                </td>
                             </tr>  
                         </tbody>
                     </table>
@@ -245,10 +278,11 @@
                         </div>
                     </div> 
                 @else
-                <div class="row">
-                    <div class="col-md-12 text-center mb-4">
-                        <input disabled type="submit" value="Agregar Desglose de Horas" class="btn btn-success" id="btn_analisis">
+                <div class="col-md-12 text-center mb-4">
+                    <div>
+                        <input disabled type="submit" value="Agregar Desglose de Horas" class="btn btn-warning" id="btn_analisis">
                     </div>
+                    <label class="text-danger" for="btn_analisis">Para capturar un nuevo Desglose de Horas debe borrar el actual.</label>
                 </div> 
                 @endif
             </div>
@@ -276,20 +310,31 @@
                     </thead>
                     <tbody>
                         <tr class="text-center">
-                            <th class="col-1">{{$practicas_planeadas}}</th>
-                            <th class="col-1">{{$practicas_realizadas}}</th>
-                            <th class="col-2">{{$nombre_practicas}}</th>
-                            <th class="col-2">{{$observaciones}}</th>
-                            <th class="col-1">{{$practicas_no_planeadas}}</th>
-                            <th class="col-2">{{$nombre_no_planeadas}}</th>
-                            <th class="col-1">{{$talleres}}</th>
-                            <th class="col-1">{{$diferencias}}</th>
-                            <th class="col-1">
+                            <td class="col-1">{{$practicas_planeadas}}</td>
+                            <td class="col-1">{{$practicas_realizadas}}</td>
+                            <td class="col-2">{{$nombre_practicas}}</td>
+                            <td class="col-2">{{$observaciones}}</td>
+                            <td class="col-1">{{$practicas_no_planeadas}}</td>
+                            <td class="col-2">{{$nombre_no_planeadas}}</td>
+                            <td class="col-1">{{$talleres}}</td>
+                            <td class="col-1">{{$diferencias}}</td>
+                            <td class="col-1">
                                 <input type="hidden" value="{{$practicas_id}}" id="pag_id">
                                 @if ($practicas_id != 0)
-                                <input class=" btn btn-danger" type="submit" value="Borrar" id="borrar_practicas">
+                                    <form action="{{ url('/rap_practicas_planeadas/'.$practicas_id) }}" method="POST">
+                                        @csrf
+                                        {{method_field('DELETE')}}
+                                        <button type="submit" onclick="return confirm('¿Deseas borrar la Descripción de las Practicas actual?')" 
+                                        value="Borrar" class="btn btn-danger">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-square" viewBox="0 0 16 16">
+                                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                            </svg>
+                                            Borrar
+                                        </button>
+                                    </form>
                                 @endif
-                            </th>
+                            </td>
                         </tr>  
                     </tbody>
                 </table>
@@ -341,11 +386,12 @@
                         </div>
                     </div> 
                 @else
-                <div class="row">
                     <div class="col-md-12 text-center mb-4">
-                        <input disabled type="submit" value="Añadir Prácticas" class="btn btn-success" id="btn_practicas">
-                    </div>
-                </div> 
+                        <div>
+                            <input disabled type="submit" value="Añadir Prácticas" class="btn btn-warning" id="btn_practicas">
+                        </div>
+                        <label class="text-danger" for="btn_analisis">Para capturar una nueva Descripción de las Practicas debe borrar el actual.</label>
+                    </div> 
                 @endif
         </div>
     {{-- Practicas Planeadas --}}
@@ -394,12 +440,11 @@
     {{-- Fin Formulario Reporte --}}
     </div>
 
-    {{-- Script campos automaticos --}}
+    {{-- Script --}}
 
     <script>
         //-------------------- JavaScript para Unidad---------------------//
             let boton = document.getElementById("enviar");
-            let btn_borrar = document.getElementById("borrar");
             let no_unidad =  document.getElementById('no_unidad');
             let nombre_unidad = document.getElementById('nombre_unidad');
             let porcentaje_avance = document.getElementById('porcentaje_avance');
@@ -434,32 +479,8 @@
                 })
             });
 
-    //-------------------- JavaScript para Borrar Unidad---------------------//        
-        if (btn_borrar) {
-            btn_borrar.addEventListener("click", function(e){
-                let borrar_dato = {id:id_reporte.value}
-                e.preventDefault();
-
-                fetch('/reportec/public/reporte_avance_programatico/borrar_unidad',{
-                    method: 'post',
-                    headers: {
-                        'X-CSRF-TOKEN': _token.value,
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(borrar_dato)
-                }).then(response => response.json())
-                .then(data => {
-                    // console.log(data);
-                    location.reload()
-                }).catch(error => {
-                    console.log(error.message);
-                })
-            });
-        }
-
         //-------------------- JavaScript para Desglose de horas ---------------------//
             let btn_analisis = document.getElementById('btn_analisis');
-            let btn_borrar_analisis = document.getElementById("borrar_analisis");
             let horas_teoricas = document.getElementById('horas_teoricas');
             let horas_practicas = document.getElementById("horas_practicas");
             let total_horas = document.getElementById('total_horas');
@@ -493,32 +514,8 @@
                 })
             });
 
-        //-------------------- JavaScript para Borrar Desglose de horas---------------------//
-            if (btn_borrar_analisis) {
-                btn_borrar_analisis.addEventListener("click", function(e){
-                let borrar_dato = {id:desglose_id.value}
-                e.preventDefault();
-                
-                fetch('/reportec/public/reporte_avance_programatico/borrar_desglose_horas',{
-                    method: 'post',
-                    headers: {
-                        'X-CSRF-TOKEN': _token.value,
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(borrar_dato)
-                }).then(response => response.json())
-                .then(data => {
-                    // console.log(data);
-                    location.reload()
-                }).catch(error => {
-                    console.log(error.message);
-                })
-            });
-            }
-
         //-------------------- JavaScript para Practicas planeadas---------------------//
             let btn_practicas = document.getElementById('btn_practicas');
-            let btn_borrar_practica = document.getElementById("borrar_practicas");
             let practicas_planeadas = document.getElementById('practicas_planeadas');
             let practicas_realizadas = document.getElementById('practicas_realizadas');
             let nombre_practicas = document.getElementById('nombre_practicas');
@@ -552,29 +549,6 @@
                     console.log(error.message);
                 })
             });
-
-        //-------------------- JavaScript para Borrar Plan General---------------------//
-            if (btn_borrar_practica) {
-                btn_borrar_practica.addEventListener("click", function(e){
-                let borrar_dato = {id:pag_id.value}
-                e.preventDefault();
-                
-                fetch('/reportec/public/reporte_avance_programatico/borrar_practicas_planeadas',{
-                    method: 'post',
-                    headers: {
-                        'X-CSRF-TOKEN': _token.value,
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(borrar_dato)
-                }).then(response => response.json())
-                .then(data => {
-                    // console.log(data);
-                    location.reload()
-                }).catch(error => {
-                    console.log(error.message);
-                })
-            });
-            }
 
     </script>
     {{-- Script campos automaticos --}}

@@ -44,12 +44,12 @@
             <table class="table table-responsive-lg table-white table-striped">
                 <thead class="bg-primary text-white">
                     <tr>
-                        <th>Fecha de elaboración</th>
+                        <th>F. de creacion</th>
                         <th>Tipo de reporte</th>
                         <th>Carrera</th>
                         <th>Asignatura</th>
                         <th>Grado Grupo</th>
-                        <th>Status</th>
+                        {{-- <th>Status</th> --}}
                         <th class="text-center">Acciones</th>
                     </tr>
                 </thead>
@@ -61,7 +61,7 @@
                         <td>{{$reporte->carrera}}</td>
                         <td>{{$reporte->asignatura}}</td>
                         <td class="text-center">{{$reporte->grado}} {{$reporte->grupo}}</td>
-                        <td class="font-weight-bold">
+                        {{-- <td class="font-weight-bold">
                             @switch($reporte->status)
                                 @case(1)
                                     <label class="text-danger">Incompleto</label> 
@@ -72,7 +72,7 @@
                                 @default
                                     Incompleto
                             @endswitch
-                        </td>
+                        </td> --}}
                         <td class="d-flex justify-content-between">
                         @switch($reporte->nombre_reporte)
                             @case("Reporte Diagnostico")

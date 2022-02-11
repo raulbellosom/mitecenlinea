@@ -91,7 +91,7 @@ class RFinalController extends Controller
     {
         $user['users'] = Auth::user();
         $rf=RFinal::findOrFail($id);
-        $curso['cursos'] = RfCurso::where('rf_id','=',$id)->paginate(2);
+        $curso['cursos'] = RfCurso::where('rf_id','=',$id)->orderByDesc('created_at')->paginate(5);
 
 
         return view('reporte.reporte_final.form_rf_descripcion',$curso, compact('rf'));

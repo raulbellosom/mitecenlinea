@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class RapController extends Controller
 {
@@ -21,7 +22,7 @@ class RapController extends Controller
     public function index()
     {
         $id = Auth::id();
-        $datos["reportes"]=Rap::where('user_id','=',$id)->paginate(10);
+        $datos["reportes"]=Rap::where('user_id','=',$id)->orderByDesc('created_at')->paginate(5);
         $user['users'] = Auth::user();
         return view('reporte/reporte_avance_programatico/rap_index', $user, $datos);
     }
@@ -160,7 +161,7 @@ class RapController extends Controller
         $status = request()->except(['_token','_method']);
         
         Rap::where('id','=',$id)->update($status);
-        return redirect('reporte_avance_programatico')->with('mensaje','Reporte Finalizado');
+        return Redirect::back()->with('mensaje','El reporte se ha finalizado con éxito');
     }
 
     /**

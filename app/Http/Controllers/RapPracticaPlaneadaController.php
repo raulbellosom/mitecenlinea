@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\RapPracticaPlaneada;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class RapPracticaPlaneadaController extends Controller
 {
@@ -98,8 +99,9 @@ class RapPracticaPlaneadaController extends Controller
      * @param  \App\Models\RapPracticaPlaneada  $rapPracticaPlaneada
      * @return \Illuminate\Http\Response
      */
-    public function destroy(RapPracticaPlaneada $rapPracticaPlaneada)
+    public function destroy($id)
     {
-        //
+        RapPracticaPlaneada::destroy($id);
+        return Redirect::back()->with('mensaje','Descripción de las Practicas eliminada con exito!');
     }
 }
