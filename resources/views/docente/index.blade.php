@@ -31,7 +31,7 @@
                                         @if ($imagen!=null)
                                             <img class="img-thumbnail img-fluid" src="{{asset('storage').'/'.$imagen}}" width="150px" alt="imagenUsuario">
                                         @else
-                                            <img class="img-thumbnail img-fluid" src="{{asset('../storage/uploads/tec-vallarta.jpg')}}" width="150px" alt="imagenUsuario">
+                                            <img class="img-thumbnail img-fluid" src="{{asset('/assets/img/tec-vallarta.jpg')}}" width="150px" alt="imagenUsuario">
                                         @endif
                                     </p> 
                                 </div>
