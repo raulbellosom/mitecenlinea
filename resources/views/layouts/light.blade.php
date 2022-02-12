@@ -215,9 +215,8 @@
     </section>
     <!-- Section: Links  -->
     <div style="display: flex; justify-content: center">
-      <img src="{{asset('./public/assets/banner-tec.jpg')}}" alt="banner" width="100%" >
-      {{-- <img src="{{asset('/assets/banner-tec.jpg')}}" alt="banner" width="100%" >
-      <img src="{{asset('assets/banner-tec.jpg')}}" alt="banner" width="100%" > --}}
+      <img src="{{asset('/assets/banner-tec.jpg')}}" alt="banner" width="100%" >
+      {{-- <img src="{{asset('assets/banner-tec.jpg')}}" alt="banner" width="100%" > --}}
     </div>
   </footer>
   
