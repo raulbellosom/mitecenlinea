@@ -216,6 +216,7 @@
     <!-- Section: Links  -->
     <div style="display: flex; justify-content: center">
       <img src="{{asset('/assets/banner-tec.jpg')}}" alt="banner" width="100%" >
+      <img src="{{asset('/../resources/img/trabajando.jpg')}}" alt="banner" width="100%" >
       {{-- <img src="{{asset('assets/banner-tec.jpg')}}" alt="banner" width="100%" > --}}
     </div>
   </footer>
