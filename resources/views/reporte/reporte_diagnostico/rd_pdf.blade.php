@@ -42,7 +42,7 @@
         <div>
             <table class="prueba">
                 <tr>
-                    <td rowspan="3" style="width: 125px"><img style="width: 125px" src="{{asset('../resources/img/logo/tec-vallarta.png')}}" alt="adydo-logo"  ></td>
+                    <td rowspan="3" style="width: 125px"><img style="width: 125px" src="{{asset('/assets/img/logo/tec-vallarta.png')}}" alt="adydo-logo"  ></td>
                     <td><b>FORMULARIO</b></td>
                     <td colspan="2">Resultado de evaluacion diagnostica</td>
                 </tr>
@@ -60,7 +60,7 @@
         </div>
     </header>
     <footer>
-        <img style="width: 16cm" src="{{asset('../resources/img/logo/background-bot.png')}}" alt="adydo-logo"  >
+        <img style="width: 16cm" src="{{asset('/assets/img/logo/background-bot.png')}}" alt="adydo-logo"  >
     </footer>
 
     <div style="text-align: right">
