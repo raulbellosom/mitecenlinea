@@ -217,7 +217,7 @@
                         <tbody>
                             <tr>
                                 <td class="col-4">{{$pag_def}}</td>
-                                <td class="col-4 text-center">{{$pag_ac}}</td>
+                                <td class="col-4">{{$pag_ac}}</td>
                                 <td class="col-2 text-center">{{$pag_time}}</td>
                                 <td class="col-2">
                                     {{-- <input type="hidden" value="{{$pag_id}}" id="pag_id">
