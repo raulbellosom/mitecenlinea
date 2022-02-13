@@ -160,30 +160,40 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="row m-2 m-md-2">
-                    <div class="form-floating col-8" >
-                        <input class="form-control" name="competencia" type="text" placeholder="Descripcion de la competencia" id="competencia" >
-                        <label class="pl-4" for="competencia">Competencia</label>
+                <form action="{{url('/rd_competencia')}}" method="POST" enctype="multipart/form-data">
+                    <div class="row m-2 m-md-2">
+                        <div class="form-floating col-8" >
+                            <input class="form-control" name="competencia" type="text" placeholder="Descripcion de la competencia" id="competencia" >
+                            <label class="pl-4" for="competencia">Competencia</label>
+                        </div>
+                        <div class="form-floating col-4">
+                            <select class="form-control" name="ponderacion" id="ponderacion">
+                                <option value="" hidden></option>
+                                <option value="0">Nulo</option>
+                                <option value="1">Bajo</option>
+                                <option value="2">Aceptable</option>
+                                <option value="3">Bueno</option>
+                            </select>
+                            <label class="pl-4" for="ponderacion">Nivel</label>
+                        </div>
+                        <input type="hidden" name="_token" id="token" value="{{ csrf_token()}}">
+                        <input type="hidden" name="r_diagnostico_id" id="r_diagnostico_id" value="{{$reporte_diagnostico->id}}" >
+                    </div>  
+                    <div class="row">
+                        <div class="col-md-12 text-center mb-4">
+                            {{-- <input type="submit" value="Añadir competencia" class="btn btn-success" id="enviar"> --}}
+                                @csrf
+                                <div>
+                                    <button class="btn btn-outline-success" type="submit">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save" viewBox="0 0 16 16">
+                                            <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
+                                        </svg>
+                                        Añadir Competencias
+                                    </button>
+                                </div>
+                        </div>
                     </div>
-                    <div class="form-floating col-4">
-                        <select class="form-control" name="ponderacion" id="ponderacion">
-                            <option value="" hidden></option>
-                            <option value="0">Nulo</option>
-                            <option value="1">Bajo</option>
-                            <option value="2">Aceptable</option>
-                            <option value="3">Bueno</option>
-                        </select>
-                        <label class="pl-4" for="ponderacion">Nivel</label>
-                    </div>
-                    <input type="hidden" name="_token" id="token" value="{{ csrf_token()}}">
-                    <input type="hidden" name="r_diagnostico_id" id="r_diagnostico_id" value="{{$reporte_diagnostico->id}}" >
-                </div>  
-                    {{-- </form> --}}
-                <div class="row">
-                    <div class="col-md-12 text-center mb-4">
-                        <input type="submit" value="Añadir competencia" class="btn btn-success" id="enviar">
-                    </div>
-                </div>
+                </form>
             </div>
 
         {{-- Conocimientos y competecias --}}
@@ -378,35 +388,35 @@
     {{-- Script campos automaticos --}}
 
     <script>
-            let boton = document.getElementById("enviar");
-            let btn_borrar = document.getElementById("borrar");
-            let competencia =  document.getElementById('competencia');
-            let ponderacion = document.getElementById('ponderacion');
-            let r_diagnostico_id = document.getElementById('r_diagnostico_id');
-            let id_reporte = document.getElementById('id_reporte');
-            let _token = document.getElementById('token');
-            let x = 0;
+            // let boton = document.getElementById("enviar");
+            // let btn_borrar = document.getElementById("borrar");
+            // let competencia =  document.getElementById('competencia');
+            // let ponderacion = document.getElementById('ponderacion');
+            // let r_diagnostico_id = document.getElementById('r_diagnostico_id');
+            // let id_reporte = document.getElementById('id_reporte');
+            // let _token = document.getElementById('token');
+            // let x = 0;
 
-            boton.addEventListener("click", function(e){
+            // boton.addEventListener("click", function(e){
                 
-                let datos = {competencia:competencia.value, ponderacion:ponderacion.value, r_diagnostico_id:r_diagnostico_id.value}
-                e.preventDefault();
+            //     let datos = {competencia:competencia.value, ponderacion:ponderacion.value, r_diagnostico_id:r_diagnostico_id.value}
+            //     e.preventDefault();
                
-                fetch('/public/reporte_diagnostico/competencia',{
-                    method: 'post',
-                    headers: {
-                        'X-CSRF-TOKEN': _token.value,
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(datos)
-                }).then(response => response.json())
-                .then(data => {
-                    // console.log(data);
-                    location.reload()
-                }).catch(error => {
-                    console.log(error.message);
-                })
-            });
+            //     fetch('/public/reporte_diagnostico/competencia',{
+            //         method: 'post',
+            //         headers: {
+            //             'X-CSRF-TOKEN': _token.value,
+            //             'Content-Type': 'application/json',
+            //         },
+            //         body: JSON.stringify(datos)
+            //     }).then(response => response.json())
+            //     .then(data => {
+            //         // console.log(data);
+            //         location.reload()
+            //     }).catch(error => {
+            //         console.log(error.message);
+            //     })
+            // });
             
 
             
