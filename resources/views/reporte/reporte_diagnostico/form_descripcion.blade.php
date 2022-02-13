@@ -334,15 +334,15 @@
                     @csrf
                     <div class="pl-4 pr-4">
                         <div class="form-floating mb-2">
-                            <input class="form-control mr-sm-2" id="alumno_particular" placeholder="Nombre del alumno">
+                            <input class="form-control mr-sm-2" id="alumno_particular" name="alumno_particular" placeholder="Nombre del alumno">
                             <label for="alumno_particular"> Nombre del alumno </label>
                         </div>
                         <div class="form-floating mb-2">
-                            <textarea class="form-control mr-sm-2" id="deficiencia_particular" placeholder="Deficiencias (temas, áreas, otros) " style="height: 100px;"></textarea>
+                            <textarea class="form-control mr-sm-2" id="deficiencia_particular" name="deficiencia_particular" placeholder="Deficiencias (temas, áreas, otros) " style="height: 100px;"></textarea>
                             <label for="deficiencia_particular">Deficiencias (temas, áreas, otros) </label>
                         </div>
                         <div class="form-floating mb-2" >
-                            <textarea class="form-control mr-sm-2" id="accion_particular" placeholder="Acción sugerida (academica, psicologica, etc)" style="height: 100px;"></textarea>
+                            <textarea class="form-control mr-sm-2" id="accion_particular" name="accion_particular" placeholder="Acción sugerida (academica, psicologica, etc)" style="height: 100px;"></textarea>
                             <label for="accion_particular">Acción sugerida (academica, psicologica, etc)</label>
                         </div>
                         <input type="hidden" name="r_diagnostico_id" id="r_diagnostico_id" value="{{$reporte_diagnostico->id}}" >
