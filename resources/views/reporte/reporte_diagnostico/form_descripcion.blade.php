@@ -391,7 +391,7 @@
                 let datos = {competencia:competencia.value, ponderacion:ponderacion.value, r_diagnostico_id:r_diagnostico_id.value}
                 e.preventDefault();
                
-                fetch('/reportec/public/reporte_diagnostico/competencia',{
+                fetch('/public/reporte_diagnostico/competencia',{
                     method: 'post',
                     headers: {
                         'X-CSRF-TOKEN': _token.value,
