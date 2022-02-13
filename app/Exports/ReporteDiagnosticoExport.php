@@ -49,9 +49,9 @@ class ReporteDiagnosticoExport implements FromView, WithStyles
     {
         $detalles['reporte']= DB::select('SELECT rd.*, rd.id as rd_id ,pags.*, pags.id as pag_id, 
         AVG(compe.ponderacion) as ponderacion, 
-        string_agg(DISTINCT paps.alumno_particular) as alumnos,
-        string_agg(DISTINCT paps.deficiencia_particular ) as deficiencia,
-        string_agg(DISTINCT paps.accion_particular ) as accion
+        array_agg(DISTINCT paps.alumno_particular) as alumnos,
+        array_agg(DISTINCT paps.deficiencia_particular ) as deficiencia,
+        array_agg(DISTINCT paps.accion_particular ) as accion
         FROM reporte_diagnosticos as rd
                 INNER JOIN rd_pags as pags ON pags.r_diagnostico_id = rd.id
                 INNER JOIN rd_competencias as compe ON compe.r_diagnostico_id = rd.id
