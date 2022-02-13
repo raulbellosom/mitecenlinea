@@ -57,7 +57,7 @@ class ReporteDiagnosticoExport implements FromView, WithStyles
                 INNER JOIN rd_competencias as compe ON compe.r_diagnostico_id = rd.id
                 INNER JOIN rd_paps as paps ON paps.r_diagnostico_id = rd.id
         WHERE status = 2
-        GROUP BY compe.r_diagnostico_id, rd.id
+        GROUP BY compe.r_diagnostico_id, rd.id,pags.id
         ORDER BY rd.autor');
 
         // $detalles['reporte']= DB::select('SELECT rd.*,pags.*, pags.id as pag_id, AVG(compe.ponderacion) as ponderacion FROM `reporte_diagnosticos` as rd 
