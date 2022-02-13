@@ -109,8 +109,8 @@
             <tbody>
                 @foreach ($competencia as $competencias)
                     <tr style="text-align: left">
-                        <td>{{$competencias->competencia}}</td>
-                        <td>
+                        <td style="text-align: left">{{$competencias->competencia}}</td>
+                        <td >
                             @if ($competencias->ponderacion==0)
                                 Nulo
                             @endif
@@ -156,9 +156,9 @@
                 @foreach ($pap as $paps)
                     @foreach ($paps as $datos)
                     <tr>
-                        <td>{{Str::substr($datos->alumno_particular,3) }}</td>
-                        <td>{{Str::substr($datos->deficiencia_particular,3)}}</td>
-                        <td>{{Str::substr($datos->accion_particular,3)}}</td>]
+                        <td>{{$datos->alumno_particular}}</td>
+                        <td>{{$datos->deficiencia_particular}}</td>
+                        <td>{{$datos->accion_particular}}</td>]
                     </tr>
                     @endforeach
                 @endforeach 
