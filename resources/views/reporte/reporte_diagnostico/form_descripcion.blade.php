@@ -394,7 +394,7 @@
             // let ponderacion = document.getElementById('ponderacion');
             // let r_diagnostico_id = document.getElementById('r_diagnostico_id');
             // let id_reporte = document.getElementById('id_reporte');
-            // let _token = document.getElementById('token');
+            let _token = document.getElementById('token');
             // let x = 0;
 
             // boton.addEventListener("click", function(e){
