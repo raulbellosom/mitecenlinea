@@ -34,7 +34,7 @@ class ReporteDepartamentalExport implements FromView, ShouldAutoSize, WithStyles
 
     public function view():View
     {
-        $detalles['reporte']= DB::select('SELECT * FROM `r_departamentals`
+        $detalles['reporte']= DB::select('SELECT * FROM r_departamentals
         ORDER by autor');
 
         // $detalles['reporte']= DB::select('SELECT rd.*,pags.*, pags.id as pag_id, AVG(compe.ponderacion) as ponderacion FROM `reporte_diagnosticos` as rd 

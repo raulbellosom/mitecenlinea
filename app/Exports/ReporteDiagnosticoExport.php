@@ -52,10 +52,10 @@ class ReporteDiagnosticoExport implements FromView, WithStyles
         GROUP_CONCAT(DISTINCT paps.alumno_particular) as alumnos,
         GROUP_CONCAT(DISTINCT paps.deficiencia_particular) as deficiencia,
         GROUP_CONCAT(DISTINCT paps.accion_particular) as accion
-        FROM `reporte_diagnosticos` as rd
-                INNER JOIN `rd_pags` as pags ON pags.r_diagnostico_id = rd.id
-                INNER JOIN `rd_competencias` as compe ON compe.r_diagnostico_id = rd.id
-                INNER JOIN `rd_paps` as paps ON paps.r_diagnostico_id = rd.id
+        FROM reporte_diagnosticos as rd
+                INNER JOIN rd_pags as pags ON pags.r_diagnostico_id = rd.id
+                INNER JOIN rd_competencias as compe ON compe.r_diagnostico_id = rd.id
+                INNER JOIN rd_paps as paps ON paps.r_diagnostico_id = rd.id
         WHERE status = 2
         GROUP BY compe.r_diagnostico_id
         ORDER BY rd.autor');
