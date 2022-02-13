@@ -42,11 +42,11 @@
 <body>
     <header>
         <div>
-            <img style="width: 100%; height: 100px" src="{{asset('/assets/img/img/logo/background-top.png')}}" alt="adydo-logo">
+            <img style="width: 100%; height: 100px" src="{{asset('/assets/img/logo/background-top.png')}}" alt="adydo-logo">
         </div>
     </header>
     <footer>
-        <img style="width: 100%" src="{{asset('/assets/img/img/logo/background-bot.png')}}" alt="adydo-logo"  >
+        <img style="width: 100%" src="{{asset('/assets/img/logo/background-bot.png')}}" alt="adydo-logo"  >
     </footer>
     <div>
         <p style="text-align: center; font-weight: bold;">REPORTE DE EXAMEN DEPARTAMENTAL</p>
