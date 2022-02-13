@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     {{-- <title>{{ config('app.name', 'Laravel') }}</title> --}}
-    <title>SISRAD</title>
+    <title>Mi Tec En Linea</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

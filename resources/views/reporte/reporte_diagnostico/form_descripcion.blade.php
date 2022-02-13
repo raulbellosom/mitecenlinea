@@ -185,8 +185,9 @@
                                 @csrf
                                 <div>
                                     <button class="btn btn-outline-success" type="submit">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-save" viewBox="0 0 16 16">
-                                            <path d="M2 1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H9.5a1 1 0 0 0-1 1v7.293l2.646-2.647a.5.5 0 0 1 .708.708l-3.5 3.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L7.5 9.293V2a2 2 0 0 1 2-2H14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h2.5a.5.5 0 0 1 0 1H2z"/>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                                            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                                         </svg>
                                         Añadir Competencias
                                     </button>
@@ -242,38 +243,48 @@
                         </tbody>
                     </table>
                 </div>
-                
-                <div class="pl-4 pr-4">
-                    @if(!($pag_id))
-                    <div class="form-floating mb-2">
-                        <textarea class="form-control mr-sm-2" id="deficiencia_general" placeholder="Deficiencias" style="height: 100px;"></textarea>
-                        <label for="deficiencia_general">Deficiencias</label>
+                <form action="{{url('/rd_pag')}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="pl-4 pr-4">
+                        @if(!($pag_id))
+                            <div class="form-floating mb-2">
+                                <textarea class="form-control mr-sm-2" id="deficiencia_general" name="deficiencia_general" placeholder="Deficiencias" style="height: 100px;"></textarea>
+                                <label for="deficiencia_general">Deficiencias</label>
+                            </div>
+                            <div class="form-floating mb-2">
+                                <textarea class="form-control mr-sm-2" id="accion_general" name="accion_general" placeholder="Acciones sugeridas y recursos necesarios" style="height: 100px;"></textarea>
+                                <label for="accion_general">Acciones sugeridas y recursos necesarios </label>
+                            </div>
+                            <div class="form-floating mb-2" >
+                                <textarea class="form-control mr-sm-2" id="tiempo_general" name="tiempo_general" placeholder="Tiempo de ejecución e impacto en cronograma" style="height: 100px;"></textarea>
+                                <label for="tiempo_general">Tiempo de ejecución e impacto en cronograma</label>
+                            </div>
+                            <input type="hidden" name="r_diagnostico_id" id="r_diagnostico_id" value="{{$reporte_diagnostico->id}}" >
+                        @endif
                     </div>
-                    <div class="form-floating mb-2">
-                        <textarea class="form-control mr-sm-2" id="accion_general" placeholder="Acciones sugeridas y recursos necesarios" style="height: 100px;"></textarea>
-                        <label for="accion_general">Acciones sugeridas y recursos necesarios </label>
-                    </div>
-                    <div class="form-floating mb-2" >
-                        <textarea class="form-control mr-sm-2" id="tiempo_general" placeholder="Tiempo de ejecución e impacto en cronograma" style="height: 100px;"></textarea>
-                        <label for="tiempo_general">Tiempo de ejecución e impacto en cronograma</label>
-                    </div>
-                    @endif
-                </div>
-                <div class="row">
-                    @if(!($pag_id))
-                    <div class="col-md-12 text-center mb-4">
-                        <input type="submit" value="Crear Plan de Accion General" class="btn btn-success" id="btn_pag">
-                    </div>
-                    @else
-                    <div class="col-md-12 text-center mb-4">
-                        <div>
-                            <input type="submit" value="Crear Plan de Accion General" class="btn btn-warning" id="btn_pag" name="btn_pag" disabled>
+                    <div class="row">
+                        @if(!($pag_id))
+                        <div class="col-md-12 text-center mb-4">
+                            <div>
+                                <button class="btn btn-outline-success" type="submit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                                        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                    </svg>
+                                    Crear Plan de Acción General
+                                </button>
+                            </div>
                         </div>
-                        
-                        <label class="text-danger" for="btn_pag">Para capturar un nuevo Plan de Accion General debe eliminar el actual.</label>
+                        @else
+                        <div class="col-md-12 text-center mb-4">
+                            <div>
+                                <input type="submit" value="Crear Plan de Accion General" class="btn btn-warning" disabled>
+                            </div>
+                            <label class="text-danger" for="btn_pag">Para capturar un nuevo Plan de Accion General debe eliminar el actual.</label>
+                        </div>
+                        @endif
                     </div>
-                    @endif
-                </div>
+                </form>
             </div>
         {{-- Plan accion general --}}
 
@@ -319,25 +330,36 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="pl-4 pr-4">
-                    <div class="form-floating mb-2">
-                        <input class="form-control mr-sm-2" id="alumno_particular" placeholder="Nombre del alumno">
-                        <label for="alumno_particular"> Nombre del alumno </label>
+                <form action="{{url('/rd_pap')}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="pl-4 pr-4">
+                        <div class="form-floating mb-2">
+                            <input class="form-control mr-sm-2" id="alumno_particular" placeholder="Nombre del alumno">
+                            <label for="alumno_particular"> Nombre del alumno </label>
+                        </div>
+                        <div class="form-floating mb-2">
+                            <textarea class="form-control mr-sm-2" id="deficiencia_particular" placeholder="Deficiencias (temas, áreas, otros) " style="height: 100px;"></textarea>
+                            <label for="deficiencia_particular">Deficiencias (temas, áreas, otros) </label>
+                        </div>
+                        <div class="form-floating mb-2" >
+                            <textarea class="form-control mr-sm-2" id="accion_particular" placeholder="Acción sugerida (academica, psicologica, etc)" style="height: 100px;"></textarea>
+                            <label for="accion_particular">Acción sugerida (academica, psicologica, etc)</label>
+                        </div>
+                        <input type="hidden" name="r_diagnostico_id" id="r_diagnostico_id" value="{{$reporte_diagnostico->id}}" >
                     </div>
-                    <div class="form-floating mb-2">
-                        <textarea class="form-control mr-sm-2" id="deficiencia_particular" placeholder="Deficiencias (temas, áreas, otros) " style="height: 100px;"></textarea>
-                        <label for="deficiencia_particular">Deficiencias (temas, áreas, otros) </label>
+                    <div class="row">
+                        <div class="col-md-12 text-center mb-4">
+                            {{-- <input type="submit" value="Añadir Caso Particular" class="btn btn-success" id="btn_pap"> --}}
+                            <button class="btn btn-outline-success" type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                </svg>
+                                Añadir Plan de Acción Particular
+                            </button>
+                        </div>
                     </div>
-                    <div class="form-floating mb-2" >
-                        <textarea class="form-control mr-sm-2" id="accion_particular" placeholder="Acción sugerida (academica, psicologica, etc)" style="height: 100px;"></textarea>
-                        <label for="accion_particular">Acción sugerida (academica, psicologica, etc)</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 text-center mb-4">
-                        <input type="submit" value="Añadir Caso Particular" class="btn btn-success" id="btn_pap">
-                    </div>
-                </div>
+                </form>
             </div>
         {{-- Plan accion particular --}}
 
@@ -394,7 +416,7 @@
             // let ponderacion = document.getElementById('ponderacion');
             // let r_diagnostico_id = document.getElementById('r_diagnostico_id');
             // let id_reporte = document.getElementById('id_reporte');
-            let _token = document.getElementById('token');
+            // let _token = document.getElementById('token');
             // let x = 0;
 
             // boton.addEventListener("click", function(e){
@@ -440,66 +462,66 @@
             //     })
             // });
 
-            let boton_pag = document.getElementById('btn_pag');
-            let deficiencia_general = document.getElementById('deficiencia_general');
-            let accion_general = document.getElementById('accion_general');
-            let tiempo_general = document.getElementById('tiempo_general');
-            let pag_id = document.getElementById('pag_id');
+            // let boton_pag = document.getElementById('btn_pag');
+            // let deficiencia_general = document.getElementById('deficiencia_general');
+            // let accion_general = document.getElementById('accion_general');
+            // let tiempo_general = document.getElementById('tiempo_general');
+            // let pag_id = document.getElementById('pag_id');
 
-            boton_pag.addEventListener("click", function(e){
+            // boton_pag.addEventListener("click", function(e){
                 
-                let datos = {deficiencia_general:deficiencia_general.value, accion_general:accion_general.value, tiempo_general:tiempo_general.value, r_diagnostico_id:r_diagnostico_id.value}
-                e.preventDefault();
+            //     let datos = {deficiencia_general:deficiencia_general.value, accion_general:accion_general.value, tiempo_general:tiempo_general.value, r_diagnostico_id:r_diagnostico_id.value}
+            //     e.preventDefault();
                
-                fetch('/reportec/public/reporte_diagnostico/pag',{
-                    method: 'post',
-                    headers: {
-                        'X-CSRF-TOKEN': _token.value,
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(datos)
-                }).then(response => response.json())
-                .then(data => {
-                    // console.log(data);
-                    location.reload()
-                    clearInput();
-                }).catch(error => {
-                    console.log(error.message);
-                })
-            });
+            //     fetch('/reportec/public/reporte_diagnostico/pag',{
+            //         method: 'post',
+            //         headers: {
+            //             'X-CSRF-TOKEN': _token.value,
+            //             'Content-Type': 'application/json',
+            //         },
+            //         body: JSON.stringify(datos)
+            //     }).then(response => response.json())
+            //     .then(data => {
+            //         // console.log(data);
+            //         location.reload()
+            //         clearInput();
+            //     }).catch(error => {
+            //         console.log(error.message);
+            //     })
+            // });
             
 
-            let boton_pap = document.getElementById('btn_pap');
-            let btn_borrar_pap = document.getElementById("borrar_pap");
-            let alumno_particular = document.getElementById('alumno_particular');
-            let deficiencia_particular = document.getElementById('deficiencia_particular');
-            let accion_particular = document.getElementById('accion_particular');
-            let pap_id = document.getElementById('pap_id');
-            var contador = (document.getElementById("particular").rows.length);
-            // console.log(contador);
-            // let alumn = contador + alumno_particular.value;
+            // let boton_pap = document.getElementById('btn_pap');
+            // let btn_borrar_pap = document.getElementById("borrar_pap");
+            // let alumno_particular = document.getElementById('alumno_particular');
+            // let deficiencia_particular = document.getElementById('deficiencia_particular');
+            // let accion_particular = document.getElementById('accion_particular');
+            // let pap_id = document.getElementById('pap_id');
+            // var contador = (document.getElementById("particular").rows.length);
+            // // console.log(contador);
+            // // let alumn = contador + alumno_particular.value;
 
-            boton_pap.addEventListener("click", function(e){
+            // boton_pap.addEventListener("click", function(e){
                 
-                let datos = {alumno_particular:contador+ ". " + alumno_particular.value, deficiencia_particular:contador+ ". " +deficiencia_particular.value, 
-                accion_particular:contador+ ". " +accion_particular.value, r_diagnostico_id:r_diagnostico_id.value}
-                e.preventDefault();
+            //     let datos = {alumno_particular:contador+ ". " + alumno_particular.value, deficiencia_particular:contador+ ". " +deficiencia_particular.value, 
+            //     accion_particular:contador+ ". " +accion_particular.value, r_diagnostico_id:r_diagnostico_id.value}
+            //     e.preventDefault();
                
-                fetch('/reportec/public/reporte_diagnostico/pap',{
-                    method: 'post',
-                    headers: {
-                        'X-CSRF-TOKEN': _token.value,
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(datos)
-                }).then(response => response.json())
-                .then(data => {
+            //     fetch('/reportec/public/reporte_diagnostico/pap',{
+            //         method: 'post',
+            //         headers: {
+            //             'X-CSRF-TOKEN': _token.value,
+            //             'Content-Type': 'application/json',
+            //         },
+            //         body: JSON.stringify(datos)
+            //     }).then(response => response.json())
+            //     .then(data => {
                     
-                    location.reload()
-                }).catch(error => {
-                    console.log(error.message);
-                })
-            })
+            //         location.reload()
+            //     }).catch(error => {
+            //         console.log(error.message);
+            //     })
+            // })
         
             
 

@@ -78,9 +78,11 @@ Route::group(['middleware'=>'auth'], function(){
     Route::get('reporte_diagnostico/create', [ReporteDiagnosticoController::class, 'create']);
     Route::get('reporte_diagnostico/show', [ReporteDiagnosticoController::class, 'show']);
     Route::post('reporte_diagnostico/finalizar', [ReporteDiagnosticoController::class, 'update']);
+    //craer copetencia
     Route::post('reporte_diagnostico/competencia', [RdCompetenciaController::class, 'create']);
     // Route::post('reporte_diagnostico/competencia', [RdCompetenciaController::class, 'addComp']);
-    Route::post('reporte_diagnostico/pag', [RdPagController::class, 'addPag']);
+    Route::post('reporte_diagnostico/create', [RdPagController::class, 'create']);
+    // Route::post('reporte_diagnostico/pag', [RdPagController::class, 'addPag']);
     Route::post('reporte_diagnostico/pap', [RdPapController::class, 'addPap']);
     Route::resource('reporte_diagnostico', ReporteDiagnosticoController::class);
 });
