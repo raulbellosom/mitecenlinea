@@ -307,9 +307,9 @@
                         @foreach ($pap as $paps)
                             @foreach ($paps as $datos)
                             <tr>
-                                <th class="col-3">{{Str::substr($datos->alumno_particular,3) }}</th>
-                                <td class="col-3">{{Str::substr($datos->deficiencia_particular,3)}}</td>
-                                <td class="col-4">{{Str::substr($datos->accion_particular,3)}}</td>
+                                <th class="col-3">{{$datos->alumno_particular }}</th>
+                                <td class="col-3">{{$datos->deficiencia_particular}}</td>
+                                <td class="col-4">{{$datos->accion_particular}}</td>
                                 <td class="col-2">
                                     <form action="{{ url('/rd_pap/'.$datos->id) }}" method="POST">
                                         @csrf
