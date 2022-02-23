@@ -152,25 +152,20 @@
         {{-- Descripción del reporte --}}
 
         {{-- Comentarios --}}
-        <div class="mb-4 pb-4 bg-light">
+        <div class="mb-4 pb-4 bg-light ">
             <div class="bg-primary p-4 col-12 text-center text-light font-weight-bold text-h1 text-uppercase">
                 Comentarios
             </div>
-            <div class="p-4">
-                <div class="form-floating pb-2">
-                    <textarea class="form-control mr-sm-2" id="comen_generales" name="comen_generales" placeholder="Comentarios Generales" style="height: 100px">
-                    {{ isset($reporte->comen_generales) ? $reporte->comen_generales:old('comen_generales') }}
-                    </textarea>
-                    <label for="comen_generales" class="pl-4">Comentarios Generales</label>
+            <div class="pl-4 pr-4 pt-3">
+                <div class="form-floating mb-2">
+                    <textarea class="form-control mr-sm-2" id="comen_generales" name="comen_generales" placeholder="Comentarios Generales" style="height: 100px"></textarea>
+                    <label for="comen_generales">Comentarios Generales</label>
                 </div>
-                <div class="form-floating pb-2">
-                    <textarea class="form-control mr-sm-2" id="comen_particulares" name="comen_particulares" placeholder="Casos Particulares"  style="height: 100px">
-                    {{ isset($reporte->comen_particulares) ? $reporte->comen_particulares:old('comen_particulares') }}
-                    </textarea>
-                    <label for="comen_particulares" class="pl-4">Casos Particulares</label>
+                <div class="form-floating mb-2">
+                    <textarea class="form-control mr-sm-2" id="comen_particulares" name="comen_particulares" placeholder="Casos Particulares"  style="height: 100px"></textarea>
+                    <label for="comen_particulares">Casos Particulares</label>
                 </div>
             </div>
-            
         </div>   
         {{-- Comentarios --}}
 

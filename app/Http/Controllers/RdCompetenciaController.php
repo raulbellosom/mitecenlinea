@@ -35,23 +35,14 @@ class RdCompetenciaController extends Controller
         $competencias->save();
         return view('reporte_diagnostico');
     }
-
-    // public function prueba(Request $request)
-    // {
-    //     ini_set('memory_limit', '-1');
-    //     // print_r($request);
-    //     $competencias = new Rd_competencia();
-    //     $competencias->competencia = $request->input('competencia');
-    //     $competencias->ponderacion = $request->input('ponderacion');
-    //     $competencias->r_diagnostico_id = $request->input('r_diagnostico_id');
         
-    //     $competencias->save();
-    //     return json_encode(['msg'=>'Competencia agregada']);
-    // }
-    public function addComp(Request $datos)
-    {
+
+    // public function addComp(Request $datos)
+    // {
         // var_dump($datos->competencia);
-        DB::insert('insert into rd_competencias (competencia, ponderacion, r_diagnostico_id) values (?, ?, ?)', [$datos->competencia, $datos->ponderacion ,$datos->r_diagnostico_id]);
+        // DB::insert('insert into rd_competencias 
+        // (competencia, ponderacion, r_diagnostico_id) values (?, ?, ?)', 
+        // [$datos->competencia, $datos->ponderacion ,$datos->r_diagnostico_id]);
         // print_r($datos->competencia);
         // $alta = DB::table('rd_competencias')->insert([
         //             'competencia' => $datos->competencia,
@@ -64,17 +55,17 @@ class RdCompetenciaController extends Controller
         //         ]);
         // if($alta)
         // {
-            return response()->json(["exito" => "registrado"]);
+            // return response()->json(["exito" => "registrado"]);
         // }
-    }
+    // }
     
-    public function deleteComp(Request $datos)
-    {
-        // var_dump($datos->id);
+    // public function deleteComp(Request $datos)
+    // {
+    //     // var_dump($datos->id);
         
-        Rd_competencia::destroy($datos->id);
-        return response()->json(["exito" => "eliminado"]);
-    }
+    //     Rd_competencia::destroy($datos->id);
+    //     return response()->json(["exito" => "eliminado"]);
+    // }
     
 
     /**
@@ -90,11 +81,6 @@ class RdCompetenciaController extends Controller
             'competencia'=>'required|string',
             'ponderacion'=>'required|string',
         ];
-        // $competencias=[
-        //     'competencia'=>'required|string',
-        //     'ponderacion'=>'required|int',
-        //     'r_diagnostico_id'=>'int'
-        // ];
         $mensaje=[
             'required'=>'El :attribute es requerido',
         ];
@@ -109,7 +95,7 @@ class RdCompetenciaController extends Controller
         
         // DB::insert('insert into competencias (competencia, ponderacion,r_diagnostico_id) values (?, ?, ?)', [$datosCompetencia["competencia"],$datosCompetencia["ponderacion"],1]);
 
-        return redirect('reporte_diagnostico')->with('mensaje','Reporte creado con éxito');
+        return Redirect::back()->with('mensaje','Competencia agregada con exito!');
     }
 
     /**

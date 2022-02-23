@@ -53,7 +53,21 @@ class RaaAnalisisResultadoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $campos=[
+            'raa_id'=>'required|int',
+            'analisis_descripcion'=>'required|string',
+            'analisis_acciones'=>'required|string',
+        ];
+        $mensaje=[
+            'required'=>'El :attribute es requerido',
+        ];
+        $this->validate($request, $campos, $mensaje);
+
+        $datosReporte = request()->except("_token");
+        
+        Raa_analisis_resultado::insert($datosReporte);
+        
+        return Redirect::back()->with('mensaje','La Unidad fue agregada con exito!');
     }
 
     /**

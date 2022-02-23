@@ -42,9 +42,9 @@
         <div>
             <table class="prueba">
                 <tr>
-                    <td rowspan="3" style="width: 125px"><img style="width: 125px" src="{{asset('../resources/img/logo/tec-vallarta.png')}}" alt="adydo-logo"  ></td>
+                    <td rowspan="3" style="width: 125px"><img style="width: 125px" src="{{asset('/assets/img/logo/tec-vallarta.png')}}" alt="adydo-logo"  ></td>
                     <td><b>FORMULARIO</b></td>
-                    <td colspan="2">Resultado de evaluacion diagnostica</td>
+                    <td colspan="2">Resultado de Evaluacion Diagnostica</td>
                 </tr>
                 <tr>
                     <td><b>CÓDIGO</b></td>
@@ -60,7 +60,7 @@
         </div>
     </header>
     <footer>
-        <img style="width: 16cm" src="{{asset('../resources/img/logo/background-bot.png')}}" alt="adydo-logo"  >
+        <img style="width: 16cm" src="{{asset('/assets/img/logo/background-bot.png')}}" alt="adydo-logo"  >
     </footer>
 
     <div style="text-align: right">
@@ -109,8 +109,8 @@
             <tbody>
                 @foreach ($competencia as $competencias)
                     <tr style="text-align: left">
-                        <td>{{$competencias->competencia}}</td>
-                        <td>
+                        <td style="text-align: left">{{$competencias->competencia}}</td>
+                        <td >
                             @if ($competencias->ponderacion==0)
                                 Nulo
                             @endif
@@ -137,18 +137,19 @@
     <div>
         <table>  
             <tr>
-                <th rowspan="2">General</th>
+                <th>General</th>
                 <th>Deficiencias</th>
                 <th>Acciones sugeridas y recursos necesarios</th>
                 <th>Tiempo de ejecución e impacto en cronograma</th>
             </tr>
             <tr>
+                <th></th>
                 <td>{{$pag_def}}</td>
                 <td>{{$pag_ac}}</td>
                 <td>{{$pag_time}}</td>
             </tr>
             <tr >
-                <th rowspan="5">Particular</th>
+                <th>Particular</th>
                 <th>Nombre del alumno</th>
                 <th>Deficiencias (temas, áreas, otros)</th>
                 <th>Acción sugerida (académica, psicologica, etc)</th>
@@ -156,9 +157,10 @@
                 @foreach ($pap as $paps)
                     @foreach ($paps as $datos)
                     <tr>
+                        <th></th>
                         <td>{{Str::substr($datos->alumno_particular,3) }}</td>
                         <td>{{Str::substr($datos->deficiencia_particular,3)}}</td>
-                        <td>{{Str::substr($datos->accion_particular,3)}}</td>]
+                        <td>{{Str::substr($datos->accion_particular,3)}}</td>
                     </tr>
                     @endforeach
                 @endforeach 

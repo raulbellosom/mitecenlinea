@@ -95,7 +95,7 @@ class PdfController extends Controller
         $unidades = Arr::add($unidades, 'analisis_acciones',$analisis_acciones);
         
         
-        $pdf = PDF::loadView('reporte.reporte_avance_academico.raa_export', $unidades,  compact('reportes'))->setPaper('letter', 'portrait');// horizontal
+        $pdf = PDF::loadView('reporte.reporte_avance_academico.raa_pdf', $unidades,  compact('reportes'))->setPaper('letter', 'landscape');// horizontal
         // $pdf = PDF::loadView('reporte.export',$competencias)->setPaper('letter', 'portrait'); //vertical
 
         return $pdf->download('reporte_avance_academico'.$id.'.pdf');

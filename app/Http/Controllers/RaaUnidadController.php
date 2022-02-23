@@ -53,7 +53,24 @@ class RaaUnidadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $campos=[
+            'raa_id'=>'required|int',
+            'no_unidad'=>'required|string',
+            'no_alu_reprobados'=>'required|string',
+            'porcentaje_reprobacion'=>'required|string',
+            'promedio_grupal'=>'required|string',
+            'porcentaje_asistencia'=>'required|string',
+        ];
+        $mensaje=[
+            'required'=>'El :attribute es requerido',
+        ];
+        $this->validate($request, $campos, $mensaje);
+
+        $datosReporte = request()->except("_token");
+        
+        Raa_unidad::insert($datosReporte);
+        
+        return Redirect::back()->with('mensaje','La Unidad fue agregada con exito!');
     }
 
     /**

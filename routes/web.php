@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\InfoUserController;
+use App\Http\Controllers\MateriasDocenteController;
 use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\RaaAnalisisResultadoController;
@@ -27,6 +28,7 @@ use App\Http\Controllers\RdPapController;
 use App\Http\Controllers\RfCursoController;
 use App\Http\Controllers\RFinalController;
 use App\Http\Controllers\RfPracticasEspacioController;
+use App\Http\Controllers\UserController;
 
 //probablemente borrar este auth;
 /*
@@ -49,6 +51,7 @@ Route::get('/', function () {
 Auth::routes(['reset'=>false]);  //este es para habilitar el registro pero oculta el reseteo de contraseña
 Auth::routes(['register'=>false,'reset'=>false]); //de esta manera queda oculto el registro y el reseteo de contraseña
 
+Route::resource('users',UserController::class)->middleware('admin');
 
 //---------------------------Rutas para el index docente
 Route::group(['middleware'=>'auth'], function(){
@@ -68,8 +71,11 @@ Route::group(['middleware'=>'auth'], function(){
     Route::resource('reporte', ReporteController::class);
 });
 
-Route::group(['middleware'=>'auth'], function(){
+Route::group(['middleware'=>'admin'], function(){
     Route::get('administrativo', [ReporteController::class, 'admin'])->name('administrativo');
+    Route::get('/administrativo/all_docentes', [ReporteController::class, 'admin_docentes'])->name('admin_docentes');
+    Route::resource('users', UserController::class);
+    Route::resource('carga_materias', MateriasDocenteController::class);
 });
 
 //---------------------Reporte Diagnostico Rutas
@@ -78,8 +84,11 @@ Route::group(['middleware'=>'auth'], function(){
     Route::get('reporte_diagnostico/create', [ReporteDiagnosticoController::class, 'create']);
     Route::get('reporte_diagnostico/show', [ReporteDiagnosticoController::class, 'show']);
     Route::post('reporte_diagnostico/finalizar', [ReporteDiagnosticoController::class, 'update']);
-    Route::post('reporte_diagnostico/competencia', [RdCompetenciaController::class, 'addComp']);
-    Route::post('reporte_diagnostico/pag', [RdPagController::class, 'addPag']);
+    //craer copetencia
+    Route::post('reporte_diagnostico/competencia', [RdCompetenciaController::class, 'create']);
+    // Route::post('reporte_diagnostico/competencia', [RdCompetenciaController::class, 'addComp']);
+    Route::post('reporte_diagnostico/create', [RdPagController::class, 'create']);
+    // Route::post('reporte_diagnostico/pag', [RdPagController::class, 'addPag']);
     Route::post('reporte_diagnostico/pap', [RdPapController::class, 'addPap']);
     Route::resource('reporte_diagnostico', ReporteDiagnosticoController::class);
 });

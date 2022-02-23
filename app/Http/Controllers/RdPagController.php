@@ -52,7 +52,22 @@ class RdPagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $campos=[
+            'r_diagnostico_id'=>'required|int',
+            'deficiencia_general'=>'required|string',
+            'accion_general'=>'required|string',
+            'tiempo_general'=>'required|string',
+        ];
+        $mensaje=[
+            'required'=>'El :attribute es requerido',
+        ];
+        $this->validate($request, $campos, $mensaje);
+
+        $datosReporte = request()->except("_token");
+        
+        Rd_pag::insert($datosReporte);
+        
+        return Redirect::back()->with('mensaje','Plan de Acción General agregado con exito!');
     }
 
     /**

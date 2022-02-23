@@ -53,7 +53,22 @@ class RdPapController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $campos=[
+            'r_diagnostico_id'=>'required|int',
+            'alumno_particular'=>'required|string',
+            'deficiencia_particular'=>'required|string',
+            'accion_particular'=>'required|string',
+        ];
+        $mensaje=[
+            'required'=>'El :attribute es requerido',
+        ];
+        $this->validate($request, $campos, $mensaje);
+
+        $datosReporte = request()->except("_token");
+        
+        Rd_pap::insert($datosReporte);
+        
+        return Redirect::back()->with('mensaje','Caso Particular agregado con exito!');
     }
 
     /**

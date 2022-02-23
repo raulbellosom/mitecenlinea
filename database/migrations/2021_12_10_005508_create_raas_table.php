@@ -21,7 +21,7 @@ class CreateRaasTable extends Migration
 
             $table->string('autor');
             $table->string('nombre_reporte');
-            $table->date('periodo_corte');
+            $table->string('periodo_corte');
             $table->string('asignatura');
             $table->string('grado');
             $table->string('grupo');

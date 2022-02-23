@@ -53,6 +53,7 @@ class RaaController extends Controller
         $campos=[
             'user_id'=>'required|int',
             'autor'=>'required|string',
+            'periodo_corte'=>'required|string',
             'nombre_reporte'=>'required|string',
             'asignatura'=>'required|string',
             'carrera'=>'required|string',

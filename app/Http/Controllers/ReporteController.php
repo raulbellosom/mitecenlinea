@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Models\ReporteDiagnostico;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Storage;
@@ -53,6 +54,12 @@ class ReporteController extends Controller
     ///////////////////////////Administrativos//////////////////////////
     public function admin(){
         return view('reporte_admin.index_admin');
+    }
+
+    public function admin_docentes(){
+        $users["users"]=User::all()->sortBy('name');
+        // $users  =  DB::table('users')->select('name','email','typeUser')->paginate(10);
+        return view('reporte_admin.admin_docentes', $users);
     }
 
     /**
