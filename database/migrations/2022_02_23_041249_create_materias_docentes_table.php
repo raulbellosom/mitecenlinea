@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRaasTable extends Migration
+class CreateMateriasDocentesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,24 +13,19 @@ class CreateRaasTable extends Migration
      */
     public function up()
     {
-        Schema::create('raas', function (Blueprint $table) {
+        Schema::create('materias_docentes', function (Blueprint $table) {
             $table->id();
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-
-            $table->string('autor');
-            $table->string('nombre_reporte');
-            $table->string('periodo_corte');
-            $table->string('asignatura');
+            // $table->string('user_id');
+            $table->string('materia');
             $table->string('grado');
             $table->string('grupo');
             $table->string('turno');
             $table->string('carrera');
-            $table->string('total_alumnos');
-            $table->string('total_alumnos_ausentes');
-            $table->string('total_alumnos_desertados');
-            $table->integer('status');
+            $table->string('ht');
+            $table->string('hp');
 
             $table->timestamps();
         });
@@ -43,6 +38,6 @@ class CreateRaasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('raas');
+        Schema::dropIfExists('materias_docentes');
     }
 }
