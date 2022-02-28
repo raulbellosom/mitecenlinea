@@ -158,6 +158,7 @@ class DocenteController extends Controller
         if ($info) {
             $bandera = 1;
         }
+        
         $user = Arr::add($user, 'info_user',$bandera);
         $user = Arr::add($user, 'imagen',$imagen);
         // print_r($info);

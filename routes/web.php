@@ -49,7 +49,7 @@ Route::get('/', function () {
 //---------------------------Rutas para la autenticacion
 // Auth::routes(['register'=>false,'reset'=>false]);
 Auth::routes(['reset'=>false]);  //este es para habilitar el registro pero oculta el reseteo de contraseña
-Auth::routes(['register'=>false,'reset'=>false]); //de esta manera queda oculto el registro y el reseteo de contraseña
+Auth::routes(['register'=>false,'reset'=>true]); //de esta manera queda oculto el registro y el reseteo de contraseña
 
 Route::resource('users',UserController::class)->middleware('admin');
 
@@ -74,8 +74,12 @@ Route::group(['middleware'=>'auth'], function(){
 Route::group(['middleware'=>'admin'], function(){
     Route::get('administrativo', [ReporteController::class, 'admin'])->name('administrativo');
     Route::get('/administrativo/all_docentes', [ReporteController::class, 'admin_docentes'])->name('admin_docentes');
+    Route::get('/administrativo/all_materias', [ReporteController::class, 'admin_materias'])->name('admin_materias');
+    Route::get('/administrativo/all_reportes', [ReporteController::class, 'admin_reportes'])->name('admin_reportes');
     Route::resource('users', UserController::class);
+    Route::get('/administrativo/formato_docente', [UserController::class, 'download_docentes_format'])->name('formato_docente');
     Route::resource('carga_materias', MateriasDocenteController::class);
+
 });
 
 //---------------------Reporte Diagnostico Rutas
@@ -179,7 +183,7 @@ Route::group(['middleware'=>'auth'], function(){
     // Route::get('reporte_diagnostico/', [ReporteDiagnosticoController::class, 'index']);
     Route::get('infoUser/index', [InfoUserController::class, 'index']);
     Route::get('infoUser/create', [InfoUserController::class, 'create']);
-    // Route::get('info_user/edit', [InfoUserController::class, 'edit']);
+    Route::get('info_user/edit', [InfoUserController::class, 'edit']);
     Route::resource('infoUser', InfoUserController::class);
 });
 Route::resource('infoUser', InfoUserController::class);

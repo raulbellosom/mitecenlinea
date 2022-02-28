@@ -40,7 +40,7 @@ class MateriasDocenteController extends Controller
         $file = $request->file('import_file');
         Excel::import(new MateriasImport, $file);
         
-        return redirect()->route('home')->with('mensaje','Carga de Materias agregada con Exito!');
+        return redirect()->route('admin_materias')->with('mensaje','Carga de Materias agregada con Exito!');
     }
 
     /**
@@ -83,8 +83,9 @@ class MateriasDocenteController extends Controller
      * @param  \App\Models\MateriasDocente  $materiasDocente
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MateriasDocente $materiasDocente)
+    public function destroy($id)
     {
-        //
+        MateriasDocente::destroy($id);
+        return redirect()->route('admin_materias')->with('mensaje','Materia borrada con éxito');
     }
 }
