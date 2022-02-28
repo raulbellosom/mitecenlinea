@@ -8,6 +8,7 @@ use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use PHPExcel_Worksheet_Drawing;
 
 class ReporteDepartamentalExport implements FromView, ShouldAutoSize, WithStyles
 {
@@ -34,6 +35,7 @@ class ReporteDepartamentalExport implements FromView, ShouldAutoSize, WithStyles
 
     public function view():View
     {
+        
         $detalles['reporte']= DB::select('SELECT * FROM r_departamentals
         ORDER by autor');
 

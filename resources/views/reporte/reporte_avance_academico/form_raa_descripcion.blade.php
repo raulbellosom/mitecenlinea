@@ -74,6 +74,7 @@
                             <th>Tipo de reporte</th>
                             <th>Carrera</th>
                             <th>Asignatura</th>
+                            <th>Periodo del Corte</th>
                             <th>Grado Grupo</th>
                             <th>Turno</th>
                             <th>Status</th>
@@ -85,6 +86,7 @@
                             <td>{{$raa->nombre_reporte}}</td>
                             <td>{{$raa->carrera}}</td>
                             <td>{{$raa->asignatura}}</td>
+                            <td>{{$raa->perido_corte}}</td>
                             <td>{{$raa->grado}} {{$raa->grupo}}</td>
                             <td>{{$raa->turno}}</td>
                             <td class="font-weight-bold">
@@ -150,35 +152,46 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="row m-2">
-                    <div class="form-floating pb-2 col-12 col-lg-4">
-                        <input id="no_unidad" class="form-control mr-2" name="no_unidad" type="number" placeholder="No. Unidad Evaluada" min="0" max="9" pattern="^[0-9]+">
-                        <label for="no_unidad" class="pl-4">No. Unidad Evaluada</label>
+                <form action="{{url('/raa_evaluacion_unidad')}}" method="POST" enctype="multipart/form-data">
+                    <div class="row m-2">
+                        <div class="form-floating pb-2 col-12 col-lg-4">
+                            <input id="no_unidad" class="form-control mr-2" name="no_unidad" type="number" placeholder="No. Unidad Evaluada" min="0" max="9" pattern="^[0-9]+">
+                            <label for="no_unidad" class="pl-4">No. Unidad Evaluada</label>
+                        </div>
+                        <div class="form-floating pb-2 col-12 col-lg-4">
+                            <input id="no_alu_reprobados" class="form-control mr-2" name="no_alu_reprobados" type="number" placeholder="No. Alumnos Reprobados" min="0" max="9" pattern="^[0-9]+">
+                            <label for="no_alu_reprobados" class="pl-4">No. Alum Reprobados</label>
+                        </div>
+                        <div class="form-floating pb-2 col-12 col-lg-4">
+                            <input id="porcentaje_reprobacion" class="form-control mr-2" name="porcentaje_reprobacion" type="number" placeholder="%. de Reprobacion" min="0" max="9" pattern="^[0-9]+">
+                            <label for="porcentaje_reprobacion" class="pl-4">%. de Reprobacion</label>
+                        </div>
+                        <div class="form-floating pb-2 col-12 col-lg-6">
+                            <input id="promedio_grupal" class="form-control mr-2" name="promedio_grupal" type="number" placeholder="Promedio de Calificaciones del grupo por unidad" min="0" max="9" pattern="^[0-9]+">
+                            <label for="promedio_grupal" class="pl-4">Promedio de Calificaciones del grupo por unidad</label>
+                        </div>
+                        <div class="form-floating pb-2 col-12 col-lg-6">
+                            <input id="porcentaje_asistencia" class="form-control mr-2" name="porcentaje_asistencia" type="number" placeholder="%. de Asistencia" min="0" max="9" pattern="^[0-9]+">
+                            <label for="porcentaje_asistencia" class="pl-4">%. de Asistencia</label>
+                        </div>
+                        <input type="hidden" name="_token" id="token" value="{{ csrf_token()}}">
+                        <input type="hidden" name="raa_id" id="raa_id" value="{{$raa->id}}">
+                    </div>  
+                    <div class="row">
+                        <div class="col-md-12 text-center mb-4">
+                            @csrf
+                            <div>
+                                <button class="btn btn-success" type="submit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                                        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                    </svg>
+                                    Guardar unidad
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-floating pb-2 col-12 col-lg-4">
-                        <input id="no_alu_reprobados" class="form-control mr-2" name="no_alu_reprobados" type="number" placeholder="No. Alumnos Reprobados" min="0" max="9" pattern="^[0-9]+">
-                        <label for="no_alu_reprobados" class="pl-4">No. Alum Reprobados</label>
-                    </div>
-                    <div class="form-floating pb-2 col-12 col-lg-4">
-                        <input id="porcentaje_reprobacion" class="form-control mr-2" name="porcentaje_reprobacion" type="number" placeholder="%. de Reprobacion" min="0" max="9" pattern="^[0-9]+">
-                        <label for="porcentaje_reprobacion" class="pl-4">%. de Reprobacion</label>
-                    </div>
-                    <div class="form-floating pb-2 col-12 col-lg-6">
-                        <input id="promedio_grupal" class="form-control mr-2" name="promedio_grupal" type="number" placeholder="Promedio de Calificaciones del grupo por unidad" min="0" max="9" pattern="^[0-9]+">
-                        <label for="promedio_grupal" class="pl-4">Promedio de Calificaciones del grupo por unidad</label>
-                    </div>
-                    <div class="form-floating pb-2 col-12 col-lg-6">
-                        <input id="porcentaje_asistencia" class="form-control mr-2" name="porcentaje_asistencia" type="number" placeholder="%. de Asistencia" min="0" max="9" pattern="^[0-9]+">
-                        <label for="porcentaje_asistencia" class="pl-4">%. de Asistencia</label>
-                    </div>
-                    <input type="hidden" name="_token" id="token" value="{{ csrf_token()}}">
-                    <input type="hidden" name="raa_id" id="raa_id" value="{{$raa->id}}">
-                </div>  
-                <div class="row">
-                    <div class="col-md-12 text-center mb-4">
-                        <input type="submit" value="Añadir unidad" class="btn btn-success" id="enviar">
-                    </div>
-                </div>
+                </form>
             </div>
 
         {{-- Unidad --}}
@@ -222,32 +235,40 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="pl-4 pr-4">
-                    @if(!($anal_id))
-                        <div class="form-floating mb-2">
-                            <textarea class="form-control mr-sm-2" id="analisis_descripcion" placeholder="Descripción de la causa de reprobación" style="height: 100px;"></textarea>
-                            <label for="analisis_descripcion">Descripción de la causa de reprobación</label>
-                        </div>
-                        <div class="form-floating mb-2">
-                            <textarea class="form-control mr-sm-2" id="analisis_acciones" placeholder="Acciones aplicadas y/o Causas de éxito de la Aprobación" style="height: 100px;"></textarea>
-                            <label for="analisis_acciones">Acciones aplicadas y/o Causas de éxito de la Aprobación</label>
-                        </div>
-                    @endif
-                </div>
-                @if(!($anal_id))
-                    <div class="row">
-                        <div class="col-md-12 text-center mb-4">
-                            <input type="submit" value="Agregar Analisis de Resultados" class="btn btn-success" id="btn_analisis">
-                        </div>
-                    </div> 
-                @else
-                <div class="col-md-12 text-center mb-4">
-                    <div>
-                        <input disabled type="submit" value="Agregar Analisis de Resultados" class="btn btn-warning" id="btn_analisis" name="btn_analisis">
+                <form action="{{url('/raa_analisis_resultados')}}" method="POST" enctype="multipart/form-data">
+                    <div class="pl-4 pr-4">
+                        @if(!($anal_id))
+                            <div class="form-floating mb-2">
+                                <textarea class="form-control mr-sm-2" name="analisis_descripcion" placeholder="Descripción de la causa de reprobación" style="height: 100px;"></textarea>
+                                <label for="analisis_descripcion">Descripción de la causa de reprobación</label>
+                            </div>
+                            <div class="form-floating mb-2">
+                                <textarea class="form-control mr-sm-2" name="analisis_acciones" placeholder="Acciones aplicadas y/o Causas de éxito de la Aprobación" style="height: 100px;"></textarea>
+                                <label for="analisis_acciones">Acciones aplicadas y/o Causas de éxito de la Aprobación</label>
+                            </div>
+                            <input type="hidden" name="raa_id" id="raa_id" value="{{$raa->id}}">
+                        @endif
                     </div>
-                    <label class="text-danger" for="btn_analisis">Para capturar un nuevo Analisis de Resultados debe borrar el actual.</label>
-                </div> 
-                @endif
+                    @if(!($anal_id))
+                        @csrf
+                        <div class="col-md-12 text-center mb-4">
+                            <button class="btn btn-outline-success" type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                </svg>
+                                Añadir Analisis de Resultados
+                            </button>
+                        </div>
+                    @else
+                    <div class="col-md-12 text-center mb-4">
+                        <div>
+                            <input disabled type="submit" value="Agregar Analisis de Resultados" class="btn btn-warning" id="btn_analisis" name="btn_analisis">
+                        </div>
+                        <label class="text-danger" for="btn_analisis">Para capturar un nuevo Analisis de Resultados debe borrar el actual.</label>
+                    </div> 
+                    @endif
+                </form>
             </div>
         {{-- Analisis de resultados --}}
 
@@ -291,38 +312,46 @@
                     </tbody>
                 </table>
             </div>
-            
-            <div class="pl-4 pr-4">
-                @if(!($pag_id))
-                    <div class="form-floating mb-2">
-                        <textarea class="form-control mr-sm-2" id="deficiencia_general" placeholder="Deficiencias" style="height: 100px;"></textarea>
-                        <label for="deficiencia_general">Deficiencias</label>
-                    </div>
-                    <div class="form-floating mb-2">
-                        <textarea class="form-control mr-sm-2" id="accion_general" placeholder="Acciones sugeridas y recursos necesarios" style="height: 100px;"></textarea>
-                        <label for="accion_general">Acciones sugeridas y recursos necesarios </label>
-                    </div>
-                    <div class="form-floating mb-2">
-                        <textarea class="form-control mr-sm-2" id="tiempo_general" placeholder="Tiempo de ejecución e impacto en cronograma" style="height: 100px;"></textarea>
-                        <label for="tiempo_general">Tiempo de ejecución e impacto en cronograma</label>
-                    </div>
-                @endif
-            </div>
-            <div class="row">
-                @if(!($pag_id))
-                <div class="col-md-12 text-center mb-4">
-                    <input type="submit" value="Crear Plan de Accion General" class="btn btn-success" id="btn_pag">
+            <form action="{{url('/raa_pag')}}" method="POST" enctype="multipart/form-data">
+                <div class="pl-4 pr-4">
+                    @if(!($pag_id))
+                        @csrf
+                        <div class="form-floating mb-2">
+                            <textarea class="form-control mr-sm-2" name="deficiencia_general" placeholder="Deficiencias" style="height: 100px;"></textarea>
+                            <label for="deficiencia_general">Deficiencias</label>
+                        </div>
+                        <div class="form-floating mb-2">
+                            <textarea class="form-control mr-sm-2" name="accion_general" placeholder="Acciones sugeridas y recursos necesarios" style="height: 100px;"></textarea>
+                            <label for="accion_general">Acciones sugeridas y recursos necesarios </label>
+                        </div>
+                        <div class="form-floating mb-2">
+                            <textarea class="form-control mr-sm-2" name="tiempo_general" placeholder="Tiempo de ejecución e impacto en cronograma" style="height: 100px;"></textarea>
+                            <label for="tiempo_general">Tiempo de ejecución e impacto en cronograma</label>
+                        </div>
+                        <input type="hidden" name="raa_id" id="raa_id" value="{{$raa->id}}">
+                    @endif
                 </div>
-                @else
-                <div class="col-md-12 text-center mb-4">
-                    <div>
-                        <input type="submit" value="Crear Plan de Accion General" class="btn btn-warning" id="btn_pag" name="btn_pag" disabled>
+                <div class="row">
+                    @if(!($pag_id))
+                    <div class="col-md-12 text-center mb-4">
+                        <button class="btn btn-outline-success" type="submit">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                                <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                            </svg>
+                            Añadir Analisis de Resultados
+                        </button>
                     </div>
-                    
-                    <label class="text-danger" for="btn_pag">Para capturar un nuevo Plan de Accion General debe borrar el actual.</label>
+                    @else
+                    <div class="col-md-12 text-center mb-4">
+                        <div>
+                            <input type="submit" value="Crear Plan de Accion General" class="btn btn-warning" id="btn_pag" name="btn_pag" disabled>
+                        </div>
+                        <label class="text-danger" for="btn_pag">Para capturar un nuevo Plan de Accion General debe borrar el actual.</label>
+                    </div>
+                    @endif
                 </div>
-                @endif
-            </div>
+            </form>
         </div>
     {{-- Plan accion general --}}
 
@@ -345,9 +374,12 @@
                         @foreach ($pap as $paps)
                             @foreach ($paps as $datos)
                             <tr>
-                                <th class="col-3">{{Str::substr($datos->alumno_particular,3) }}</th>
+                                {{-- <th class="col-3">{{Str::substr($datos->alumno_particular,3) }}</th>
                                 <td class="col-3">{{Str::substr($datos->deficiencia_particular,3)}}</td>
-                                <td class="col-4">{{Str::substr($datos->accion_particular,3)}},</td>
+                                <td class="col-4">{{Str::substr($datos->accion_particular,3)}},</td> --}}
+                                <th class="col-3">{{$datos->alumno_particular}}</th>
+                                <td class="col-3">{{$datos->deficiencia_particular}}</td>
+                                <td class="col-4">{{$datos->accion_particular}},</td>
                                 <td class="col-2">
                                     <form action="{{ url('/raa_pap/'.$datos->id) }}" method="POST">
                                         @csrf
@@ -368,25 +400,36 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="pl-4 pr-4">
-                    <div class="form-floating mb-2">
-                        <input class="form-control mr-sm-2" id="alumno_particular" placeholder="Nombre del alumno">
-                        <label for="alumno_particular"> Nombre del alumno </label>
+                <form action="{{url('/raa_pap')}}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="pl-4 pr-4">
+                        <div class="form-floating mb-2">
+                            <input class="form-control mr-sm-2" id="alumno_particular" name="alumno_particular" placeholder="Nombre del alumno">
+                            <label for="alumno_particular"> Nombre del alumno </label>
+                        </div>
+                        <div class="form-floating mb-2">
+                            <textarea class="form-control mr-sm-2" id="deficiencia_particular" name="deficiencia_particular" placeholder="Deficiencias (temas, áreas, otros) " style="height: 100px;"></textarea>
+                            <label for="deficiencia_particular">Deficiencias (temas, áreas, otros) </label>
+                        </div>
+                        <div class="form-floating mb-2" >
+                            <textarea class="form-control mr-sm-2" id="accion_particular" name="accion_particular" placeholder="Acción sugerida (academica, psicologica, etc)" style="height: 100px;"></textarea>
+                            <label for="accion_particular">Acción sugerida (academica, psicologica, etc)</label>
+                        </div>
+                        <input type="hidden" name="raa_id" id="raa_id" value="{{$raa->id}}">
                     </div>
-                    <div class="form-floating mb-2">
-                        <textarea class="form-control mr-sm-2" id="deficiencia_particular" style="height: 100px;" placeholder="Deficiencias (temas, áreas, otros)"></textarea>
-                        <label for="deficiencia_particular">Deficiencias (temas, áreas, otros) </label>
+                    <div class="row">
+                        <div class="col-md-12 text-center mb-4">
+                            {{-- <input type="submit" value="Añadir Caso Particular" class="btn btn-success" id="btn_pap"> --}}
+                            <button class="btn btn-outline-success" type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                                </svg>
+                                Añadir Plan de Acción Particular
+                            </button>
+                        </div>
                     </div>
-                    <div class="form-floating mb-2">
-                        <textarea class="form-control mr-sm-2" id="accion_particular" style="height: 100px;" placeholder="Acción sugerida (Asesoría, Tutoría,  psicológica, etc.)"></textarea>
-                        <label for="accion_particular">Acción sugerida (Asesoría, Tutoría,  psicológica, etc.)</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12 text-center mb-4">
-                        <input type="submit" value="Añadir Caso Particular" class="btn btn-success" id="btn_pap">
-                    </div>
-                </div>
+                </form>
             </div>
         {{-- Plan accion general --}}
 
@@ -433,133 +476,5 @@
     {{-- Fin Formulario Reporte --}}
     </div>
 
-    {{-- Script campos automaticos --}}
-
-    <script>
-        //-------------------- JavaScript para Evaluacion por unidad---------------------//
-            let boton = document.getElementById("enviar");
-            let no_unidad =  document.getElementById('no_unidad');
-            let no_alu_reprobados = document.getElementById('no_alu_reprobados');
-            let porcentaje_reprobacion = document.getElementById('porcentaje_reprobacion');
-            let promedio_grupal = document.getElementById('promedio_grupal');
-            let porcentaje_asistencia = document.getElementById('porcentaje_asistencia');
-            let raa_id = document.getElementById('raa_id');
-            let id_reporte = document.getElementById('id_reporte');
-            let _token = document.getElementById('token');
-
-            boton.addEventListener("click", function(e){
-                
-                let datos = {no_unidad:no_unidad.value, no_alu_reprobados:no_alu_reprobados.value, raa_id:raa_id.value,
-                    porcentaje_reprobacion:porcentaje_reprobacion.value, promedio_grupal:promedio_grupal.value, porcentaje_asistencia:porcentaje_asistencia.value
-                }
-                e.preventDefault();
-               
-                fetch('/reportec/public/reporte_avance_academico/evaluacion_por_unidad',{
-                    method: 'post',
-                    headers: {
-                        'X-CSRF-TOKEN': _token.value,
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(datos)
-                }).then(response => response.json())
-                .then(data => {
-                    // console.log(data);
-                    location.reload()
-                }).catch(error => {
-                    console.log(error.message);
-                })
-            });
-
-
-        //-------------------- JavaScript para Analisis ---------------------//
-            let btn_analisis = document.getElementById('btn_analisis');
-            let analisis_descripcion = document.getElementById('analisis_descripcion');
-            let analisis_acciones = document.getElementById('analisis_acciones');
-            let descr_id = document.getElementById('descr_id');
-
-            btn_analisis.addEventListener("click", function(e){
-                
-                let datos = {analisis_descripcion:analisis_descripcion.value, analisis_acciones:analisis_acciones.value, raa_id:raa_id.value}
-                e.preventDefault();
-               
-                fetch('/reportec/public/reporte_avance_academico/crear_analisis',{
-                    method: 'post',
-                    headers: {
-                        'X-CSRF-TOKEN': _token.value,
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(datos)
-                }).then(response => response.json())
-                .then(data => {
-                    // console.log(data);
-                    location.reload()
-                    clearInput();
-                }).catch(error => {
-                    console.log(error.message);
-                })
-            });
-
-        //-------------------- JavaScript para Plan General---------------------//
-            let boton_pag = document.getElementById('btn_pag');
-            let deficiencia_general = document.getElementById('deficiencia_general');
-            let accion_general = document.getElementById('accion_general');
-            let tiempo_general = document.getElementById('tiempo_general');
-            let pag_id = document.getElementById('pag_id');
-
-            boton_pag.addEventListener("click", function(e){
-                
-                let datos = {deficiencia_general:deficiencia_general.value, accion_general:accion_general.value, tiempo_general:tiempo_general.value, raa_id:raa_id.value}
-                e.preventDefault();
-               
-                fetch('/reportec/public/reporte_avance_academico/agregar_pag',{
-                    method: 'post',
-                    headers: {
-                        'X-CSRF-TOKEN': _token.value,
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(datos)
-                }).then(response => response.json())
-                .then(data => {
-                    // console.log(data);
-                    location.reload()
-                    clearInput();
-                }).catch(error => {
-                    console.log(error.message);
-                })
-            });
-            
-    //-------------------- JavaScript para Plan Particular---------------------//
-            let boton_pap = document.getElementById('btn_pap');
-            let alumno_particular = document.getElementById('alumno_particular');
-            let deficiencia_particular = document.getElementById('deficiencia_particular');
-            let accion_particular = document.getElementById('accion_particular');
-            let pap_id = document.getElementById('pap_id');
-            var contador = (document.getElementById("particular").rows.length);
-            // console.log(contador);
-
-            boton_pap.addEventListener("click", function(e){
-                
-                let datos = {alumno_particular:contador+ ". " + alumno_particular.value, deficiencia_particular:contador+ ". " +deficiencia_particular.value, 
-                accion_particular:contador+ ". " +accion_particular.value, raa_id:raa_id.value}
-                e.preventDefault();
-               
-                fetch('/reportec/public/reporte_avance_academico/agregar_pap',{
-                    method: 'post',
-                    headers: {
-                        'X-CSRF-TOKEN': _token.value,
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(datos)
-                }).then(response => response.json())
-                .then(data => {
-                    
-                    location.reload()
-                }).catch(error => {
-                    console.log(error.message);
-                })
-            });
-
-    </script>
-    {{-- Script campos automaticos --}}
 </div>
 @endsection

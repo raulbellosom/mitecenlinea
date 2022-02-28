@@ -54,7 +54,26 @@ class RapDesgloseHorasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $campos=[
+            'rap_id'=>'required|int',
+            'horas_teoricas'=>'required|string',
+            'horas_practicas'=>'required|string',
+            'total_horas'=>'required|string',
+            'cantidad_horas_aula'=>'required|string',
+            'cantidad_horas_externas'=>'required|string',
+            'cantidad_horas_taller'=>'required|string',
+            'porcentaje_horas_tecnologia'=>'required|string',
+        ];
+        $mensaje=[
+            'required'=>'El :attribute es requerido',
+        ];
+        $this->validate($request, $campos, $mensaje);
+
+        $datosReporte = request()->except("_token");
+        
+        RapDesgloseHoras::insert($datosReporte);
+        
+        return Redirect::back()->with('mensaje','Desgloce de Horas fue agregado con exito!');
     }
 
     /**

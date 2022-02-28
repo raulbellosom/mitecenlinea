@@ -52,7 +52,22 @@ class RaaPagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $campos=[
+            'raa_id'=>'required|int',
+            'deficiencia_general'=>'required|string',
+            'accion_general'=>'required|string',
+            'tiempo_general'=>'required|string',
+        ];
+        $mensaje=[
+            'required'=>'El :attribute es requerido',
+        ];
+        $this->validate($request, $campos, $mensaje);
+
+        $datosReporte = request()->except("_token");
+        
+        Raa_pag::insert($datosReporte);
+        
+        return Redirect::back()->with('mensaje','Plan de Acción General fue agregado con exito!');
     }
 
     /**

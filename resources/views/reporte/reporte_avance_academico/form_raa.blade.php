@@ -34,36 +34,42 @@
                 <div class="bg-primary p-4 mb-4 text-center text-light font-weight-bold text-h1 text-uppercase">
                     Información General del Reporte
                 </div>
-                <div class="m-2 row justify-content-between justify-content-md-around ">
+                <div class="m-2 row justify-content-between  ">
                     <div class="form-floating col-12 col-md-6 pb-2">
                         <input id="asignatura" class="form-control mr-2" name="asignatura" type="text" placeholder="Asignatura"
-                            value="{{ isset($reporte_diagnostico->asignatura) ? $reporte_diagnostico->asignatura:old('asignatura') }}"
+                            value="{{ isset($raa->asignatura) ? $raa->asignatura:old('asignatura') }}"
                         >                        
                         <label for="asignatura" class="pl-4">Asignatura</label>
                     </div>
                     <div class="form-floating col-12 col-md-6 pb-2">
+                        <input id="periodo_corte" class="form-control mr-2" name="periodo_corte" type="text" placeholder="periodo_corte"
+                            value="{{ isset($raa->periodo_corte) ? $periodo_corte->periodo_corte:old('periodo_corte') }}"
+                        >                        
+                        <label for="periodo_corte" class="pl-4">Periodo del Corte</label>
+                    </div>
+                    <div class="form-floating col-12 col-md-6 pb-2">
                         <input id="carrera" class="form-control mr-2" name="carrera" type="text" placeholder="carrera"
-                            value="{{ isset($reporte_diagnostico->carrera) ? $reporte_diagnostico->carrera:old('carrera') }}"
+                            value="{{ isset($raa->carrera) ? $raa->carrera:old('carrera') }}"
                         >
                         <label for="carrera" class="pl-4">Carrera</label> 
                     </div>
                     <div class="form-floating col-12 col-md-6 pb-2">
                         <input id="grado" class="form-control mr-2" name="grado" type="number" placeholder="Grado" min="0" max="9" pattern="^[0-9]+"
-                            value="{{ isset($reporte_diagnostico->grado) ? $reporte_diagnostico->grado:old('grado') }}"
+                            value="{{ isset($raa->grado) ? $raa->grado:old('grado') }}"
                         >
                         <label for="grado" class="pl-4">Grado</label>
                     </div>
                     <div class="form-floating col-12 col-md-6 pb-2">
                         <input id="grupo" class="form-control mr-2" name="grupo" type="text" placeholder="Grupo"
-                            value="{{ isset($reporte_diagnostico->grupo) ? $reporte_diagnostico->grupo:old('grupo') }}"
+                            value="{{ isset($raa->grupo) ? $raa->grupo:old('grupo') }}"
                         >
                         <label for="grupo" class="pl-4">Grupo</label> 
                     </div>
                     <div class="form-floating col-12 col-md-6 pb-2">
                         <select id="turno" class="form-control" name="turno"
-                            value="{{ isset($reporte_diagnostico->turno) ? $reporte_diagnostico->turno:old('turno') }}"
+                            value="{{ isset($raa->turno) ? $raa->turno:old('turno') }}"
                         >
-                            <option value="{{ isset($reporte_diagnostico->turno) ? $reporte_diagnostico->turno:old('turno') }}" hidden>{{ isset($reporte_diagnostico->turno) ? $reporte_diagnostico->turno:old('turno') }}</option>
+                            <option value="{{ isset($raa->turno) ? $raa->turno:old('turno') }}" hidden>{{ isset($raa->turno) ? $raa->turno:old('turno') }}</option>
                             <option value="Matutino">Matutino</option>
                             <option value="Vespertino">Vespertino</option>
                         </select>

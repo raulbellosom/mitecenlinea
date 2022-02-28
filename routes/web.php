@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DocenteController;
 use App\Http\Controllers\InfoUserController;
+use App\Http\Controllers\MateriasDocenteController;
 use App\Http\Controllers\ReporteController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\RaaAnalisisResultadoController;
@@ -27,6 +28,7 @@ use App\Http\Controllers\RdPapController;
 use App\Http\Controllers\RfCursoController;
 use App\Http\Controllers\RFinalController;
 use App\Http\Controllers\RfPracticasEspacioController;
+use App\Http\Controllers\UserController;
 
 //probablemente borrar este auth;
 /*
@@ -47,8 +49,9 @@ Route::get('/', function () {
 //---------------------------Rutas para la autenticacion
 // Auth::routes(['register'=>false,'reset'=>false]);
 Auth::routes(['reset'=>false]);  //este es para habilitar el registro pero oculta el reseteo de contraseña
-Auth::routes(['register'=>false,'reset'=>false]); //de esta manera queda oculto el registro y el reseteo de contraseña
+Auth::routes(['register'=>false,'reset'=>true]); //de esta manera queda oculto el registro y el reseteo de contraseña
 
+Route::resource('users',UserController::class)->middleware('admin');
 
 //---------------------------Rutas para el index docente
 Route::group(['middleware'=>'auth'], function(){
@@ -68,8 +71,15 @@ Route::group(['middleware'=>'auth'], function(){
     Route::resource('reporte', ReporteController::class);
 });
 
-Route::group(['middleware'=>'auth'], function(){
+Route::group(['middleware'=>'admin'], function(){
     Route::get('administrativo', [ReporteController::class, 'admin'])->name('administrativo');
+    Route::get('/administrativo/all_docentes', [ReporteController::class, 'admin_docentes'])->name('admin_docentes');
+    Route::get('/administrativo/all_materias', [ReporteController::class, 'admin_materias'])->name('admin_materias');
+    Route::get('/administrativo/all_reportes', [ReporteController::class, 'admin_reportes'])->name('admin_reportes');
+    Route::resource('users', UserController::class);
+    Route::get('/administrativo/formato_docente', [UserController::class, 'download_docentes_format'])->name('formato_docente');
+    Route::resource('carga_materias', MateriasDocenteController::class);
+
 });
 
 //---------------------Reporte Diagnostico Rutas
@@ -173,7 +183,7 @@ Route::group(['middleware'=>'auth'], function(){
     // Route::get('reporte_diagnostico/', [ReporteDiagnosticoController::class, 'index']);
     Route::get('infoUser/index', [InfoUserController::class, 'index']);
     Route::get('infoUser/create', [InfoUserController::class, 'create']);
-    // Route::get('info_user/edit', [InfoUserController::class, 'edit']);
+    Route::get('info_user/edit', [InfoUserController::class, 'edit']);
     Route::resource('infoUser', InfoUserController::class);
 });
 Route::resource('infoUser', InfoUserController::class);

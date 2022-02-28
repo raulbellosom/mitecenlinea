@@ -53,7 +53,25 @@ class RapUnidadController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $campos=[
+            'rap_id'=>'required|int',
+            'no_unidad'=>'required|string',
+            'nombre_unidad'=>'required|string',
+            'porcentaje_avance'=>'required|string',
+            'no_criterios'=>'required|string',
+            'porcentaje_alumnos_aprobados'=>'required|string',
+            'promedio_calificaciones'=>'required|string',
+        ];
+        $mensaje=[
+            'required'=>'El :attribute es requerido',
+        ];
+        $this->validate($request, $campos, $mensaje);
+
+        $datosReporte = request()->except("_token");
+        
+        Rap_unidad::insert($datosReporte);
+        
+        return Redirect::back()->with('mensaje','Descripción de la Unidad fue agregada con exito!');
     }
 
     /**

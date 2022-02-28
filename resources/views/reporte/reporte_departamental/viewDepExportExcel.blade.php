@@ -2,19 +2,24 @@
 <table class="tg">
     <thead class="bg-secondary">
         <tr>
-            <th class="text-center" colspan="10">SEMESTRE: FEBRERO - JULIO 2021</th>
+            <th colspan="10">
+                <img src="{{asset('/assets/img/logo/banner-tec.jpg')}}" alt="Banner TecMM">
+            </th>
         </tr>
         <tr>
-            <th class="text-center" colspan="10">INGENIERÍA EN GESTIÓN EMPRESARIAL </th>
+            <th style="text-center" colspan="10">SEMESTRE: FEBRERO - JULIO 2021</th>
         </tr>
         <tr>
-            <th class="text-center" colspan="10">EXAMENES DEPARTAMENTALES</th>
+            <th style="text-center" colspan="10">INGENIERÍA EN GESTIÓN EMPRESARIAL </th>
         </tr>
         <tr>
-            <th class="text-center" colspan="10"></th>
+            <th style="text-center" colspan="10">EXAMENES DEPARTAMENTALES</th>
         </tr>
         <tr>
-            <th class="text-center" colspan="10">DOCENTES IGEM </th>
+            <th style="text-center" colspan="10"></th>
+        </tr>
+        <tr>
+            <th style="text-center" colspan="10">DOCENTES IGEM </th>
         </tr>
         <tr>
             <td rowspan="3">NO.</td>
@@ -44,7 +49,11 @@
                 <td>{{$reporte->id}}</td>
                 <td>{{$reporte->autor}}</td>
                 <td>{{$reporte->asignatura}}</td>
-                <td></td>
+                @if ($reporte->fecha_aplicacion_examen)
+                    <td>SI</td>
+                @else
+                    <td>No</td>
+                @endif
                 <td>{{$reporte->unidad_evaluada}}</td>
                 <td>{{$reporte->fecha_aplicacion_examen}}</td>
                 <td>{{$reporte->grado}}{{$reporte->grupo}}</td>
@@ -54,42 +63,5 @@
                 <td></td>
             </tr>
         @endforeach
-        {{-- @foreach ($pap as $reporte)
-                    <td>{{$reporte->alumno_particular}}</td>
-                    <td>{{$reporte->deficiencia_particular}}</td>
-                    <td>{{$reporte->accion_particular}}</td>
-        @endforeach --}}
-        
-        
-            {{-- <tr>
-                @foreach ($r_diagnostico as $reporte)
-                    <td>{{$reporte->id}}</td>
-                    <td>{{$reporte->autor}}</td>
-                    <td>{{$reporte->asignatura}}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>{{$reporte->carrera}}</td>
-                    <td>{{$reporte->grado}}</td>
-                    <td>{{$reporte->grupo}}</td>
-                    <td>{{$reporte->turno}}</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>{{$reporte->tipo_evaluacion}}</td>
-                    <td>{{$reporte->cantidad_alumnos}}</td>
-                @endforeach
-                
-                @foreach ($pag as $reporte)
-                    <td>{{$reporte->deficiencia_general}}</td>
-                    <td>{{$reporte->accion_general}}</td>
-                    <td>{{$reporte->tiempo_general}}</td>
-                @endforeach
-                @foreach ($pap as $reporte)
-                    <td>{{$reporte->alumno_particular}}</td>
-                    <td>{{$reporte->deficiencia_particular}}</td>
-                    <td>{{$reporte->accion_particular}}</td>
-                @endforeach
-            </tr> --}}
     </tbody>
 </table>

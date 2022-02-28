@@ -42,13 +42,13 @@
         <table class="prueba">
             <tr>
                 <td rowspan="3" style="width: 100px"><img style="width: 125px" src="{{asset('../resources/img/logo/tec-vallarta.png')}}" alt="adydo-logo"  ></td>
-                <td>FORMULARIO</td>
+                <td><b>FORMULARIO</b></td>
                 <td colspan="2">Reporte de Avance Programático</td>
             </tr>
             <tr>
-                <td>CÓDIGO</td>
-                <td>VERSIÓN</td>
-                <td>ÚLTIMA REVISIÓN</td>
+                <td><b>CÓDIGO</b></td>
+                <td><b>VERSIÓN</b></td>
+                <td><b>ÚLTIMA REVISIÓN</b></td>
             </tr>
             <tr>
                 <td>AAP-PRC-04/F07</td>
@@ -91,8 +91,8 @@
                 </tr>
             </table>
         </div>
-        <br>
-        <div>
+        
+        <div style="padding-top: 1.5cm">
             <table>  
                 <tr>
                     <th>Unidad</th>
@@ -180,7 +180,7 @@
             </table>
         </div>
     
-        <div style="padding-top: 50px;">
+        <div style="padding-top: 60px;">
             <table style="border: 0px;">
                     <tr style="border: 0px;">
                         <td style="border: 0px; border-bottom: 1px solid black; border-collapse: collapse;">{{$reportes->autor}}</td>

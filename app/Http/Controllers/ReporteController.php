@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Models\MateriasDocente;
 use App\Models\ReporteDiagnostico;
+use App\Models\Reporte;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Storage;
@@ -12,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 
 class ReporteController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -53,6 +56,53 @@ class ReporteController extends Controller
     ///////////////////////////Administrativos//////////////////////////
     public function admin(){
         return view('reporte_admin.index_admin');
+    }
+
+    public function admin_docentes(){
+        $users["users"]=User::all()->sortBy('name');
+        // $users  =  DB::table('users')->select('name','email','typeUser')->paginate(10);
+        return view('reporte_admin.admin_docentes', $users);
+    }
+
+    public function admin_materias(){
+        // $materias= collect(MateriasDocente::all()->sortBy('materia'));
+        // $plucked = $materias->pluck('user_id');
+        // var_dump($plucked->all());
+
+        $materias['materias']= DB::select('SELECT md.*, user.name
+        FROM materias_docentes as md
+        INNER JOIN users as user ON user.id = md.user_id
+        ORDER BY md.materia');
+
+        return view('reporte_admin.admin_materias', $materias);
+    }
+
+    public function admin_reportes(){
+        $diagnostico = DB::table('reporte_diagnosticos')
+        ->select('created_at', 'nombre_reporte', 'grado', 'grupo', 'id', 'carrera','asignatura', 'user_id', 'status' )
+        ->where('status','=',2)
+        ;
+
+        $raps= DB::table('raps')
+        ->select('created_at', 'nombre_reporte', 'grado', 'grupo', 'id', 'carrera','asignatura', 'user_id', 'status')
+        ->where('status','=',2)
+        ;
+
+        $raas= DB::table('raas')
+        ->select('created_at', 'nombre_reporte', 'grado', 'grupo', 'id', 'carrera','asignatura', 'user_id', 'status')
+        ->where('status','=',2)
+        ;
+        
+        $datos["reportes"] = DB::table('r_departamentals')
+        ->union($raas)
+        ->union($raps)
+        ->union($diagnostico)
+        ->select('created_at', 'nombre_reporte', 'grado', 'grupo', 'id', 'carrera','asignatura', 'user_id', 'status')
+        ->where('status','=',2)
+        ->orderByDesc('created_at')
+        ->paginate(10);
+
+        return view('reporte_admin.admin_reportes', $datos);
     }
 
     /**

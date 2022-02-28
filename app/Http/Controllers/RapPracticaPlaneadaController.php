@@ -56,7 +56,27 @@ class RapPracticaPlaneadaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $campos=[
+            'rap_id'=>'required|int',
+            'practicas_planeadas'=>'required|string',
+            'practicas_realizadas'=>'required|string',
+            'nombre_practicas'=>'required|string',
+            'observaciones'=>'required|string',
+            'practicas_no_planeadas'=>'required|string',
+            'nombre_no_planeadas'=>'required|string',
+            'talleres'=>'required|string',
+            'diferencias'=>'required|string',
+        ];
+        $mensaje=[
+            'required'=>'El :attribute es requerido',
+        ];
+        $this->validate($request, $campos, $mensaje);
+
+        $datosReporte = request()->except("_token");
+        
+        RapPracticaPlaneada::insert($datosReporte);
+        
+        return Redirect::back()->with('mensaje','Descripción de las Practicas fue agregada con exito!');
     }
 
     /**
