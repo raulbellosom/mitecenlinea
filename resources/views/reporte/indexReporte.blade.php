@@ -14,6 +14,7 @@
         {{-- Codigo para recepcion de un mensaje --}}
 
     {{-- Barra de navegación  --}}
+    <div class="pt-4">
         <nav class="navbar navbar-expand-xl navbar-light bg-light">
             <a class="navbar-brand text-primary font-weight-bold" href="{{url('reporte/')}}">Mis Reportes</a>
             <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,15 +30,14 @@
                 </div>
             </div>
         </nav>
+    </div>
     {{-- Barra de navegación  --}}
 
     {{-- Tabla principal --}}
-    <div class="bg-light ">
-        <div class="mt-4 ">
-            <div class=" ml-3 mr-3 p-2 d-flex justify-content-between align-items-baseline bg-light border border-primary border-bottom-0"> 
-                <div class="font-weight-bold text-primary h5 pb-2">
-                    Mis Reportes
-                </div>
+    <div class="bg-light pt-4 pb-4">
+        <div class=" ml-3 mr-3 p-2 d-flex justify-content-between align-items-baseline bg-light border border-primary border-bottom-0"> 
+            <div class="font-weight-bold text-primary h5 pb-2">
+                Mis Reportes
             </div>
         </div>
         <div class="col-sm-12 row-sm-12">
