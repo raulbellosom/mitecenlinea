@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MateriasDocente;
 use App\Models\RDepartamental;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class RDepartamentalController extends Controller
 {
@@ -29,7 +31,8 @@ class RDepartamentalController extends Controller
     public function create()
     {
         $id = Auth::id();
-        $datos["reportes"]=RDepartamental::where('user_id','=',$id)->paginate(10);
+        // $datos["reportes"]=RDepartamental::where('user_id','=',$id)->paginate(10);
+        $datos["datos"] = DB::select('select * from materias_docentes where user_id = ?', [$id]);
         $user['users'] = Auth::user();
 
         return view("reporte/reporte_departamental/rdep_create", $user,$datos);
@@ -43,15 +46,12 @@ class RDepartamentalController extends Controller
      */
     public function store(Request $request)
     {
+        $reporte = MateriasDocente::findOrFail($request->input('asignatura'));
         $campos=[
             'user_id'=>'required|int',
             'autor'=>'required|string',
             'nombre_reporte'=>'required|string',
             'asignatura'=>'required|string',
-            'carrera'=>'required|string',
-            'grado'=>'required|string',
-            'grupo'=>'required|string',
-            'turno'=>'required|string',
             'semestre'=>'required|string',
             'total_alumnos_lista'=>'required|int',
             'total_alumnos_examen'=>'required|int',
@@ -69,7 +69,17 @@ class RDepartamentalController extends Controller
         ];
         $this->validate($request, $campos, $mensaje);
 
-        $datosReporte = request()->except("_token");
+        $datosReporte = request()->except("_token","asignatura");
+
+        $complementos=[
+            'grado'=>$reporte->grado,
+            'grupo'=>$reporte->grupo,
+            'turno'=>$reporte->turno,
+            'carrera'=>$reporte->carrera,
+            'asignatura'=>$reporte->materia,
+
+        ];
+        $datosReporte = array_merge($datosReporte,$complementos);
         
         RDepartamental::insert($datosReporte);
 

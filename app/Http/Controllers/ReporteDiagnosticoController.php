@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MateriasDocente;
 use App\Models\Rd_competencia;
 use App\Models\Rd_pag;
 use App\Models\Rd_pap;
@@ -14,17 +15,27 @@ use Illuminate\Support\Facades\Redirect;
 
 class ReporteDiagnosticoController extends Controller
 {
+    // private $user_id;
+    // private $asignaturas;
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+    // public function __construct()
+    //  {
+    //      $this->user_id = Auth::id();
+    //      $this->asignaturas [] = DB::select('select * from materias_docentes where user_id = ?', [$this->user_id]);
+    //  }
+
     public function index()
     {
         $id = Auth::id();
         $datos["reportes"]=ReporteDiagnostico::where('user_id','=',$id)->orderByDesc('created_at')->paginate(5);
         $user['users'] = Auth::user();
         return view('reporte/reporte_diagnostico/indexDiagnostico', $user, $datos);
+
     }
 
     /**
@@ -34,11 +45,16 @@ class ReporteDiagnosticoController extends Controller
      */
     public function create()
     {
+        // $reporte_diagnostico = 0;
         $id = Auth::id();
-        $datos["reportes"]=ReporteDiagnostico::where('user_id','=',$id)->paginate(10);
+        // $datos["reportes"]=ReporteDiagnostico::where('user_id','=',$id)->paginate(10);
+        $datos["datos"] = DB::select('select * from materias_docentes where user_id = ?', [$id]);
         $user['users'] = Auth::user();
-
-        return view("reporte/reporte_diagnostico/create_diagnostico", $user,$datos);
+        // if ($id_materia) {
+        //     $reporte_diagnostico = MateriasDocente::findOrFail($id_materia);
+        // }
+        // var_dump($datos);
+        return view("reporte/reporte_diagnostico/create_diagnostico", $user, $datos);
     }
 
     /**
@@ -49,6 +65,8 @@ class ReporteDiagnosticoController extends Controller
      */
     public function store(Request $request)
     {
+        $reporte_diagnostico = MateriasDocente::findOrFail($request->input('asignatura'));
+        // var_dump($reporte_diagnostico);
         $campos=[
             'user_id'=>'required|int',
             'autor'=>'required|string',
@@ -56,26 +74,28 @@ class ReporteDiagnosticoController extends Controller
             'asignatura'=>'required|string',
             'tipo_evaluacion'=>'required|string',
             'cantidad_alumnos'=>'required|int',
-            'carrera'=>'required|string',
-            'grado'=>'required|string',
-            'grupo'=>'required|string',
-            'turno'=>'required|string',
             'created_at'=>'required|date'
         ];
-        // $competencias=[
-        //     'competencia'=>'required|string',
-        //     'ponderacion'=>'required|int',
-        //     'r_diagnostico_id'=>'int'
-        // ];
+        
         $mensaje=[
             'required'=>'El :attribute es requerido',
         ];
         $this->validate($request, $campos, $mensaje);
         // $this->validate($request, $competencias, $mensaje);
 
-        $datosReporte = request()->except("_token");
+        $datosReporte = request()->except("_token","asignatura");
+
+        $complementos=[
+            'grado'=>$reporte_diagnostico->grado,
+            'grupo'=>$reporte_diagnostico->grupo,
+            'turno'=>$reporte_diagnostico->turno,
+            'carrera'=>$reporte_diagnostico->carrera,
+            'asignatura'=>$reporte_diagnostico->materia,
+
+        ];
+        $datosReporte = array_merge($datosReporte,$complementos);
         // $datosCompetencia = request()->except("_token", "user_id", "autor", "nombre_reporte",
-        //  "asignatura","tipo_evaluacion", "cantidad_alumnos","carrera","grado", "grupo", "turno", "created_at");
+        // "asignatura","tipo_evaluacion", "cantidad_alumnos","carrera","grado", "grupo", "turno", "created_at");
         
         ReporteDiagnostico::insert($datosReporte);
         
