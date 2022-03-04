@@ -3,7 +3,7 @@
     <thead class="bg-secondary">
         <tr>
             <th colspan="10">
-                <img src="{{asset('/assets/img/logo/banner-tec.jpg')}}" alt="Banner TecMM">
+                {{-- <img src="{{asset('/assets/img/logo/banner-tec.jpg')}}" alt="Banner TecMM"> --}}
             </th>
         </tr>
         <tr>

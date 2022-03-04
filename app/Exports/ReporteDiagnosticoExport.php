@@ -12,11 +12,13 @@ use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\Exportable;
-use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class ReporteDiagnosticoExport implements FromView, WithStyles
+class ReporteDiagnosticoExport implements FromView, WithStyles, WithEvents
 {
     use Exportable;
     /**
@@ -44,6 +46,20 @@ class ReporteDiagnosticoExport implements FromView, WithStyles
             // 'C'  => ['font' => ['size' => 16]],
         ];
     }
+
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class => function(AfterSheet $event) {
+                $event->sheet->getDelegate()->getStyle('A1:Y3')
+                                ->getAlignment()
+                                ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+   
+            },
+        ];
+    }
+
+
 
     public function view():View
     {

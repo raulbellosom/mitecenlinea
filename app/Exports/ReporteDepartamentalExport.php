@@ -5,12 +5,14 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\Exportable;
-use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithDrawings;
+use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Events\AfterSheet;
+use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
-use PHPExcel_Worksheet_Drawing;
 
-class ReporteDepartamentalExport implements FromView, ShouldAutoSize, WithStyles
+class ReporteDepartamentalExport implements FromView, WithStyles, WithEvents, WithDrawings
 {
     use Exportable;
     /**
@@ -20,9 +22,15 @@ class ReporteDepartamentalExport implements FromView, ShouldAutoSize, WithStyles
     {
         return [
             // Style the first row as bold text.
-            1    => ['font' => ['bold' => true, 'size'=> 13 ]],
-            2    => ['font' => ['bold' => true, 'size'=> 13 ]],
-            3    => ['font' => ['bold' => true, 'size'=> 13 ]],
+            1    => ['font' => ['bold' => true, 'size'=> 12 ]],
+            2    => ['font' => ['bold' => true, 'size'=> 12 ]],
+            3    => ['font' => ['bold' => true, 'size'=> 12 ]],
+            4    => ['font' => ['bold' => true, 'size'=> 12 ]],
+            5    => ['font' => ['bold' => true, 'size'=> 12 ]],
+            6    => ['font' => ['bold' => true, 'size'=> 12 ]],
+            7    => ['font' => ['bold' => true, 'size'=> 11 ]],
+            8    => ['font' => ['bold' => true, 'size'=> 11 ]],
+            9    => ['font' => ['bold' => true, 'size'=> 11 ]],
 
 
             // Styling a specific cell by coordinate.
@@ -30,6 +38,143 @@ class ReporteDepartamentalExport implements FromView, ShouldAutoSize, WithStyles
 
             // Styling an entire column.
             // 'C'  => ['font' => ['size' => 16]],
+        ];
+    }
+
+    public function drawings()
+    {
+        $drawing = new Drawing();
+        $drawing->setName('Logo');
+        $drawing->setDescription('This is my logo');
+        $drawing->setPath(public_path('/assets/img/logo/banner-tec.jpg'));
+        $drawing->setWidth(1100);
+        $drawing->setCoordinates('B1');
+
+        return $drawing;
+    }
+
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class => function(AfterSheet $event) {
+                $event->sheet->getDelegate()->getStyle('A1:J9')
+                                ->getAlignment()
+                                ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+                $event->sheet->getDelegate()->getRowDimension('9')->setRowHeight(30);
+                $event->sheet->getDelegate()->getRowDimension('1')->setRowHeight(90);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(40);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(40);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(20);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(17);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(18);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(15);
+                $event->sheet->getDelegate()->getStyle('A6:J6')
+                    ->getFill()
+                    ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+                    ->getStartColor()
+                    ->setRGB('D0D3D4');
+                $event->sheet->getDelegate()->getStyle('A7:J9')
+                    ->getFill()
+                    ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+                    ->getStartColor()
+                    ->setRGB('7B7D7D');
+                $event->sheet->getStyle('A6:J6')->applyFromArray([
+                        'borders' => [
+                            'outline' => [
+                                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                                'color' => ['rgb' => '000000'],
+                            ],
+                        ]
+                    ]);
+                $event->sheet->getStyle('A7:J9')->applyFromArray([
+                        'borders' => [
+                            'outline' => [
+                                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                                'color' => ['rgb' => '000000'],
+                            ],
+                        ]
+                    ]);
+                $event->sheet->getStyle('B7:B100')->applyFromArray([
+                        'borders' => [
+                            'outline' => [
+                                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                                'color' => ['rgb' => '000000'],
+                            ],
+                        ]
+                    ]);
+                $event->sheet->getStyle('C7:C100')->applyFromArray([
+                        'borders' => [
+                            'outline' => [
+                                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                                'color' => ['rgb' => '000000'],
+                            ],
+                        ]
+                    ]);
+                $event->sheet->getStyle('D8:D100')->applyFromArray([
+                        'borders' => [
+                            'outline' => [
+                                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                                'color' => ['rgb' => '000000'],
+                            ],
+                        ]
+                    ]);
+                $event->sheet->getStyle('J8:J100')->applyFromArray([
+                        'borders' => [
+                            'outline' => [
+                                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                                'color' => ['rgb' => '000000'],
+                            ],
+                        ]
+                    ]);
+                $event->sheet->getStyle('D7:J7')->applyFromArray([
+                        'borders' => [
+                            'outline' => [
+                                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                                'color' => ['rgb' => '000000'],
+                            ],
+                        ]
+                    ]);
+                    $event->sheet->getStyle('E9:E100')->applyFromArray([
+                        'borders' => [
+                            'outline' => [
+                                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                                'color' => ['rgb' => '000000'],
+                            ],
+                        ]
+                    ]);
+                $event->sheet->getStyle('E8:H8')->applyFromArray([
+                        'borders' => [
+                            'outline' => [
+                                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                                'color' => ['rgb' => '000000'],
+                            ],
+                        ]
+                    ]);
+                $event->sheet->getStyle('F9:F100')->applyFromArray([
+                        'borders' => [
+                            'outline' => [
+                                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                                'color' => ['rgb' => '000000'],
+                            ],
+                        ]
+                    ]);
+                $event->sheet->getStyle('G9:G100')->applyFromArray([
+                        'borders' => [
+                            'outline' => [
+                                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                                'color' => ['rgb' => '000000'],
+                            ],
+                        ]
+                    ]);
+                $event->sheet->getStyle('H9:H100')->applyFromArray([
+                        'borders' => [
+                            'outline' => [
+                                'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                                'color' => ['rgb' => '000000'],
+                            ],
+                        ]
+                    ]);
+            },
         ];
     }
 
