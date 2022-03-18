@@ -155,23 +155,23 @@
                 <form action="{{url('/raa_evaluacion_unidad')}}" method="POST" enctype="multipart/form-data">
                     <div class="row m-2">
                         <div class="form-floating pb-2 col-12 col-lg-4">
-                            <input id="no_unidad" class="form-control mr-2" name="no_unidad" type="number" placeholder="No. Unidad Evaluada" min="0" max="9" pattern="^[0-9]+">
+                            <input id="no_unidad" class="form-control mr-2" name="no_unidad" type="number" placeholder="No. Unidad Evaluada" min="0" max="10" pattern="^[0-9]+">
                             <label for="no_unidad" class="pl-4">No. Unidad Evaluada</label>
                         </div>
                         <div class="form-floating pb-2 col-12 col-lg-4">
-                            <input id="no_alu_reprobados" class="form-control mr-2" name="no_alu_reprobados" type="number" placeholder="No. Alumnos Reprobados" min="0" max="9" pattern="^[0-9]+">
+                            <input id="no_alu_reprobados" class="form-control mr-2" name="no_alu_reprobados" type="number" placeholder="No. Alumnos Reprobados" min="0" max="50" pattern="^[0-9]+">
                             <label for="no_alu_reprobados" class="pl-4">No. Alum Reprobados</label>
                         </div>
                         <div class="form-floating pb-2 col-12 col-lg-4">
-                            <input id="porcentaje_reprobacion" class="form-control mr-2" name="porcentaje_reprobacion" type="number" placeholder="%. de Reprobacion" min="0" max="9" pattern="^[0-9]+">
+                            <input id="porcentaje_reprobacion" class="form-control mr-2" name="porcentaje_reprobacion" type="number" placeholder="%. de Reprobacion" min="0" max="100" pattern="^[0-9]+">
                             <label for="porcentaje_reprobacion" class="pl-4">%. de Reprobacion</label>
                         </div>
                         <div class="form-floating pb-2 col-12 col-lg-6">
-                            <input id="promedio_grupal" class="form-control mr-2" name="promedio_grupal" type="number" placeholder="Promedio de Calificaciones del grupo por unidad" min="0" max="9" pattern="^[0-9]+">
+                            <input id="promedio_grupal" class="form-control mr-2" name="promedio_grupal" type="number" placeholder="Promedio de Calificaciones del grupo por unidad" min="0" max="100" pattern="^[0-9]+">
                             <label for="promedio_grupal" class="pl-4">Promedio de Calificaciones del grupo por unidad</label>
                         </div>
                         <div class="form-floating pb-2 col-12 col-lg-6">
-                            <input id="porcentaje_asistencia" class="form-control mr-2" name="porcentaje_asistencia" type="number" placeholder="%. de Asistencia" min="0" max="9" pattern="^[0-9]+">
+                            <input id="porcentaje_asistencia" class="form-control mr-2" name="porcentaje_asistencia" type="number" placeholder="%. de Asistencia" min="0" max="100" pattern="^[0-9]+">
                             <label for="porcentaje_asistencia" class="pl-4">%. de Asistencia</label>
                         </div>
                         <input type="hidden" name="_token" id="token" value="{{ csrf_token()}}">

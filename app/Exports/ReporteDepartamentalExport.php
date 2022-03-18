@@ -77,7 +77,7 @@ class ReporteDepartamentalExport implements FromView, WithStyles, WithEvents, Wi
                     ->getFill()
                     ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
                     ->getStartColor()
-                    ->setRGB('7B7D7D');
+                    ->setRGB('D8D8D8');
                 $event->sheet->getStyle('A6:J6')->applyFromArray([
                         'borders' => [
                             'outline' => [

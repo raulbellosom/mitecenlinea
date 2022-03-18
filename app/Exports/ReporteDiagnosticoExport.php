@@ -2,23 +2,18 @@
 
 namespace App\Exports;
 
-use App\Models\Rd_competencia;
-use App\Models\Rd_pag;
-use App\Models\Rd_pap;
-use App\Models\ReporteDiagnostico;
 use Illuminate\Contracts\View\View;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithDrawings;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithEvents;
-use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Events\AfterSheet;
+use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class ReporteDiagnosticoExport implements FromView, WithStyles, WithEvents
+class ReporteDiagnosticoExport implements FromView, WithStyles, WithEvents, WithDrawings
 {
     use Exportable;
     /**
@@ -28,15 +23,15 @@ class ReporteDiagnosticoExport implements FromView, WithStyles, WithEvents
     {
         return [
             // Style the first row as bold text.
-            1    => ['font' => ['bold' => true, 'size'=> 16 ]],
-            2    => ['font' => ['bold' => true, 'size'=> 8 ]],
-            3    => ['font' => ['bold' => true , 'size'=> 8 ]],
+            3    => ['font' => ['bold' => true, 'size'=> 16 ]],
             't'    => ['font' => ['size'=> 7 ]],
             'u'    => ['font' => ['size'=> 7 ]],
             'v'    => ['font' => ['size'=> 7 ]],
             'w'    => ['font' => ['size'=> 7 ]],
             'x'    => ['font' => ['size'=> 7 ]],
             'y'    => ['font' => ['size'=> 7 ]],
+            4    => ['font' => ['bold' => true, 'size'=> 8 ]],
+            5    => ['font' => ['bold' => true , 'size'=> 8 ]],
 
 
             // Styling a specific cell by coordinate.
@@ -47,14 +42,271 @@ class ReporteDiagnosticoExport implements FromView, WithStyles, WithEvents
         ];
     }
 
+    public function drawings()
+    {
+        $drawing = new Drawing();
+        $drawing->setName('Logo');
+        $drawing->setDescription('This is my logo');
+        $drawing->setPath(public_path('/assets/img/logo/banner-tec.jpg'));
+        $drawing->setWidth(1100);
+        $drawing->setCoordinates('D1');
+
+        return $drawing;
+    }
+
     public function registerEvents(): array
     {
         return [
             AfterSheet::class => function(AfterSheet $event) {
-                $event->sheet->getDelegate()->getStyle('A1:Y3')
-                                ->getAlignment()
-                                ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-   
+                //asingar alto
+                $event->sheet->getDelegate()->getRowDimension('4')->setRowHeight(25);
+                $event->sheet->getDelegate()->getRowDimension('5')->setRowHeight(60);
+                //asignar ancho
+                $event->sheet->getDelegate()->getColumnDimension('A')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(40);
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(40);
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('F')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('G')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('H')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('I')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('J')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('K')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('L')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('M')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('N')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('O')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('P')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('Q')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('R')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('S')->setWidth(5);
+                $event->sheet->getDelegate()->getColumnDimension('T')->setWidth(25);
+                $event->sheet->getDelegate()->getColumnDimension('U')->setWidth(25);
+                $event->sheet->getDelegate()->getColumnDimension('V')->setWidth(25);
+                $event->sheet->getDelegate()->getColumnDimension('W')->setWidth(25);
+                $event->sheet->getDelegate()->getColumnDimension('X')->setWidth(25);
+                $event->sheet->getDelegate()->getColumnDimension('Y')->setWidth(25);
+                 //asignar rotacion
+                $event->sheet->getStyle("D5")->getAlignment()->setTextRotation(90);
+                $event->sheet->getStyle("E5")->getAlignment()->setTextRotation(90);
+                $event->sheet->getStyle("F5")->getAlignment()->setTextRotation(90);
+                $event->sheet->getStyle("G5")->getAlignment()->setTextRotation(90);
+                $event->sheet->getStyle("H5")->getAlignment()->setTextRotation(90);
+                $event->sheet->getStyle("I5")->getAlignment()->setTextRotation(90);
+                $event->sheet->getStyle("J5")->getAlignment()->setTextRotation(90);
+                $event->sheet->getStyle("K5")->getAlignment()->setTextRotation(90);
+                $event->sheet->getStyle("L5")->getAlignment()->setTextRotation(90);
+                $event->sheet->getStyle("M5")->getAlignment()->setTextRotation(90);
+
+                $event->sheet->getStyle("N4")->getAlignment()->setTextRotation(90);
+                $event->sheet->getStyle("O4")->getAlignment()->setTextRotation(90);
+                $event->sheet->getStyle("P5")->getAlignment()->setTextRotation(90);
+                $event->sheet->getStyle("Q5")->getAlignment()->setTextRotation(90);
+                $event->sheet->getStyle("R5")->getAlignment()->setTextRotation(90);
+                $event->sheet->getStyle("S5")->getAlignment()->setTextRotation(90);
+
+                //CENTRAR TEXTO
+                $event->sheet->getDelegate()->getStyle('A1:Y5')
+                ->getAlignment()
+                ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+
+
+                $event->sheet->getDelegate()->getRowDimension('1')->setRowHeight(90);
+                $event->sheet->getDelegate()->getStyle('A3:Y3')
+                ->getFill()
+                ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+                ->getStartColor()
+                ->setRGB('FBE4D5');
+                $event->sheet->getStyle('A3:Y3')->applyFromArray([
+                    'borders' => [
+                        'outline' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                            'color' => ['rgb' => '000000'],
+                        ],
+                    ]
+                ]);
+                $event->sheet->getDelegate()->getStyle('A4:Y5')
+                ->getFill()
+                ->setFillType(\PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID)
+                ->getStartColor()
+                ->setRGB('D8D8D8');
+                $event->sheet->getStyle('A4:Y5')->applyFromArray([
+                    'borders' => [
+                        'outline' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                            'color' => ['rgb' => '000000'],
+                        ],
+                    ]
+                ]);
+                $event->sheet->getStyle('B4:B5')->applyFromArray([
+                    'borders' => [
+                        'outline' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                            'color' => ['rgb' => '000000'],
+                        ],
+                    ]
+                ]);
+                $event->sheet->getStyle('C4:C5')->applyFromArray([
+                    'borders' => [
+                        'outline' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                            'color' => ['rgb' => '000000'],
+                        ],
+                    ]
+                ]);
+                $event->sheet->getStyle('E5:E5')->applyFromArray([
+                    'borders' => [
+                        'outline' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color' => ['rgb' => '000000'],
+                        ],
+                    ]
+                ]);
+                $event->sheet->getStyle('I5:I5')->applyFromArray([
+                    'borders' => [
+                        'outline' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color' => ['rgb' => '000000'],
+                        ],
+                    ]
+                ]);
+                $event->sheet->getStyle('G5:G5')->applyFromArray([
+                    'borders' => [
+                        'outline' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color' => ['rgb' => '000000'],
+                        ],
+                    ]
+                ]);
+                $event->sheet->getStyle('L5:L5')->applyFromArray([
+                    'borders' => [
+                        'outline' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color' => ['rgb' => '000000'],
+                        ],
+                    ]
+                ]);
+                $event->sheet->getStyle('Q5:Q5')->applyFromArray([
+                    'borders' => [
+                        'outline' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color' => ['rgb' => '000000'],
+                        ],
+                    ]
+                ]);
+                $event->sheet->getStyle('R5:R5')->applyFromArray([
+                    'borders' => [
+                        'outline' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color' => ['rgb' => '000000'],
+                        ],
+                    ]
+                ]);
+                $event->sheet->getStyle('D4:J4')->applyFromArray([
+                    'borders' => [
+                        'outline' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                            'color' => ['rgb' => '000000'],
+                        ],
+                    ]
+                ]);
+                $event->sheet->getStyle('D5:J5')->applyFromArray([
+                    'borders' => [
+                        'outline' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                            'color' => ['rgb' => '000000'],
+                        ],
+                    ]
+                ]);
+                $event->sheet->getStyle('K4:M4')->applyFromArray([
+                    'borders' => [
+                        'outline' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                            'color' => ['rgb' => '000000'],
+                        ],
+                    ]
+                ]);
+                $event->sheet->getStyle('K5:M5')->applyFromArray([
+                    'borders' => [
+                        'outline' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                            'color' => ['rgb' => '000000'],
+                        ],
+                    ]
+                ]);
+                $event->sheet->getStyle('O4:O5')->applyFromArray([
+                    'borders' => [
+                        'outline' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                            'color' => ['rgb' => '000000'],
+                        ],
+                    ]
+                ]);
+                $event->sheet->getStyle('P4:S4')->applyFromArray([
+                    'borders' => [
+                        'outline' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                            'color' => ['rgb' => '000000'],
+                        ],
+                    ]
+                ]);
+                $event->sheet->getStyle('P5:S5')->applyFromArray([
+                    'borders' => [
+                        'outline' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                            'color' => ['rgb' => '000000'],
+                        ],
+                    ]
+                ]);
+                $event->sheet->getStyle('U5:U5')->applyFromArray([
+                    'borders' => [
+                        'outline' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color' => ['rgb' => '000000'],
+                        ],
+                    ]
+                ]);
+                $event->sheet->getStyle('X5:X5')->applyFromArray([
+                    'borders' => [
+                        'outline' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'color' => ['rgb' => '000000'],
+                        ],
+                    ]
+                ]);
+                $event->sheet->getStyle('T4:V4')->applyFromArray([
+                    'borders' => [
+                        'outline' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                            'color' => ['rgb' => '000000'],
+                        ],
+                    ]
+                ]);
+                $event->sheet->getStyle('T5:V5')->applyFromArray([
+                    'borders' => [
+                        'outline' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                            'color' => ['rgb' => '000000'],
+                        ],
+                    ]
+                ]);
+                $event->sheet->getStyle('W4:Y4')->applyFromArray([
+                    'borders' => [
+                        'outline' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                            'color' => ['rgb' => '000000'],
+                        ],
+                    ]
+                ]);
+                $event->sheet->getStyle('W5:Y5')->applyFromArray([
+                    'borders' => [
+                        'outline' => [
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_MEDIUM,
+                            'color' => ['rgb' => '000000'],
+                        ],
+                    ]
+                ]);
             },
         ];
     }
@@ -65,9 +317,12 @@ class ReporteDiagnosticoExport implements FromView, WithStyles, WithEvents
     {
         $detalles['reporte']= DB::select('SELECT rd.* ,pags.*,
         AVG(compe.ponderacion) as ponderacion, 
-        GROUP_CONCAT(DISTINCT paps.alumno_particular) as alumnos,
-        GROUP_CONCAT(DISTINCT paps.deficiencia_particular) as deficiencia,
-        GROUP_CONCAT(DISTINCT paps.accion_particular) as accion
+        array_agg(DISTINCT paps.alumno_particular) as alumnos,
+        array_agg(DISTINCT paps.deficiencia_particular) as deficiencia,
+        array_agg(DISTINCT paps.accion_particular) as accion
+        -- GROUP_CONCAT(DISTINCT paps.alumno_particular) as alumnos,
+        -- GROUP_CONCAT(DISTINCT paps.deficiencia_particular) as deficiencia,
+        -- GROUP_CONCAT(DISTINCT paps.accion_particular) as accion
         FROM reporte_diagnosticos as rd
                 INNER JOIN rd_pags as pags ON pags.r_diagnostico_id = rd.id
                 INNER JOIN rd_competencias as compe ON compe.r_diagnostico_id = rd.id
