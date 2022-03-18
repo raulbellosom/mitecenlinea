@@ -69,9 +69,9 @@ class ReporteController extends Controller
         // $plucked = $materias->pluck('user_id');
         // var_dump($plucked->all());
 
-        $materias['materias']= DB::select('SELECT md.*, user.name
+        $materias['materias']= DB::select('SELECT md.*, users.*
         FROM materias_docentes as md
-        INNER JOIN users as user ON user.id = md.user_id
+        INNER JOIN users as users ON users.id = md.user_id
         ORDER BY md.materia');
 
         return view('reporte_admin.admin_materias', $materias);
