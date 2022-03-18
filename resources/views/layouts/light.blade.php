@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     {{-- <title>{{ config('app.name', 'Laravel') }}</title> --}}
-    <title>SISRAD</title>
+    <title>REPORTEC</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -29,7 +29,7 @@
         <nav class="navbar navbar-expand-md navbar-light shadow-sm bg-light" >
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                  <img src="{{asset('../assets/img/logo/mi_tec_blue.png')}}" alt="mi-tec-logo" height="50px" >
+                  <img src="{{asset('assets/img/logo/mi_tec_blue.png')}}" alt="mi-tec-logo" height="50px" >
                 </a>
                 
                 <button class="navbar-toggler bg-light" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

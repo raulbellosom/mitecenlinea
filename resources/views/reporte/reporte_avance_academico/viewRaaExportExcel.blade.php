@@ -2,19 +2,25 @@
 <table class="tg">
     <thead class="bg-secondary">
         <tr>
-            <th class="text-center" colspan="25">SEMESTRE: FEBRERO - JULIO 2021</th>
+            <th></th>
         </tr>
         <tr>
-            <th class="text-center" colspan="25">INGENIERÍA EN GESTIÓN EMPRESARIAL </th>
+            <th></th>
         </tr>
         <tr>
-            <th class="text-center" colspan="25">REPORTE DE PRIMER CORTE </th>
+            <th class="text-center" colspan="23">SEMESTRE: FEBRERO - JULIO 2021</th>
         </tr>
         <tr>
-            <th class="text-center" colspan="25"></th>
+            <th class="text-center" colspan="23">INGENIERÍA EN GESTIÓN EMPRESARIAL </th>
         </tr>
         <tr>
-            <th class="text-center" colspan="25">REPORTE GENERAL</th>
+            <th class="text-center" colspan="23">REPORTE DE PRIMER CORTE </th>
+        </tr>
+        <tr>
+            <th class="text-center" colspan="23"></th>
+        </tr>
+        <tr>
+            <th class="text-center" colspan="23">REPORTE GENERAL</th>
         </tr>
         <tr>
             <th rowspan="2">NO.</th>
@@ -35,16 +41,16 @@
             <th>GRUPO</th>
             <th>TURNO</th>
 
-            <td>REPORTE ACADEM</td>
-            <td>AVANCE PROGR.</td>
+            <td>REPORTE ACADEMICO</td>
+            <td>AVANCE PROGRAMATICO</td>
             <td>LISTA DE ASISTENCIA</td>
-            <td>CALIFICAC.</td>
+            <td>CALIFICACACIONES</td>
             <td>EVIDENCIAS</td>
 
             <td>No. UNIDADES EVALUADAS</td>
             <td>No. ALUMNOS REPROBADOS</td>
             <td>% REPROBACIÓN</td>
-            <td>PROMEDIO DEL GRUPO POR UNIDAD .</td>
+            <td>PROMEDIO DEL GRUPO POR UNIDAD.</td>
             <td>% DE ASISTENCIA</td>
 
             <td>CRITERIOS APLICADOS PARA LA EVALUACIÓN</td>
@@ -58,6 +64,8 @@
                 <td>{{$raas->id}}</td>
                 <td>{{$raas->autor}}</td>
                 <td>{{$raas->asignatura}}</td>
+                {{-- <td>{{$raas->ht}}</td>
+                <td>{{$raas->hp}}</td> --}}
                 <td></td>
                 <td></td>
                 <td></td>

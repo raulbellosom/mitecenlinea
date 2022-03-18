@@ -15,9 +15,9 @@
 
     {{-- Barra de navegación  --}}
     <div class="pt-4">
-        <nav class="navbar navbar-expand-xl navbar-white bg-white">
-            <a class="navbar-brand mb-0 h1" href="{{url('administrativo/')}}">Panel de control</a>
-            <button class="navbar-toggler bg-secondary " type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <nav class="navbar navbar-expand-xl navbar-light bg-light">
+            <a class="navbar-brand mb-0 text-primary h1" href="{{url('administrativo/')}}">Panel de control</a>
+            <button class="navbar-toggler bg-light " type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon "></span>
             </button>
             <div class="collapse navbar-collapse nav-pills" id="navbarNav">

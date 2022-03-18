@@ -87,7 +87,7 @@ Route::group(['middleware'=>'auth'], function(){
     Route::get('reporte_diagnostico/index', [ReporteDiagnosticoController::class, 'index']);
     Route::get('reporte_diagnostico/create', [ReporteDiagnosticoController::class, 'create']);
     Route::get('reporte_diagnostico/show', [ReporteDiagnosticoController::class, 'show']);
-    Route::post('reporte_diagnostico/finalizar', [ReporteDiagnosticoController::class, 'update']);
+    Route::get('reporte_diagnostico/finalizar', [ReporteDiagnosticoController::class, 'update']);
     //craer copetencia
     Route::post('reporte_diagnostico/competencia', [RdCompetenciaController::class, 'create']);
     // Route::post('reporte_diagnostico/competencia', [RdCompetenciaController::class, 'addComp']);

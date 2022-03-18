@@ -35,19 +35,22 @@
                     Información General del Reporte
                 </div>
                 <div class="row p-4">
-                    <div class="form-floating col-12 col-md-6 pb-2">
-                        <input id="asignatura" class="form-control mr-2" name="asignatura" type="text" placeholder="Asignatura"
-                            value="{{ isset($reporte->asignatura) ? $reporte->asignatura:old('asignatura') }}"
-                        >
-                        <label for="asignatura" class="pl-4">Asignatura</label>
+                    <div class="form-floating col-12 col-lg-6 pb-3">
+                        <select class="form-control" id="asignatura" name="asignatura">
+                            <option selected>Elije una asignatura...</option>
+                                @foreach ($datos as $dato)
+                                    <option value="{{$dato->id}}"> {{$dato->materia}} - {{$dato->grado}}{{$dato->grupo}} - {{$dato->turno}} - {{$dato->carrera}} </option>
+                                @endforeach
+                            </select>
+                        <label for="asignatura" class="pl-4">Asignatura</label> 
                     </div>
-                    <div class="form-floating col-12 col-md-6 pb-2 ">
+                    <div class="form-floating col-12 col-lg-6 pb-3 ">
                         <input id="semestre" class="form-control" name="semestre" type="text" placeholder="Semestre"
                             value="{{ isset($reporte->semestre) ? $reporte->semestre:old('semestre') }}"
                         >
                         <label for="semestre" class="pl-4">Semestre</label> 
                     </div>
-                    <div class="form-floating col-6 pb-2">
+                    {{-- <div class="form-floating col-6 pb-2">
                         <input id="carrera" class="form-control" name="carrera" type="text" placeholder="carrera"
                             value="{{ isset($reporte->carrera) ? $reporte->carrera:old('carrera') }}"
                         >
@@ -74,7 +77,7 @@
                             <option value="Vespertino">Vespertino</option>
                         </select>
                         <label for="turno" class="pl-4">Turno</label> 
-                    </div>
+                    </div> --}}
                 {{-- Elementos ocultos --}}
                 <div class="mw-100 d-flex justify-content-around">
                     <div class="d-flex align-items-center">

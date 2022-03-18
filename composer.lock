@@ -1772,26 +1772,26 @@
         },
         {
             "name": "maatwebsite/excel",
-            "version": "3.1.33",
+            "version": "3.1.36",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Maatwebsite/Laravel-Excel.git",
-                "reference": "b2de5ba92c5c1ad9415f0eb7c72838fb3eaaa5b8"
+                "url": "https://github.com/SpartnerNL/Laravel-Excel.git",
+                "reference": "eb31f30d72c51c3fb11644b636945accbe50404f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Maatwebsite/Laravel-Excel/zipball/b2de5ba92c5c1ad9415f0eb7c72838fb3eaaa5b8",
-                "reference": "b2de5ba92c5c1ad9415f0eb7c72838fb3eaaa5b8",
+                "url": "https://api.github.com/repos/SpartnerNL/Laravel-Excel/zipball/eb31f30d72c51c3fb11644b636945accbe50404f",
+                "reference": "eb31f30d72c51c3fb11644b636945accbe50404f",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "illuminate/support": "5.8.*|^6.0|^7.0|^8.0",
+                "illuminate/support": "5.8.*|^6.0|^7.0|^8.0|^9.0",
                 "php": "^7.0|^8.0",
                 "phpoffice/phpspreadsheet": "^1.18"
             },
             "require-dev": {
-                "orchestra/testbench": "^6.0",
+                "orchestra/testbench": "^6.0|^7.0",
                 "predis/predis": "^1.1"
             },
             "type": "library",
@@ -1817,7 +1817,7 @@
             "authors": [
                 {
                     "name": "Patrick Brouwers",
-                    "email": "patrick@maatwebsite.nl"
+                    "email": "patrick@spartner.nl"
                 }
             ],
             "description": "Supercharged Excel exports and imports in Laravel",
@@ -1833,8 +1833,8 @@
                 "phpspreadsheet"
             ],
             "support": {
-                "issues": "https://github.com/Maatwebsite/Laravel-Excel/issues",
-                "source": "https://github.com/Maatwebsite/Laravel-Excel/tree/3.1.33"
+                "issues": "https://github.com/SpartnerNL/Laravel-Excel/issues",
+                "source": "https://github.com/SpartnerNL/Laravel-Excel/tree/3.1.36"
             },
             "funding": [
                 {
@@ -1846,7 +1846,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-08-12T15:52:25+00:00"
+            "time": "2022-01-27T18:34:20+00:00"
         },
         {
             "name": "maennchen/zipstream-php",

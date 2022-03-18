@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MateriasDocente;
 use App\Models\Rap;
 use App\Models\Rap_unidad;
 use App\Models\RapDesgloseHoras;
@@ -35,7 +36,8 @@ class RapController extends Controller
     public function create()
     {
         $id = Auth::id();
-        $datos["reportes"]=Rap::where('user_id','=',$id)->paginate(10);
+        // $datos["reportes"]=Rap::where('user_id','=',$id)->paginate(10);
+        $datos["datos"] = DB::select('select * from materias_docentes where user_id = ?', [$id]);
         $user['users'] = Auth::user();
 
         return view("reporte/reporte_avance_programatico/rap_create", $user,$datos);
@@ -49,6 +51,7 @@ class RapController extends Controller
      */
     public function store(Request $request)
     {
+        $reporte = MateriasDocente::findOrFail($request->input('asignatura'));
         $campos=[
             'user_id'=>'required|int',
             'autor'=>'required|string',
@@ -56,10 +59,6 @@ class RapController extends Controller
             'semestre'=>'required|string',
             'periodo_monitoreo'=>'required|string',
             'asignatura'=>'required|string',
-            'grado'=>'required|string',
-            'grupo'=>'required|string',
-            'turno'=>'required|string',
-            'carrera'=>'required|string',
             'status'=>'required|int',
             'created_at'=>'required|date'
         ];
@@ -68,7 +67,17 @@ class RapController extends Controller
         ];
         $this->validate($request, $campos, $mensaje);
 
-        $datosReporte = request()->except("_token");
+        $datosReporte = request()->except("_token","asignatura");
+
+        $complementos=[
+            'grado'=>$reporte->grado,
+            'grupo'=>$reporte->grupo,
+            'turno'=>$reporte->turno,
+            'carrera'=>$reporte->carrera,
+            'asignatura'=>$reporte->materia,
+
+        ];
+        $datosReporte = array_merge($datosReporte,$complementos);
         
         Rap::insert($datosReporte);
 

@@ -1,0 +1,15 @@
+-> Mejorar la interface de usuario del administrativo
+
+-> Que al dar clic en el botón finalizar reporte, valida que todo tenga contenido
+dentro de un reporte, de otra manera, el sistema debera autorrellenar,
+
+-> Mejorar la seguridad para que un usuario no pueda entrar a los reportes
+de otro usuario
+
+-> Implementar modalidad para subir cvs de maestros y las materias
+
+-> Implementar en los reportes que los maestros solo les aparezcan sus propias
+materias
+
+-> Administrativo debe poder ver todos los reportes de los docentes pero 
+no debe poderlos editar, en una pestaña llamada reportes

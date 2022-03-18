@@ -35,19 +35,22 @@
                     Información General del Reporte
                 </div>
                 <div class="m-2 row justify-content-between  ">
-                    <div class="form-floating col-12 col-md-6 pb-2">
-                        <input id="asignatura" class="form-control mr-2" name="asignatura" type="text" placeholder="Asignatura"
-                            value="{{ isset($raa->asignatura) ? $raa->asignatura:old('asignatura') }}"
-                        >                        
-                        <label for="asignatura" class="pl-4">Asignatura</label>
+                    <div class="form-floating col-12 col-md-12 pb-3">
+                        <select class="form-control" id="asignatura" name="asignatura">
+                            <option selected>Elije una asignatura...</option>
+                                @foreach ($datos as $dato)
+                                    <option value="{{$dato->id}}"> {{$dato->materia}} - {{$dato->grado}}{{$dato->grupo}} - {{$dato->turno}} - {{$dato->carrera}} </option>
+                                @endforeach
+                            </select>
+                        <label for="asignatura" class="pl-4">Asignatura</label> 
                     </div>
-                    <div class="form-floating col-12 col-md-6 pb-2">
+                    <div class="form-floating col-12 col-lg-6 pb-3">
                         <input id="periodo_corte" class="form-control mr-2" name="periodo_corte" type="text" placeholder="periodo_corte"
                             value="{{ isset($raa->periodo_corte) ? $periodo_corte->periodo_corte:old('periodo_corte') }}"
                         >                        
                         <label for="periodo_corte" class="pl-4">Periodo del Corte</label>
                     </div>
-                    <div class="form-floating col-12 col-md-6 pb-2">
+                    {{-- <div class="form-floating col-12 col-md-6 pb-2">
                         <input id="carrera" class="form-control mr-2" name="carrera" type="text" placeholder="carrera"
                             value="{{ isset($raa->carrera) ? $raa->carrera:old('carrera') }}"
                         >
@@ -74,20 +77,20 @@
                             <option value="Vespertino">Vespertino</option>
                         </select>
                         <label for="turno" class="pl-4">Turno</label> 
-                    </div>
-                    <div class="form-floating col-12 col-md-6 pb-2">
+                    </div> --}}
+                    <div class="form-floating col-12 col-lg-6 pb-3">
                         <input id="total_alumnos" class="form-control mr-2" name="total_alumnos" type="number" placeholder="Total de alumnos" min="1" pattern="^[0-9]+"
                             value="{{ isset($raa->total_alumnos) ? $raa->total_alumnos:old('total_alumnos') }}" 
                         >
                         <label for="total_alumnos" class="pl-4">Total Alumnos</label>
                     </div>
-                    <div class="form-floating col-12 col-md-6 pb-2">
+                    <div class="form-floating col-12 col-lg-6 pb-3">
                         <input id="total_alumnos_ausentes" class="form-control mr-2" name="total_alumnos_ausentes" type="number" placeholder="Alumnos ausentes" min="1" pattern="^[0-9]+"
                             value="{{ isset($raa->total_alumnos_ausentes) ? $raa->total_alumnos_ausentes:old('total_alumnos_ausentes') }}" 
                         >
                         <label for="total_alumnos_ausentes" class="pl-4">No. de alumnos que desde el inicio del semestre no se presentaron a las clases </label>
                     </div>
-                    <div class="form-floating col-12 col-md-6 pb-2">
+                    <div class="form-floating col-12 col-lg-6 pb-3">
                         <input id="total_alumnos_desertados" class="form-control mr-2" name="total_alumnos_desertados" type="number" placeholder="Alumnos desertados" min="1" pattern="^[0-9]+"
                             value="{{ isset($raa->total_alumnos_desertados) ? $raa->total_alumnos_desertados:old('total_alumnos_desertados') }}" 
                         >
