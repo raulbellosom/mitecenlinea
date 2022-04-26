@@ -7,8 +7,9 @@ use Illuminate\Support\Facades\Schema;
 class CreateRdPagsTable extends Migration
 {
     /**
-     * Run the migrations.
-     *
+     * Reporte diagnostico
+     * Plan de accion general
+     * Solo 1 registro no es dinamico
      * @return void
      */
     public function up()

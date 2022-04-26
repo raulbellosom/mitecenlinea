@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\Schema;
 class CreateRdCompetenciasTable extends Migration
 {
     /**
-     * Run the migrations.
+     * Reporte diagnostico 
+     * competencias
+     * Admite registros multiples (Dinamico)
      *
      * @return void
      */

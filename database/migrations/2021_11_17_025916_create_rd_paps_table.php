@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Schema;
 class CreateRdPapsTable extends Migration
 {
     /**
-     * Run the migrations.
+     * Plan de accion particular 
+     * Admite registros multiples (Dinamico)
      *
      * @return void
      */

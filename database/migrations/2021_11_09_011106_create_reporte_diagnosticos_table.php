@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreateReporteDiagnosticosTable extends Migration
 {
     /**
-     * Run the migrations.
+     * Reporte diagnostico - Cabezera
      *
      * @return void
      */
