@@ -26,7 +26,7 @@
                     <a href="{{route('raa-index')}}" class="nav-link text-secondary">Reporte de Avance Académico</a>
                     <a href="{{route('rap-index')}}" class="nav-link text-primary font-weight-bold" href="#">Reporte de Avance Programático</a>
                     <a href="{{route('rdep-index')}}" class="nav-link text-secondary ">Reporte Departamental</a>
-                    {{-- <a href="{{route('rfinal-index')}}" class="nav-link text-secondary" href="#">Reporte Final</a> --}}
+                    <a href="{{route('rfinal-index')}}" class="nav-link text-secondary" href="#">Reporte Final</a>
                 </div>
             </div>
         </nav>
