@@ -390,7 +390,7 @@
                     </div>
                 </div>
 
-                <div class="col-5 col-md-2 p-4 mt-4 bg-white border border-3 border-success rounded-3">
+                {{-- <div class="col-5 col-md-2 p-4 mt-4 bg-white border border-3 border-success rounded-3">
                     <div class="text-center text-success">
                         <div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-filetype-xlsx" viewBox="0 0 16 16">
@@ -410,7 +410,7 @@
                             </button>
                         </form>
                     </div>
-                </div>
+                </div> --}}
             </div>
         @endif
     {{-- Administrativo --}}

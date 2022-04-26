@@ -158,9 +158,12 @@
                     @foreach ($paps as $datos)
                     <tr>
                         <th></th>
-                        <td>{{Str::substr($datos->alumno_particular,3) }}</td>
+                        <td>{{$datos->alumno_particular }}</td>
+                        <td>{{$datos->deficiencia_particular}}</td>
+                        <td>{{$datos->accion_particular}}</td>
+                        {{-- <td>{{Str::substr($datos->alumno_particular,3) }}</td>
                         <td>{{Str::substr($datos->deficiencia_particular,3)}}</td>
-                        <td>{{Str::substr($datos->accion_particular,3)}}</td>
+                        <td>{{Str::substr($datos->accion_particular,3)}}</td> --}}
                     </tr>
                     @endforeach
                 @endforeach 
