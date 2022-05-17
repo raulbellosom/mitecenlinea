@@ -31,7 +31,7 @@ class RFinalController extends Controller
     public function create()
     {
         $id = Auth::id();
-        $datos["reportes"]=RFinal::where('user_id','=',$id)->paginate(10);
+        $datos["datos"]=DB::select('select * from materias_docentes where user_id = ?', [$id]);
         $user['users'] = Auth::user();
 
         return view("reporte/reporte_final/rf_create", $user,$datos);
@@ -49,14 +49,9 @@ class RFinalController extends Controller
             'user_id'=>'required|int',
             'autor'=>'required|string',
             'nombre_reporte'=>'required|string',
-            'semestre'=>'required|string',
             'asignatura'=>'required|string',
-            'grado'=>'required|string',
-            'grupo'=>'required|string',
-            'turno'=>'required|string',
-            'carrera'=>'required|string',
             'status'=>'required|int',
-            'created_at'=>'required|date'
+            'created_at'=>'required|date',
         ];
         $mensaje=[
             'required'=>'El :attribute es requerido',
@@ -65,9 +60,10 @@ class RFinalController extends Controller
 
         $datosReporte = request()->except("_token");
         
-        RFinal::insert($datosReporte);
+        // RFinal::insert($datosReporte);
 
-        return redirect('reporte_final')->with('mensaje','Reporte creado con éxito');
+        // return redirect('reporte_final')->with('mensaje','Reporte creado con éxito');
+        return response()->json($datosReporte);
     }
 
     /**

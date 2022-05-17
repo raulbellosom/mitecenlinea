@@ -42,6 +42,7 @@ class RaaController extends Controller
         $user['users'] = Auth::user();
 
         return view("reporte/reporte_avance_academico/raa_create", $user,$datos);
+        //return response()->json($user+$datos);
     }
 
     /**

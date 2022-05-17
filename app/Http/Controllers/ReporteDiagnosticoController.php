@@ -33,8 +33,8 @@ class ReporteDiagnosticoController extends Controller
     {
         $id = Auth::id();
         $datos["reportes"]=ReporteDiagnostico::where('user_id','=',$id)->orderByDesc('created_at')->paginate(5);
-        $user['users'] = Auth::user();
-        return view('reporte/reporte_diagnostico/indexDiagnostico', $user, $datos);
+        //$user['users'] = Auth::user();
+        return view('reporte/reporte_diagnostico/indexDiagnostico', $datos);
 
     }
 
@@ -66,6 +66,7 @@ class ReporteDiagnosticoController extends Controller
     public function store(Request $request)
     {
         $reporte_diagnostico = MateriasDocente::findOrFail($request->input('asignatura'));
+        //Solo para traerme los datos complementos
         // var_dump($reporte_diagnostico);
         $campos=[
             'user_id'=>'required|int',
@@ -96,7 +97,7 @@ class ReporteDiagnosticoController extends Controller
         $datosReporte = array_merge($datosReporte,$complementos);
         // $datosCompetencia = request()->except("_token", "user_id", "autor", "nombre_reporte",
         // "asignatura","tipo_evaluacion", "cantidad_alumnos","carrera","grado", "grupo", "turno", "created_at");
-        
+        //var_dump($datosReporte);//Muestra los datos en json
         ReporteDiagnostico::insert($datosReporte);
         
         // DB::insert('insert into competencias (competencia, ponderacion,r_diagnostico_id) values (?, ?, ?)', [$datosCompetencia["competencia"],$datosCompetencia["ponderacion"],1]);

@@ -317,12 +317,12 @@ class ReporteDiagnosticoExport implements FromView, WithStyles, WithEvents, With
     {
         $detalles['reporte']= DB::select('SELECT rd.* ,pags.*,
         AVG(compe.ponderacion) as ponderacion, 
-        array_agg(DISTINCT paps.alumno_particular) as alumnos,
-        array_agg(DISTINCT paps.deficiencia_particular) as deficiencia,
-        array_agg(DISTINCT paps.accion_particular) as accion
-        -- GROUP_CONCAT(DISTINCT paps.alumno_particular) as alumnos,
-        -- GROUP_CONCAT(DISTINCT paps.deficiencia_particular) as deficiencia,
-        -- GROUP_CONCAT(DISTINCT paps.accion_particular) as accion
+        -- array_agg(DISTINCT paps.alumno_particular) as alumnos,
+        -- array_agg(DISTINCT paps.deficiencia_particular) as deficiencia,
+        -- array_agg(DISTINCT paps.accion_particular) as accion
+        GROUP_CONCAT(DISTINCT paps.alumno_particular) as alumnos,
+        GROUP_CONCAT(DISTINCT paps.deficiencia_particular) as deficiencia,
+        GROUP_CONCAT(DISTINCT paps.accion_particular) as accion
         FROM reporte_diagnosticos as rd
                 INNER JOIN rd_pags as pags ON pags.r_diagnostico_id = rd.id
                 INNER JOIN rd_competencias as compe ON compe.r_diagnostico_id = rd.id
