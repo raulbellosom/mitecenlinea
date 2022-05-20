@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MateriasDocente;
 use App\Models\RfCurso;
 use App\Models\RFinal;
 use Illuminate\Http\Request;
@@ -49,7 +50,7 @@ class RFinalController extends Controller
             'user_id'=>'required|int',
             'autor'=>'required|string',
             'nombre_reporte'=>'required|string',
-            'asignatura'=>'required|string',
+            'asignatura'=>'required|int',
             'status'=>'required|int',
             'created_at'=>'required|date',
         ];
@@ -59,10 +60,20 @@ class RFinalController extends Controller
         $this->validate($request, $campos, $mensaje);
 
         $datosReporte = request()->except("_token");
-        
         // RFinal::insert($datosReporte);
+        $reporte_diagnostico = MateriasDocente::findOrFail($request->input('asignatura'));
+        $complementos=[
+            'grado'=>$reporte_diagnostico->grado,
+            'grupo'=>$reporte_diagnostico->grupo,
+            'turno'=>$reporte_diagnostico->turno,
+            'carrera'=>$reporte_diagnostico->carrera,
+            'asignatura'=>$reporte_diagnostico->materia,
 
-        // return redirect('reporte_final')->with('mensaje','Reporte creado con éxito');
+        ];
+        $datosReporte = array_merge($datosReporte,$complementos);
+
+        // return redirect('reporte_final')->with('mensaje','Reporte creado con éxito');  $datosReporte + 
+        RFinal::insert($datosReporte);
         return response()->json($datosReporte);
     }
 
