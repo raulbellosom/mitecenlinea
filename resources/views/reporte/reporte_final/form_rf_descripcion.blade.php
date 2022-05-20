@@ -66,7 +66,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{$rf->created_at}}</td>
+                            <td>{{Str::substr($rf->created_at, 0, 10)}}</td>
                             <td>{{$rf->nombre_reporte}}</td>
                             <td>{{$rf->semestre}}</td>
                             <td>{{$rf->carrera}}</td>

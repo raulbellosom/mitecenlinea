@@ -50,6 +50,7 @@ class RFinalController extends Controller
             'user_id'=>'required|int',
             'autor'=>'required|string',
             'nombre_reporte'=>'required|string',
+            'semestre'=>'required|string',
             'asignatura'=>'required|int',
             'status'=>'required|int',
             'created_at'=>'required|date',
@@ -71,10 +72,10 @@ class RFinalController extends Controller
 
         ];
         $datosReporte = array_merge($datosReporte,$complementos);
-
-        // return redirect('reporte_final')->with('mensaje','Reporte creado con éxito');  $datosReporte + 
         RFinal::insert($datosReporte);
-        return response()->json($datosReporte);
+        return redirect('reporte_final')->with('mensaje','Reporte creado con éxito');
+        
+        //return response()->json($datosReporte);
     }
 
     /**

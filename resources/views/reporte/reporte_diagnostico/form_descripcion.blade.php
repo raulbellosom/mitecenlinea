@@ -82,7 +82,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{$reporte_diagnostico->created_at}}</td>
+                            <td>{{Str::substr($reporte_diagnostico->created_at, 0, 10)}}</td>
                             <td>{{$reporte_diagnostico->nombre_reporte}}</td>
                             <td>{{$reporte_diagnostico->carrera}}</td>
                             <td>{{$reporte_diagnostico->asignatura}}</td>

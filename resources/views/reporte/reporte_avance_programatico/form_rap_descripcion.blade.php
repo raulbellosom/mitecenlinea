@@ -81,7 +81,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{$rap->created_at}}</td>
+                            <td>{{Str::substr($rap->created_at, 0, 10)}}</td>
                             <td>{{$rap->nombre_reporte}}</td>
                             <td>{{$rap->carrera}}</td>
                             <td>{{$rap->asignatura}}</td>

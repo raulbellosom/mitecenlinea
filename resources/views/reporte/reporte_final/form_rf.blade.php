@@ -46,12 +46,12 @@
                         <label for="asignatura" class="pl-4">Asignatura</label> 
                     
                     </div>
-                    {{-- <div class="form-floating col-12 col-md-6 pb-2">
+                    <div class="form-floating col-12 col-md-12 pb-3">
                         <input id="semestre" class="form-control mr-2" name="semestre" type="text" placeholder="semestre" 
                             value="{{ isset($reporte->semestre) ? $reporte->semestre:old('semestre') }}" 
                         >
                         <label for="semestre" class="pl-4">Semestre</label>
-                    </div> --}}
+                    </div>
                     {{-- <div class="form-floating col-12 col-md-6 pb-2">
                         <input id="grado" class="form-control mr-2" name="grado" type="number" placeholder="Grado" min="0" max="9" pattern="^[0-9]+"
                             value="{{ isset($reporte->grado) ? $reporte->grado:old('grado') }}"

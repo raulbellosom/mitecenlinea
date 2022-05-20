@@ -65,7 +65,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{$raa->created_at}}</td>
+                            <td>{{Str::substr($raa->created_at, 0, 10)}}</td>
                             <td>{{$raa->nombre_reporte}}</td>
                             <td>{{$raa->carrera}}</td>
                             <td>{{$raa->asignatura}}</td>
