@@ -35,6 +35,7 @@
                     Información General del Reporte
                 </div>
                 <div class="row p-4">
+                    @isset($datos)
                     <div class="form-floating col-12 col-lg-6 pb-3">
                         <select class="form-control" id="asignatura" name="asignatura">
                             <option selected>Elije una asignatura...</option>
@@ -44,6 +45,15 @@
                             </select>
                         <label for="asignatura" class="pl-4">Asignatura</label> 
                     </div>
+                     @endisset
+                     @empty($datos)
+                    <div class="form-floating col-12 col-lg-6 pb-3 ">
+                        <input disabled id="asignatura" class="form-control" name="asignatura" type="text" placeholder="Asignatura"
+                            value="{{ isset($reporte->asignatura) ? $reporte->asignatura:old('asignatura') }}"
+                        >
+                        <label for="asignatura" class="pl-4">Asignatura</label> 
+                    </div>
+                    @endempty
                     <div class="form-floating col-12 col-lg-6 pb-3 ">
                         <input id="semestre" class="form-control" name="semestre" type="text" placeholder="Semestre"
                             value="{{ isset($reporte->semestre) ? $reporte->semestre:old('semestre') }}"
