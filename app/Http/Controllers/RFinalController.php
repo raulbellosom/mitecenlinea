@@ -72,10 +72,12 @@ class RFinalController extends Controller
 
         ];
         $datosReporte = array_merge($datosReporte,$complementos);
+
+
         RFinal::insert($datosReporte);
         return redirect('reporte_final')->with('mensaje','Reporte creado con éxito');
         
-        //return response()->json($datosReporte);
+        // return response()->json($datosReporte);
     }
 
     /**
@@ -99,10 +101,10 @@ class RFinalController extends Controller
     {
         $user['users'] = Auth::user();
         $rf=RFinal::findOrFail($id);
-        $curso['cursos'] = RfCurso::where('rf_id','=',$id)->orderByDesc('created_at')->paginate(5);
+        $curso['cursos'] = RfCurso::where('rf_id','=',$id)->paginate(1);
 
 
-        return view('reporte.reporte_final.form_rf_descripcion',$curso, compact('rf'));
+        return view('reporte.reporte_final.edit_rf',$curso, compact('rf'));
     }
 
     /**
@@ -112,9 +114,11 @@ class RFinalController extends Controller
      * @param  \App\Models\RFinal  $rFinal
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RFinal $rFinal)
+    public function update(Request $request, $id)
     {
-        //
+        $datosReporte = request()->except("_token");
+        return response()->json($datosReporte);
+
     }
 
     /**

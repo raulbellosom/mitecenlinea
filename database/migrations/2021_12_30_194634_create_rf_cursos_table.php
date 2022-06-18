@@ -25,6 +25,7 @@ class CreateRfCursosTable extends Migration
             $table->integer('prom_general');
             $table->string('caracteristicas_grupo');
             $table->integer('porcentaje_asistencia');
+            $table->string('observaciones');
             
             $table->unsignedBigInteger('rf_id');
             $table->foreign('rf_id')->references('id')->on('r_finals');

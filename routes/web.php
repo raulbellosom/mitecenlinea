@@ -25,8 +25,10 @@ use App\Http\Controllers\RdCompetenciaController;
 use App\Http\Controllers\RDepartamentalController;
 use App\Http\Controllers\RdPagController;
 use App\Http\Controllers\RdPapController;
+use App\Http\Controllers\RfActividadesController;
 use App\Http\Controllers\RfCursoController;
 use App\Http\Controllers\RFinalController;
+use App\Http\Controllers\RfMetodologiaController;
 use App\Http\Controllers\RfPracticasEspacioController;
 use App\Http\Controllers\UserController;
 
@@ -160,7 +162,17 @@ Route::group(['middleware'=>'auth'], function(){
     // Route::post('reporte_avance_programatico/borrar_practicas_planeadas', [RapPracticaPlaneadaController::class, 'deletePracticasPlaneadas']);
     // Route::post('reporte_avance_academico/agregar_pap', [RaaPapController::class, 'addRaaPap']);
     // Route::post('reporte_avance_academico/borrar_pap', [RaaPapController::class, 'deleteRaaPap']);
-    Route::resource('reporte_final', RFinalController::class);
+    // Route::resources([
+        //     'photos' => PhotoController::class,
+        //     'posts' => PostController::class,
+        // ]);
+        Route::resources([
+            'guarda_actividades' => RfActividadesController::class,
+            'guarda_metodologias' => RfMetodologiaController::class,
+        ]);
+        
+        Route::resource('reporte_final', RFinalController::class);
+
 });
 
 Route::get('download', function () {
