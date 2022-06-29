@@ -1,6 +1,3 @@
-{{-- @extends('layouts.light')
-
-@section('content') --}}
 <style>
     .puntero{
         cursor: pointer;
@@ -203,7 +200,7 @@
                             <label for="no_alu_desercion" class="pl-4">No. de alumnos no aprobados por deserción en la materia</label>
                         </div>
                         <div class="form-floating pb-2 col-12 col-lg-6">
-                            <input id="prom_general" class="form-control mr-2" name="prom_general" type="number" placeholder="Promedio General del Grupoa" min="0" pattern="^[0-9]+">
+                            <input id="prom_general" class="form-control mr-2" name="prom_general" type="text" placeholder="Promedio General del Grupoa">
                             <label for="prom_general" class="pl-4">Promedio General del Grupo</label>
                         </div>
                     </div>
@@ -542,6 +539,22 @@
             </div>
         </div> 
         {{-- fin - Actividades Académicas de Vinculación con el Sector Productivo --}}
+
+        {{-- Observaciones - Reporte final --}}
+        <div class="bg-light pb-3">
+            <div class="bg-secondary p-4 text-center text-light font-weight-bold text-h1 text-uppercase" >
+                Observaciones
+            </div>
+            <div class="pl-4 pr-4 pt-3">
+                <div class="row">
+                    <div class="form-floating">
+                        <textarea class="form-control" placeholder="Observaciones" name="observaciones" id="observaciones" style="height:100px"></textarea>
+                        <label for="observaciones">Observaciones</label>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        {{-- Observaciones - Reporte final  --}}
           
         {{-- Boton guardar --}}
             <div class="row pt-4">
@@ -577,12 +590,14 @@
             </div>
         {{-- Botones --}}
     {{-- Fin Formulario Reporte --}}
+    
     </div>
 
     {{-- Script campos automaticos --}}
 
     <script>
     // Actividades academicas de vinculacion el sector productivo 
+        
         let agregar = document.getElementById('agregar');
         let contenido = document.getElementById('contenedor');
     
@@ -651,4 +666,3 @@
     </script>
     {{-- Script campos automaticos --}}
 </div>
-{{-- @endsection --}}

@@ -18,10 +18,6 @@ class CreateRfActividadesTable extends Migration
 
             $table->integer('rf_no_eventos');
             $table->integer('rf_no_horas');
-            $table->string('rf_evento');
-            $table->string('rf_a_participantes');
-            $table->integer('rf_h_empleadas');
-            $table->string('rf_contribucion');
 
             $table->unsignedBigInteger('rf_id');
             $table->foreign('rf_id')->references('id')->on('r_finals');

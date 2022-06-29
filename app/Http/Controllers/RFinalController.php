@@ -99,12 +99,14 @@ class RFinalController extends Controller
      */
     public function edit($id)
     {
+      
+
         $user['users'] = Auth::user();
         $rf=RFinal::findOrFail($id);
         $curso['cursos'] = RfCurso::where('rf_id','=',$id)->paginate(1);
-
-
-        return view('reporte.reporte_final.edit_rf',$curso, compact('rf'));
+        // var_dump(compact("rf"));
+        
+        return view('reporte.reporte_final.edit_rf',$curso, compact("rf"));
     }
 
     /**
@@ -116,9 +118,64 @@ class RFinalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $datosReporte = request()->except("_token");
-        return response()->json($datosReporte);
+        $datosReporte = request()->except("_token","_method");
+        // return response()->json($datosReporte);
+          /*Se trabajara con las bases de datos 
+            r_finals
+                rf_cursos
+                rf_practicas_espacios
+                rf_actividades
+                rf_metodologias
+        */
 
+        $campos=[
+            //rf_curso
+            'no_unidades'=>'required|int',
+            'porcentaje_cobertura_programa'=>'required|string',
+            'causas'=>'required|string',
+            'no_alu_lista'=>'required|string',
+            'no_alu_aprobados'=>'required|int',
+            'no_alu_reprobados'=>'required|int',
+            'no_alu_desercion'=>'required|int',
+            'prom_general'=>'required|string',
+            'caracteristicas_grupo'=>'required|string',
+            'porcentaje_asistencia'=>'required|string',
+            'observaciones'=>'required|string',
+            'rf_id'=>'required|int',
+            //rf_practicas_especios
+            'espacios_aulas'=>'required|string',
+            'espacios_talleres'=>'required|string',
+            'espacios_laboratorios'=>'required|string',
+            'no_practicas_programadas'=>'required|int',
+            'porcentaje_practicas'=>'required|int',
+            'nombre_practicas'=>'required|string',
+            'e_canon_por_uso'=>'required|int',
+            'e_canon_tipo'=>'required|string',
+            'e_pc_por_uso'=>'required|int',
+            'e_pc_tipo'=>'required|string',
+            'e_rotafolio_por_uso'=>'required|int',
+            'e_rotafolio_tipo'=>'required|string',
+            'e_tv_por_uso'=>'required|int',
+            'e_tv_tipo'=>'required|string',
+            'e_dvd_por_uso'=>'required|int',
+            'e_dvd_tipo'=>'required|string',
+            'e_otro'=>'required|string',
+            'e_otro_por_uso'=>'required|int',
+            'e_otro_tipo'=>'required|string',
+
+
+        ];
+        $mensaje=[
+            'required'=>'El :attribute es requerido',
+        ];
+        $this->validate($request, $campos, $mensaje);
+
+
+
+        /* Inserts*/
+        // RfCurso::insert($datosReporte);
+        // return redirect('reporte_final')->with('mensaje','Los cambios se han efectuado con exito');
+        
     }
 
     /**
