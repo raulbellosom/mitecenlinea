@@ -31,6 +31,7 @@ use App\Http\Controllers\RFinalController;
 use App\Http\Controllers\RfMetodologiaController;
 use App\Http\Controllers\RfPracticasEspacioController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Log;
 
 //probablemente borrar este auth;
 /*

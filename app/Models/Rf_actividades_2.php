@@ -5,13 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RfMetodologia extends Model
+class Rf_actividades_2 extends Model
 {
     use HasFactory;
-
-    // protected $fillable = [
-    //     'espacios_aulas',
-    //     'espacios_talleres',
-        
-    // ];
 }

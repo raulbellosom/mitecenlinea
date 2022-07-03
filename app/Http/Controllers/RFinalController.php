@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\MateriasDocente;
+use App\Models\Rf_actividades_2;
+use App\Models\RfActividades;
 use App\Models\RfCurso;
 use App\Models\RFinal;
+use App\Models\RfMetodologia;
+use App\Models\RfPracticasEspacio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -103,8 +107,9 @@ class RFinalController extends Controller
 
         $user['users'] = Auth::user();
         $rf=RFinal::findOrFail($id);
-        $curso['cursos'] = RfCurso::where('rf_id','=',$id)->paginate(1);
-        // var_dump(compact("rf"));
+        $curso['cursos'] = RfCurso::where('rf_id',$id)->take(1)->get();
+        
+        // var_dump($curso); //No funciono 
         
         return view('reporte.reporte_final.edit_rf',$curso, compact("rf"));
     }
@@ -118,7 +123,7 @@ class RFinalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $datosReporte = request()->except("_token","_method");
+        // $datosReporte = request()->except("_token","_method","rf_tecnicas","rf_no_temas","rf_promedio","rf_a_participantes","rf_h_empleadas","rf_contribucion","rf_evento");
         // return response()->json($datosReporte);
           /*Se trabajara con las bases de datos 
             r_finals
@@ -162,7 +167,9 @@ class RFinalController extends Controller
             'e_otro'=>'required|string',
             'e_otro_por_uso'=>'required|int',
             'e_otro_tipo'=>'required|string',
-
+            //rf_actividades
+            'rf_no_eventos'=>'required|int',
+            'rf_no_horas'=>'required|int',
 
         ];
         $mensaje=[
@@ -172,9 +179,94 @@ class RFinalController extends Controller
 
 
 
+        $datosReporte = request()->only(
+            'no_unidades',
+            'porcentaje_cobertura_programa',
+            'causas',
+            'no_alu_lista',
+            'no_alu_aprobados',
+            'no_alu_reprobados',
+            'no_alu_desercion',
+            'prom_general',
+            'caracteristicas_grupo',
+            'porcentaje_asistencia',
+            'observaciones',
+            'rf_id',
+        );
+
+        $datosReporte2 = request()->only(
+            'espacios_aulas',
+            'espacios_talleres',
+            'espacios_laboratorios',
+            'no_practicas_programadas',
+            'porcentaje_practicas',
+            'nombre_practicas',
+            'e_canon_por_uso',
+            'e_canon_tipo',
+            'e_pc_por_uso',
+            'e_pc_tipo',
+            'e_rotafolio_por_uso',
+            'e_rotafolio_tipo',
+            'e_tv_por_uso',
+            'e_tv_tipo',
+            'e_dvd_por_uso',
+            'e_dvd_tipo',
+            'e_otro',
+            'e_otro_por_uso',
+            'e_otro_tipo',
+            'rf_id',
+        );
+
+        $datosReporte3 = request()->only(
+            'rf_no_eventos',
+            'rf_no_horas',
+            'rf_id',
+        );
+
+        $rf_tecnicas = $request['rf_tecnicas'];
+        $rf_no_temas = $request['rf_no_temas'];
+        $rf_promedio = $request['rf_promedio'];
+        $rf_id = $request['rf_id'];
+
+        foreach($rf_tecnicas as $key => $row){
+            if((is_null($row))||(is_null($rf_no_temas[$key]))||(is_null($rf_promedio[$key]))){
+                return redirect('cursos')->with('error','Todos los valores son requeridos');
+            }
+        }
+
+        $nuevoarre=array();
+        foreach($rf_tecnicas as $key2 => $row2){
+        $nuevoarre[$key2]=array('rf_tecnicas' => $row2, 'rf_no_temas' => $rf_no_temas[$key2], 'rf_promedio'=> $rf_promedio[$key2], 'rf_id'=>$rf_id ); 
+        }
+        
+        $rf_evento = $request['rf_evento'];
+        $rf_a_participantes = $request['rf_a_participantes'];
+        $rf_h_empleadas = $request['rf_h_empleadas'];
+        $rf_contribucion = $request['rf_contribucion'];
+
+        foreach($rf_evento as $key3 => $row3){
+            if((is_null($row3))||(is_null($rf_a_participantes[$key3]))||(is_null($rf_h_empleadas[$key3]))||(is_null($rf_contribucion[$key3]))){
+                return redirect('cursos')->with('error','Todos los valores son requeridos');
+            }
+        }
+
+        $nuevoarre2=array();
+        foreach($rf_evento as $key4 => $row4){
+        $nuevoarre2[$key4]=array('rf_evento' => $row4, 'rf_a_participantes' => $rf_a_participantes[$key4], 'rf_h_empleadas'=> $rf_h_empleadas[$key4], 'rf_contribucion'=> $rf_contribucion[$key4], 'rf_id'=>$rf_id ); 
+        }
+
+        // return response()->json($nuevoarre);
+        
+        // var_dump(array_values($nuevoarre));
+
         /* Inserts*/
-        // RfCurso::insert($datosReporte);
-        // return redirect('reporte_final')->with('mensaje','Los cambios se han efectuado con exito');
+        RfCurso::insert($datosReporte);
+        RfPracticasEspacio::insert($datosReporte2);
+        RfActividades::insert($datosReporte3);
+        RfMetodologia::insert($nuevoarre);
+        Rf_actividades_2::insert($nuevoarre2);
+
+        return redirect('reporte_final')->with('mensaje','Los cambios se han efectuado con exito');
         
     }
 
